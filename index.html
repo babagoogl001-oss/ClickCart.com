@@ -1,150 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ClickCart & Co. — Online Services</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous">
-<style>
-  :root {
-    --brand:#007bff;
-    --bg:#f0f4f8;
-    --text:#333;
-    --card:#fff;
-    --radius:14px;
-    --shadow:0 6px 16px rgba(0,0,0,.08);
-  }
-  *{box-sizing:border-box;}
-  body{margin:0;font-family:'Roboto',sans-serif;background:var(--bg);color:var(--text);}
-  header{background:var(--brand);color:#fff;padding:64px 20px;text-align:center;animation:fadeIn 1s ease;}
-  header h1{font-size:2.4rem;margin:0 0 10px;}
-  header p{margin:0;}
-  .cta-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700;}
-  .btn-primary{background:#fff;color:var(--brand);}
-  .btn-outline{background:transparent;color:#fff;border:2px solid #fff;}
-  section{padding:48px 20px;max-width:1000px;margin:0 auto;}
-  h2{text-align:center;margin-bottom:28px;font-size:1.8rem;}
-  .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;}
-  .service-card{background:var(--card);padding:22px 18px;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:transform .25s ease;}
-  .service-card:hover{transform:translateY(-6px);cursor:pointer;}
-  .service-card i{font-size:1.9rem;margin-bottom:12px;color:var(--brand);}
-  .service-card h3{margin:6px 0 6px;font-size:1.2rem;}
-  .service-card p{margin:0;font-size:.98rem;opacity:.9;}
-  .contact{background:var(--brand);color:#fff;padding:42px 20px;text-align:center;border-radius:var(--radius);margin-top:48px;}
-  .contact a{color:#fff;text-decoration:underline;}
-  footer{text-align:center;padding:20px;font-size:.9rem;color:#666;}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClickCart & Co. — Online Services</title>
+  <meta name="description" content="Online ticket booking, form filling, resume creation, poster design, and photo editing — all by ClickCart & Co." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a2e0e6c78b.js" crossorigin="anonymous"></script>
 
-  /* Modal Form */
-  .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;animation:fadeIn 0.3s ease;}
-  .modal-content{background:#fff;padding:24px;border-radius:12px;width:90%;max-width:400px;position:relative;animation:fadeIn 0.4s ease;}
-  .modal-content h3{text-align:center;margin-bottom:16px;}
-  .modal-content label{display:block;margin:10px 0 4px;}
-  .modal-content input, .modal-content select, .modal-content textarea{width:100%;padding:8px 10px;margin-bottom:12px;border-radius:6px;border:1px solid #ccc;font-size:1rem;}
-  .modal-content button{background:var(--brand);color:#fff;padding:12px 16px;border:none;border-radius:8px;width:100%;font-size:1rem;cursor:pointer;}
-  .close-btn{position:absolute;top:10px;right:14px;font-size:1.3rem;cursor:pointer;color:#333;}
-</style>
+  <style>
+    :root {
+      --neon1: #6d28d9;
+      --neon2: #00b4d8;
+      --bg-dark: #0a0a0f;
+      --glass: rgba(255,255,255,0.08);
+      --white: #fff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at top left, var(--neon2), var(--neon1), #000);
+      font-family: 'Poppins', sans-serif;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 40px 20px;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: var(--white);
+      text-shadow: 0 0 25px var(--neon1);
+    }
+
+    header p {
+      opacity: 0.9;
+      font-size: 1.2rem;
+    }
+
+    .poster {
+      max-width: 400px;
+      width: 90%;
+      border-radius: 16px;
+      margin: 25px auto;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(255,255,255,0.3);
+      animation: float 3s infinite ease-in-out;
+    }
+
+    .poster img {
+      width: 100%;
+      display: block;
+    }
+
+    .language-select {
+      margin-top: 15px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 50px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card {
+      background: var(--glass);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px var(--neon2);
+    }
+
+    .card i {
+      font-size: 2rem;
+      color: var(--neon2);
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .card p { opacity: 0.8; }
+
+    .contact {
+      text-align: center;
+      background: rgba(0,0,0,0.5);
+      padding: 60px 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .contact a {
+      color: #25D366;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Popup form */
+    #formPopup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .form-box {
+      background: var(--glass);
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 25px var(--neon1);
+      animation: pop 0.5s ease-out;
+    }
+
+    .form-box input, .form-box select {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .form-box button {
+      background: linear-gradient(45deg, var(--neon1), var(--neon2));
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .form-box button:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: none;} }
+    @keyframes pop { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+    @keyframes float { 0%,100%{transform: translateY(0);} 50%{transform: translateY(-10px);} }
+  </style>
 </head>
+
 <body>
+  <header>
+    <h1>⚡ ClickCart & Co.</h1>
+    <p>Hamare bina online duniya adhoori hai 😎</p>
+    <div class="poster">
+      <img src="https://i.imgur.com/1Edt2uR.jpeg" alt="ClickCart & Co. Services Poster">
+    </div>
+    <select class="language-select" id="langSelector">
+      <option>English</option>
+      <option>हिन्दी</option>
+      <option>मराठी</option>
+      <option>বাংলা</option>
+      <option>தமிழ்</option>
+      <option>తెలుగు</option>
+      <option>ગુજરાતી</option>
+      <option>ਪੰਜਾਬੀ</option>
+      <option>اردو</option>
+      <option>भोजपुरी</option>
+      <option>मैथिली</option>
+    </select>
+  </header>
 
-<header role="banner">
-  <h1>ClickCart & Co.</h1>
-  <p>Hamare bina online duniya adhoori hai 😎</p>
-  <div class="cta-bar">
-    <a class="btn btn-primary" href="#services"><i class="fa-solid fa-list"></i> View Services</a>
-    <a class="btn btn-outline" href="#contact"><i class="fa-solid fa-phone"></i> Contact Now</a>
-  </div>
-</header>
+  <section class="services" id="services">
+    <div class="card" onclick="openForm('Tatkal Ticket Booking')">
+      <i class="fas fa-train"></i>
+      <h3>Tatkal Ticket Booking</h3>
+      <p>Fast IRCTC ticket booking</p>
+    </div>
 
-<main>
-<section id="services">
-  <h2>Our Services</h2>
-  <div class="services">
-    <div class="service-card" onclick="openForm('Online Tickets Booking')">
-      <i class="fa-solid fa-plane"></i>
-      <h3>Online Tickets Booking</h3>
-      <p>Railway, Air, Buses</p>
+    <div class="card" onclick="openForm('Form Filling')">
+      <i class="fas fa-pen"></i>
+      <h3>Form Filling</h3>
+      <p>Govt. & Private applications</p>
     </div>
-    <div class="service-card" onclick="openForm('Online Form Fill')">
-      <i class="fa-solid fa-pen"></i>
-      <h3>Online Form Fill</h3>
-      <p>Govt. & private applications</p>
+
+    <div class="card" onclick="openForm('Resume & Documents')">
+      <i class="fas fa-file-alt"></i>
+      <h3>Resume & Documents</h3>
+      <p>CVs, Cover letters, Docs</p>
     </div>
-    <div class="service-card" onclick="openForm('Resume & Document Creation')">
-      <i class="fa-solid fa-file-lines"></i>
-      <h3>Resume & Document Creation</h3>
-      <p>Professional CVs, cover letters</p>
+
+    <div class="card" onclick="openForm('Poster Designing')">
+      <i class="fas fa-paint-brush"></i>
+      <h3>Poster Designing</h3>
+      <p>Custom banners & social posts</p>
     </div>
-    <div class="service-card" onclick="openForm('Priority Tatkal Booking')">
-      <i class="fa-solid fa-bolt"></i>
-      <h3>Priority Tatkal Booking</h3>
-      <p>Fast processing during Tatkal hours</p>
-    </div>
-    <div class="service-card" onclick="openForm('Custom Poster Designing')">
-      <i class="fa-solid fa-paintbrush"></i>
-      <h3>Custom Poster Designing</h3>
-      <p>Social posts, flyers, banners</p>
-    </div>
-    <div class="service-card" onclick="openForm('Photo Editing Services')">
-      <i class="fa-solid fa-image"></i>
-      <h3>Photo Editing Services</h3>
+
+    <div class="card" onclick="openForm('Photo Editing')">
+      <i class="fas fa-camera"></i>
+      <h3>Photo Editing</h3>
       <p>Retouching, enhancements</p>
     </div>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <p>Adarsh Gupta: <a href="tel:+918092317965">+91 80923 17965</a></p>
+    <p>Ayush Pandey: <a href="tel:+918595674919">+91 85956 74919</a></p>
+    <p>Email: <a href="mailto:baba.googl001@gmail.com">baba.googl001@gmail.com</a></p>
+  </section>
+
+  <footer>© 2025 ClickCart & Co. · All Rights Reserved ⚡</footer>
+
+  <div id="formPopup">
+    <div class="form-box">
+      <h3 id="formTitle">Service Form</h3>
+      <input type="text" id="userName" placeholder="Full Name" required />
+      <input type="number" id="userAge" placeholder="Age" required />
+      <input type="tel" id="userPhone" placeholder="Phone Number" required />
+      <select id="userService">
+        <option value="Tatkal Ticket Booking">Tatkal Ticket Booking</option>
+        <option value="Form Filling">Form Filling</option>
+        <option value="Resume & Documents">Resume & Documents</option>
+        <option value="Poster Designing">Poster Designing</option>
+        <option value="Photo Editing">Photo Editing</option>
+      </select>
+      <button onclick="sendWhatsApp()">Submit & Send</button><br><br>
+      <button onclick="closeForm()">Close</button>
+    </div>
   </div>
-</section>
 
-<section id="contact" class="contact">
-  <h2>Contact Us</h2>
-  <p>Adarsh Gupta: <a href="tel:+918092317965">+91 80923 17965</a></p>
-  <p>Ayush Pandey: <a href="tel:+918595674919">+91 85956 74919</a></p>
-  <p>Email: <a href="mailto:baba.googl001@gmail.com">baba.googl001@gmail.com</a></p>
-</section>
-<footer>
-  © ClickCart & Co. · All rights reserved
-</footer>
+  <script>
+    function openForm(service) {
+      document.getElementById('formPopup').style.display = 'flex';
+      document.getElementById('formTitle').innerText = service + " Form";
+      document.getElementById('userService').value = service;
+    }
 
-<!-- Modal Form -->
-<div class="modal" id="serviceFormModal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeForm()">&times;</span>
-    <h3>Request Service</h3>
-    <form id="serviceForm" onsubmit="submitForm(event)">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-      <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone" required>
-      <label for="service">Service Required</label>
-      <input type="text" id="service" name="service" readonly>
-      <button type="submit">Submit Request</button>
-    </form>
-  </div>
-</div>
+    function closeForm() {
+      document.getElementById('formPopup').style.display = 'none';
+    }
 
-<script>
-function openForm(serviceName){
-  document.getElementById('service').value = serviceName;
-  document.getElementById('serviceFormModal').style.display = 'flex';
-}
-
-function closeForm(){
-  document.getElementById('serviceFormModal').style.display = 'none';
-}
-
-// Simulated form submission (replace with email sending via backend)
-function submitForm(event){
-  event.preventDefault();
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const service = document.getElementById('service').value;
-  alert(Thanks ${name}! Your request for "${service}" has been received.\nWe will contact you at ${email} / ${phone}.);
-  closeForm();
-}
-</script>
-
+    function sendWhatsApp() {
+      let name = document.getElementById('userName').value;
+      let age = document.getElementById('userAge').value;
+      let phone = document.getElementById('userPhone').value;
+      let service = document.getElementById('userService').value;
+      if(!name || !age || !phone) return alert('Please fill all details!');
+      
+      let msg = New Service Request:%0AName: ${name}%0AAge: ${age}%0APhone: ${phone}%0AService: ${service};
+      window.open(https://wa.me/918092317965?text=${msg});
+      window.open(https://wa.me/918595674919?text=${msg});
+      alert("Request sent successfully to both WhatsApp numbers!");
+      closeForm();
+    }
+  </script>
 </body>
 </html>
