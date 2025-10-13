@@ -5,12 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ClickCart & Co. — Online Services</title>
 
-<!-- Performance: preconnect + fonts -->
+<!-- Fonts + Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-
-<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <style>
@@ -24,37 +22,37 @@ body{
   background:linear-gradient(135deg,var(--secondary),var(--primary));
   color:var(--white); overflow-x:hidden;
 }
-header{ text-align:center; padding:70px 20px 20px 20px; }
-header h1{ font-size:3rem; text-shadow:0 0 15px var(--primary); }
-header p{ opacity:0.9; font-size:1.2rem; }
+
+/* Header */
+header{ text-align:center; padding:64px 20px 24px; }
+header h1{ font-size:2.6rem; text-shadow:0 0 15px var(--primary); }
+header p{ opacity:0.9; font-size:1.1rem; margin-top:6px; }
 
 /* Services grid */
 .services{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px; padding:40px 20px; max-width:1100px; margin:auto;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:22px; padding:36px 20px 48px; max-width:1100px; margin:auto;
 }
 .card{
-  background:var(--glass); padding:25px; border-radius:15px; text-align:center;
+  background:var(--glass); padding:22px; border-radius:14px; text-align:center;
   box-shadow:0 0 20px rgba(0,0,0,0.3);
-  transition:transform .3s, box-shadow .3s; cursor:pointer; outline:none;
+  transition:transform .25s, box-shadow .25s; cursor:pointer; outline:none;
 }
-.card:hover{ transform:translateY(-10px); box-shadow:0 0 25px var(--secondary); }
+.card:hover{ transform:translateY(-8px); box-shadow:0 0 25px var(--secondary); }
 .card:focus-visible{ box-shadow:0 0 0 3px var(--accent); }
-.card i{ font-size:2rem; color:var(--secondary); margin-bottom:12px; }
-.card h3{ margin-bottom:8px; }
+.card i{ font-size:2rem; color:var(--secondary); margin-bottom:10px; }
+.card h3{ margin-bottom:6px; }
 .card p{ opacity:0.85; }
 
 /* Contact */
 .contact{
   text-align:center; background:rgba(0,0,0,0.4);
-  padding:50px 20px; border-top:1px solid rgba(255,255,255,0.1);
+  padding:44px 20px; border-top:1px solid rgba(255,255,255,0.1);
 }
 .contact a{ color:var(--success); text-decoration:none; font-weight:600; }
 
 /* Footer */
-footer{
-  text-align:center; padding:22px; background:rgba(0,0,0,0.5); font-size:0.95rem;
-}
+footer{ text-align:center; padding:22px; background:rgba(0,0,0,0.5); font-size:0.95rem; }
 .footer-people{
   display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap; margin-bottom:6px;
 }
@@ -66,30 +64,30 @@ footer{
 }
 .madein{ opacity:0.95; }
 
-/* Modal (accessible) */
-#formPopup{
+/* Modal */
+#formOverlay{
   display:none; position:fixed; inset:0; z-index:999;
   background:rgba(0,0,0,0.65); backdrop-filter:blur(6px);
   justify-content:center; align-items:center; padding:20px;
 }
-.form-box{
-  background:var(--glass); padding:24px; border-radius:16px; width:min(520px,92%);
+.dialog{
+  background:var(--glass); padding:22px; border-radius:16px; width:min(520px,92%);
   box-shadow:0 0 25px var(--primary);
 }
-.form-box header{ padding:0 0 10px 0; }
-.form-title{ font-size:1.4rem; margin-bottom:8px; }
-.form-desc{ font-size:0.95rem; opacity:0.9; margin-bottom:16px; }
+.dialog header{ padding:0 0 10px 0; }
+.dialog .title{ font-size:1.3rem; margin-bottom:6px; }
+.dialog .desc{ font-size:0.95rem; opacity:0.9; margin-bottom:14px; }
 
 .form-grid{
   display:grid; grid-template-columns:1fr 1fr; gap:12px;
 }
 .form-grid .full{ grid-column:1 / -1; }
 
-.form-box input, .form-box select, .form-box textarea{
-  width:100%; margin:0; padding:10px; border-radius:8px; border:none; outline:none;
+.dialog input, .dialog select, .dialog textarea{
+  width:100%; padding:10px; border-radius:8px; border:none; outline:none;
   background:rgba(255,255,255,0.12); color:#fff;
 }
-.form-box textarea{ resize:vertical; min-height:84px; }
+.dialog textarea{ resize:vertical; min-height:84px; }
 
 .form-actions{ display:flex; gap:12px; margin-top:12px; }
 .btn{
@@ -99,44 +97,43 @@ footer{
 }
 .btn:hover{ opacity:0.9; transform:translateY(-1px); }
 .btn.secondary{ background:#ff4d4d; }
-
 .hidden{ display:none !important; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>⚡ ClickCart & Co.</h1>
+  <h1>⚡ClickCart & Co.</h1>
   <p>Hamare bina online duniya adhoori hai 😎</p>
-  <!-- Poster image removed as requested -->
+  <!-- Language selector and poster image removed -->
 </header>
 
 <section class="services" id="services">
-  <div class="card" data-service="Tatkal Ticket Booking" role="button" tabindex="0" aria-label="Tatkal Ticket Booking form open">
+  <div class="card" data-service="Tatkal Ticket Booking" role="button" tabindex="0" aria-label="Open Tatkal Ticket Booking form">
     <i class="fas fa-train"></i>
     <h3>Tatkal Ticket Booking</h3>
     <p>Fast IRCTC ticket booking</p>
   </div>
 
-  <div class="card" data-service="Form Filling" role="button" tabindex="0" aria-label="Form Filling form open">
+  <div class="card" data-service="Form Filling" role="button" tabindex="0" aria-label="Open Form Filling form">
     <i class="fas fa-pen"></i>
     <h3>Form Filling</h3>
     <p>Govt. & Private applications</p>
   </div>
 
-  <div class="card" data-service="Resume & Documents" role="button" tabindex="0" aria-label="Resume & Documents form open">
+  <div class="card" data-service="Resume & Documents" role="button" tabindex="0" aria-label="Open Resume & Documents form">
     <i class="fas fa-file-alt"></i>
     <h3>Resume & Documents</h3>
     <p>CVs, Cover letters, Docs</p>
   </div>
 
-  <div class="card" data-service="Poster Designing" role="button" tabindex="0" aria-label="Poster Designing form open">
+  <div class="card" data-service="Poster Designing" role="button" tabindex="0" aria-label="Open Poster Designing form">
     <i class="fas fa-paint-brush"></i>
     <h3>Poster Designing</h3>
     <p>Custom banners & social posts</p>
   </div>
 
-  <div class="card" data-service="Photo Editing" role="button" tabindex="0" aria-label="Photo Editing form open">
+  <div class="card" data-service="Photo Editing" role="button" tabindex="0" aria-label="Open Photo Editing form">
     <i class="fas fa-camera"></i>
     <h3>Photo Editing</h3>
     <p>Retouching, enhancements</p>
@@ -155,15 +152,15 @@ footer{
     <span class="badge"><i class="fa-solid fa-user-tie"></i> Adarsh Gupta</span>
     <span class="badge"><i class="fa-solid fa-user-tie"></i> Ayush Pandey</span>
   </div>
-  <div class="madein">Made with ♥ in India • © 2025 ClickCart & Co. · All Rights Reserved ⚡</div>
+  <div class="madein">Made with ♥️ in India • © 2025 ClickCart & Co. · All Rights Reserved ⚡</div>
 </footer>
 
-<!-- Accessible Modal -->
-<div id="formPopup" role="dialog" aria-modal="true" aria-labelledby="formTitle" aria-describedby="formDesc">
-  <div class="form-box">
+<!-- Modal Dialog -->
+<div id="formOverlay" role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialogDesc">
+  <div class="dialog">
     <header>
-      <div id="formTitle" class="form-title">Service Form</div>
-      <div id="formDesc" class="form-desc">Provide details to proceed with the selected service.</div>
+      <div id="dialogTitle" class="title">Service Form</div>
+      <div id="dialogDesc" class="desc">Please fill the details to proceed.</div>
     </header>
 
     <form id="leadForm" novalidate>
@@ -222,52 +219,54 @@ footer{
 </div>
 
 <script>
-// Open modal from any card + focus trapping
-const formPopup = document.getElementById('formPopup');
-const formTitle = document.getElementById('formTitle');
+// Elements
+const overlay = document.getElementById('formOverlay');
+const dialogTitle = document.getElementById('dialogTitle');
 const userService = document.getElementById('userService');
 const leadForm = document.getElementById('leadForm');
+const sendBtn = document.getElementById('sendBtn');
+const closeBtn = document.getElementById('closeBtn');
+
 let lastTrigger = null;
 
+// Open dialog
 function openForm(service){
-  formTitle.textContent = service + " Form";
+  dialogTitle.textContent = service + ' Form';
   userService.value = service;
-  formPopup.style.display='flex';
-  formPopup.scrollTop = 0;
-
-  // Set initial focus for accessibility
-  const firstInput = document.getElementById('userName');
-  firstInput.focus();
-
-  // Trap focus inside modal
-  trapFocus(formPopup);
+  overlay.style.display = 'flex';
+  document.getElementById('userName').focus();
+  trapFocus(overlay);
 }
 
+// Close dialog
 function closeForm(){
-  formPopup.style.display='none';
+  overlay.style.display = 'none';
   leadForm.reset();
-  if(lastTrigger){ lastTrigger.focus(); }
   releaseFocusTrap();
+  if(lastTrigger) lastTrigger.focus();
 }
 
-// Attach to cards
+// Bind service cards
 document.querySelectorAll('.card').forEach(card=>{
+  card.setAttribute('role','button');
+  card.setAttribute('tabindex','0');
+
   const open = ()=>{
     lastTrigger = card;
-    const service = card.dataset.service;
-    openForm(service);
+    openForm(card.dataset.service || 'Service');
   };
+
   card.addEventListener('click', open);
   card.addEventListener('keydown', e=>{
-    if(e.key==='Enter' || e.key===' '){
+    if(e.key === 'Enter' || e.key === ' '){
       e.preventDefault();
       open();
     }
   });
 });
 
-// WhatsApp send (two contacts, individually)
-document.getElementById('sendBtn').addEventListener('click', ()=>{
+// WhatsApp send to two numbers
+sendBtn.addEventListener('click', ()=>{
   const name = document.getElementById('userName').value.trim();
   const age = document.getElementById('userAge').value.trim();
   const gender = document.getElementById('userGender').value;
@@ -283,49 +282,51 @@ document.getElementById('sendBtn').addEventListener('click', ()=>{
 
   const lines = [
     'New Service Request:',
-    Name: ${name},
-    Age: ${age},
-    Gender: ${gender},
-    Phone: ${phone},
-    Email: ${email},
-    Service: ${service},
-    Requirement: ${req}
+    `Name: ${name}`,
+    `Age: ${age}`,
+    `Gender: ${gender}`,
+    `Phone: ${phone}`,
+    `Email: ${email}`,
+    `Service: ${service}`,
+    `Requirement: ${req}`
   ];
-  const msg = encodeURIComponent(lines.join('
-'));
+  const msg = encodeURIComponent(lines.join('\n'));
 
-  const numbers = ['918092317965','918595674919'];
+  const numbers = ['918092317965','918595674919']; // Adarsh, Ayush
   numbers.forEach(num=>{
-    window.open(https://wa.me/${num}?text=${msg},'_blank');
+    window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener');
   });
 
-  alert("Request sent successfully to both WhatsApp numbers!");
+  alert('Request sent successfully to both WhatsApp numbers!');
   closeForm();
 });
 
 // Close handlers
-document.getElementById('closeBtn').addEventListener('click', closeForm);
-document.addEventListener('keydown', (e)=>{
-  if(e.key==='Escape' && formPopup.style.display==='flex'){ closeForm(); }
+closeBtn.addEventListener('click', closeForm);
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && overlay.style.display === 'flex'){
+    closeForm();
+  }
 });
 
-// Focus trap (vanilla)
+// Simple focus trap
 let trapHandler = null;
 function trapFocus(container){
   const selectors = [
     'a[href]','button','textarea','input','select','[tabindex]:not([tabindex="-1"])'
   ];
   const getFocusable = ()=>Array.from(container.querySelectorAll(selectors.join(',')))
-    .filter(el=>!el.hasAttribute('disabled') && el.offsetParent!==null);
+    .filter(el=>!el.disabled && el.offsetParent !== null);
+
   trapHandler = (e)=>{
     if(e.key !== 'Tab') return;
     const focusables = getFocusable();
-    if(focusables.length===0) return;
+    if(!focusables.length) return;
     const first = focusables[0];
-    const last = focusables[focusables.length-1];
-    if(e.shiftKey && document.activeElement===first){
+    const last = focusables[focusables.length - 1];
+    if(e.shiftKey && document.activeElement === first){
       e.preventDefault(); last.focus();
-    } else if(!e.shiftKey && document.activeElement===last){
+    } else if(!e.shiftKey && document.activeElement === last){
       e.preventDefault(); first.focus();
     }
   };
@@ -333,7 +334,7 @@ function trapFocus(container){
 }
 function releaseFocusTrap(){
   if(trapHandler){
-    formPopup.removeEventListener('keydown', trapHandler);
+    overlay.removeEventListener('keydown', trapHandler);
     trapHandler = null;
   }
 }
