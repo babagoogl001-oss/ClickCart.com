@@ -1,288 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ClickCart & Co. — Online Services</title>
-  <meta name="description" content="Online ticket booking, form filling, resume creation, poster design, and photo editing — all by ClickCart & Co." />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/a2e0e6c78b.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ClickCart & Co. — Online Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/a2e0e6c78b.js" crossorigin="anonymous"></script>
 
-  <style>
-    :root {
-      --neon1: #6d28d9;
-      --neon2: #00b4d8;
-      --bg-dark: #0a0a0f;
-      --glass: rgba(255,255,255,0.08);
-      --white: #fff;
-    }
+<style>
+:root {
+  --primary: #6d28d9;
+  --secondary: #00b4d8;
+  --bg: #121212;
+  --glass: rgba(255,255,255,0.1);
+  --white: #fff;
+  --accent: #ffdd57;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: radial-gradient(circle at top left, var(--neon2), var(--neon1), #000);
-      font-family: 'Poppins', sans-serif;
-      color: var(--white);
-      overflow-x: hidden;
-    }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg,var(--secondary),var(--primary));
+  color: var(--white);
+  overflow-x:hidden;
+}
 
-    header {
-      text-align: center;
-      padding: 80px 20px 40px 20px;
-      animation: fadeIn 1.5s ease-in;
-    }
+header{
+  text-align:center;
+  padding:70px 20px 40px 20px;
+}
 
-    header h1 {
-      font-size: 3rem;
-      color: var(--white);
-      text-shadow: 0 0 25px var(--neon1);
-    }
+header h1{
+  font-size:3rem;
+  color: var(--white);
+  text-shadow:0 0 15px var(--primary);
+}
 
-    header p {
-      opacity: 0.9;
-      font-size: 1.2rem;
-    }
+header p{
+  opacity:0.9;
+  font-size:1.2rem;
+}
 
-    .poster {
-      max-width: 400px;
-      width: 90%;
-      border-radius: 16px;
-      margin: 25px auto;
-      overflow: hidden;
-      box-shadow: 0 0 25px rgba(255,255,255,0.3);
-      animation: float 3s infinite ease-in-out;
-    }
+.poster{
+  max-width:400px;
+  width:90%;
+  margin:25px auto;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 0 20px rgba(255,255,255,0.3);
+  animation: float 3s infinite ease-in-out;
+}
 
-    .poster img {
-      width: 100%;
-      display: block;
-    }
+.poster img{
+  width:100%;
+  display:block;
+}
 
-    .language-select {
-      margin-top: 15px;
-      background: var(--glass);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-    }
+.language-select{
+  margin-top:15px;
+  background: var(--glass);
+  border:1px solid rgba(255,255,255,0.3);
+  color:white;
+  padding:8px 12px;
+  border-radius:8px;
+  backdrop-filter: blur(8px);
+  cursor:pointer;
+}
 
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      padding: 50px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+  padding:50px 20px;
+  max-width:1100px;
+  margin:auto;
+}
 
-    .card {
-      background: var(--glass);
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+.card{
+  background: var(--glass);
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor:pointer;
+}
 
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 25px var(--neon2);
-    }
+.card:hover{
+  transform: translateY(-10px);
+  box-shadow:0 0 25px var(--secondary);
+}
 
-    .card i {
-      font-size: 2rem;
-      color: var(--neon2);
-      margin-bottom: 12px;
-    }
+.card i{
+  font-size:2rem;
+  color: var(--secondary);
+  margin-bottom:12px;
+}
 
-    .card h3 {
-      margin-bottom: 8px;
-      color: #fff;
-    }
+.card h3{margin-bottom:8px;color:#fff;}
+.card p{opacity:0.8;}
 
-    .card p { opacity: 0.8; }
+.contact{
+  text-align:center;
+  background: rgba(0,0,0,0.4);
+  padding:60px 20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
 
-    .contact {
-      text-align: center;
-      background: rgba(0,0,0,0.5);
-      padding: 60px 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
+.contact a{color:#25D366;text-decoration:none;font-weight:600;}
 
-    .contact a {
-      color: #25D366;
-      text-decoration: none;
-      font-weight: 600;
-    }
+footer{
+  text-align:center;
+  padding:20px;
+  background: rgba(0,0,0,0.5);
+  font-size:0.9rem;
+  opacity:0.8;
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(0,0,0,0.6);
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
+/* Popup form */
+#formPopup{
+  display:none;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(6px);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
 
-    /* Popup form */
-    #formPopup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(6px);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
+.form-box{
+  background: var(--glass);
+  padding:30px;
+  border-radius:16px;
+  max-width:450px;
+  width:90%;
+  text-align:center;
+  box-shadow:0 0 25px var(--primary);
+  animation: pop 0.5s ease-out;
+}
 
-    .form-box {
-      background: var(--glass);
-      padding: 30px;
-      border-radius: 16px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 0 25px var(--neon1);
-      animation: pop 0.5s ease-out;
-    }
+.form-box input, .form-box select, .form-box textarea{
+  width:100%;
+  margin:10px 0;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  outline:none;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
 
-    .form-box input, .form-box select {
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-    }
+.form-box textarea{
+  resize:none;
+  height:80px;
+}
 
-    .form-box button {
-      background: linear-gradient(45deg, var(--neon1), var(--neon2));
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-      width: 100%;
-    }
+.form-box button{
+  background: linear-gradient(45deg,var(--primary),var(--secondary));
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
+  width:100%;
+  margin-top:10px;
+}
 
-    .form-box button:hover {
-      opacity: 0.8;
-      transform: scale(1.05);
-    }
+.form-box button:hover{
+  opacity:0.85;
+  transform: scale(1.05);
+}
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: none;} }
-    @keyframes pop { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
-    @keyframes float { 0%,100%{transform: translateY(0);} 50%{transform: translateY(-10px);} }
-  </style>
+@keyframes pop{from{transform:scale(0.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+</style>
 </head>
 
 <body>
-  <header>
-    <h1>⚡ ClickCart & Co.</h1>
-    <p>Hamare bina online duniya adhoori hai 😎</p>
-    <div class="poster">
-      <img src="https://i.imgur.com/1Edt2uR.jpeg" alt="ClickCart & Co. Services Poster">
-    </div>
-    <select class="language-select" id="langSelector">
-      <option>English</option>
-      <option>हिन्दी</option>
-      <option>मराठी</option>
-      <option>বাংলা</option>
-      <option>தமிழ்</option>
-      <option>తెలుగు</option>
-      <option>ગુજરાતી</option>
-      <option>ਪੰਜਾਬੀ</option>
-      <option>اردو</option>
-      <option>भोजपुरी</option>
-      <option>मैथिली</option>
-    </select>
-  </header>
 
-  <section class="services" id="services">
-    <div class="card" onclick="openForm('Tatkal Ticket Booking')">
-      <i class="fas fa-train"></i>
-      <h3>Tatkal Ticket Booking</h3>
-      <p>Fast IRCTC ticket booking</p>
-    </div>
+<header>
+  <h1 id="siteTitle">⚡ ClickCart & Co.</h1>
+  <p id="siteSlogan">Hamare bina online duniya adhoori hai 😎</p>
+  <div class="poster">
+    <img src="https://i.imgur.com/1Edt2uR.jpeg" alt="ClickCart & Co. Services Poster">
+  </div>
+  <select class="language-select" id="langSelector">
+    <option value="en">English</option>
+    <option value="hi">हिन्दी</option>
+    <option value="mr">मराठी</option>
+    <option value="bn">বাংলা</option>
+    <option value="ta">தமிழ்</option>
+    <option value="te">తెలుగు</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="pa">ਪੰਜਾਬੀ</option>
+    <option value="ur">اردو</option>
+    <option value="bh">भोजपुरी</option>
+    <option value="ma">मैथिली</option>
+  </select>
+</header>
 
-    <div class="card" onclick="openForm('Form Filling')">
-      <i class="fas fa-pen"></i>
-      <h3>Form Filling</h3>
-      <p>Govt. & Private applications</p>
-    </div>
-
-    <div class="card" onclick="openForm('Resume & Documents')">
-      <i class="fas fa-file-alt"></i>
-      <h3>Resume & Documents</h3>
-      <p>CVs, Cover letters, Docs</p>
-    </div>
-
-    <div class="card" onclick="openForm('Poster Designing')">
-      <i class="fas fa-paint-brush"></i>
-      <h3>Poster Designing</h3>
-      <p>Custom banners & social posts</p>
-    </div>
-
-    <div class="card" onclick="openForm('Photo Editing')">
-      <i class="fas fa-camera"></i>
-      <h3>Photo Editing</h3>
-      <p>Retouching, enhancements</p>
-    </div>
-  </section>
-
-  <section class="contact">
-    <h2>Contact Us</h2>
-    <p>Adarsh Gupta: <a href="tel:+918092317965">+91 80923 17965</a></p>
-    <p>Ayush Pandey: <a href="tel:+918595674919">+91 85956 74919</a></p>
-    <p>Email: <a href="mailto:baba.googl001@gmail.com">baba.googl001@gmail.com</a></p>
-  </section>
-
-  <footer>© 2025 ClickCart & Co. · All Rights Reserved ⚡</footer>
-
-  <div id="formPopup">
-    <div class="form-box">
-      <h3 id="formTitle">Service Form</h3>
-      <input type="text" id="userName" placeholder="Full Name" required />
-      <input type="number" id="userAge" placeholder="Age" required />
-      <input type="tel" id="userPhone" placeholder="Phone Number" required />
-      <select id="userService">
-        <option value="Tatkal Ticket Booking">Tatkal Ticket Booking</option>
-        <option value="Form Filling">Form Filling</option>
-        <option value="Resume & Documents">Resume & Documents</option>
-        <option value="Poster Designing">Poster Designing</option>
-        <option value="Photo Editing">Photo Editing</option>
-      </select>
-      <button onclick="sendWhatsApp()">Submit & Send</button><br><br>
-      <button onclick="closeForm()">Close</button>
-    </div>
+<section class="services" id="services">
+  <div class="card" data-service="Tatkal Ticket Booking">
+    <i class="fas fa-train"></i>
+    <h3 data-text-en="Tatkal Ticket Booking">Tatkal Ticket Booking</h3>
+    <p data-text-en="Fast IRCTC ticket booking">Fast IRCTC ticket booking</p>
   </div>
 
-  <script>
-    function openForm(service) {
-      document.getElementById('formPopup').style.display = 'flex';
-      document.getElementById('formTitle').innerText = service + " Form";
-      document.getElementById('userService').value = service;
-    }
+  <div class="card" data-service="Form Filling">
+    <i class="fas fa-pen"></i>
+    <h3 data-text-en="Form Filling">Form Filling</h3>
+    <p data-text-en="Govt. & Private applications">Govt. & Private applications</p>
+  </div>
 
-    function closeForm() {
-      document.getElementById('formPopup').style.display = 'none';
-    }
+  <div class="card" data-service="Resume & Documents">
+    <i class="fas fa-file-alt"></i>
+    <h3 data-text-en="Resume & Documents">Resume & Documents</h3>
+    <p data-text-en="CVs, Cover letters, Docs">CVs, Cover letters, Docs</p>
+  </div>
 
-    function sendWhatsApp() {
-      let name = document.getElementById('userName').value;
-      let age = document.getElementById('userAge').value;
-      let phone = document.getElementById('userPhone').value;
-      let service = document.getElementById('userService').value;
-      if(!name || !age || !phone) return alert('Please fill all details!');
-      
-      let msg = New Service Request:%0AName: ${name}%0AAge: ${age}%0APhone: ${phone}%0AService: ${service};
-      window.open(https://wa.me/918092317965?text=${msg});
-      window.open(https://wa.me/918595674919?text=${msg});
-      alert("Request sent successfully to both WhatsApp numbers!");
-      closeForm();
-    }
-  </script>
+  <div class="card" data-service="Poster Designing">
+    <i class="fas fa-paint-brush"></i>
+    <h3 data-text-en="Poster Designing">Poster Designing</h3>
+    <p data-text-en="Custom banners & social posts">Custom banners & social posts</p>
+  </div>
+
+  <div class="card" data-service="Photo Editing">
+    <i class="fas fa-camera"></i>
+    <h3 data-text-en="Photo Editing">Photo Editing</h3>
+    <p data-text-en="Retouching, enhancements">Retouching, enhancements</p>
+  </div>
+</section>
+
+<section class="contact">
+  <h2 id="contactTitle">Contact Us</h2>
+  <p>Adarsh Gupta: <a href="tel:+918092317965">+91 80923 17965</a></p>
+  <p>Ayush Pandey: <a href="tel:+918595674919">+91 85956 74919</a></p>
+  <p>Email: <a href="mailto:baba.googl001@gmail.com">baba.googl001@gmail.com</a></p>
+</section>
+
+<footer>© 2025 ClickCart & Co. · All Rights Reserved ⚡</footer>
+
+<!-- Form Popup -->
+<div id="formPopup">
+  <div class="form-box">
+    <h3 id="formTitle">Service Form</h3>
+    <input type="text" id="userName" placeholder="Full Name" required />
+    <input type="number" id="userAge" placeholder="Age" required />
+    <input type="tel" id="userPhone" placeholder="Phone Number" required />
+    <textarea id="userReq" placeholder="Write your requirement here..." required></textarea>
+    <select id="userService">
+      <option value="Tatkal Ticket Booking">Tatkal Ticket Booking</option>
+      <option value="Form Filling">Form Filling</option>
+      <option value="Resume & Documents">Resume & Documents</option>
+      <option value="Poster Designing">Poster Designing</option>
+      <option value="Photo Editing">Photo Editing</option>
+    </select>
+    <button onclick="sendWhatsApp()">Submit & Send</button>
+    <button onclick="closeForm()" style="margin-top:10px;background:#ff4d4d;">Close</button>
+  </div>
+</div>
+
+<script>
+// Language translations (sample)
+const translations = {
+  hi: {
+    siteTitle: "⚡ क्लिककार्ट & कंपनी",
+    siteSlogan: "हमारे बिना ऑनलाइन दुनिया अधूरी है 😎",
+    contactTitle: "संपर्क करें",
+    "Tatkal Ticket Booking": "तत्काल टिकट बुकिंग",
+    "Fast IRCTC ticket booking": "तेज़ IRCTC टिकट बुकिंग",
+    "Form Filling": "फ़ॉर्म भरना",
+    "Govt. & Private applications": "सरकारी और निजी आवेदन",
+    "Resume & Documents": "रेज़्यूमे और दस्तावेज़",
+    "CVs, Cover letters, Docs": "सीवी, कवर लेटर, दस्तावेज़",
+    "Poster Designing": "पोस्टर डिजाइनिंग",
+    "Custom banners & social posts": "कस्टम बैनर और सोशल पोस्ट",
+    "Photo Editing": "फोटो संपादन",
+    "Retouching, enhancements": "रिटचिंग, सुधार"
+  }
+};
+
+// Language change
+document.getElementById('langSelector').addEventListener('change', function() {
+  const lang = this.value;
+  if(lang === 'en') return; // default
+  const t = translations[lang];
+  if(!t) return;
+
+  document.getElementById('siteTitle').innerText = t.siteTitle || document.getElementById('siteTitle').innerText;
+  document.getElementById('siteSlogan').innerText = t.siteSlogan || document.getElementById('siteSlogan').innerText;
+  document.getElementById('contactTitle').innerText = t.contactTitle || document.getElementById('contactTitle').innerText;
+
+  document.querySelectorAll('.card h3').forEach(h3=>{
+    const key = h3.dataset.textEn;
+    h3.innerText = t[key] || h3.innerText;
+  });
+  document.querySelectorAll('.card p').forEach(p=>{
+    const key = p.dataset.textEn;
+    p.innerText = t[key] || p.innerText;
+  });
+});
+
+// Open detailed form
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const service = card.dataset.service;
+    document.getElementById('formPopup').style.display='flex';
+    document.getElementById('formTitle').innerText = service + " Form";
+    document.getElementById('userService').value = service;
+  });
+});
+
+// Close form
+function closeForm(){
+  document.getElementById('formPopup').style.display='none';
+  document.getElementById('userName').value='';
+  document.getElementById('userAge').value='';
+  document.getElementById('userPhone').value='';
+  document.getElementById('userReq').value='';
+}
+
+// Send WhatsApp message
+function sendWhatsApp(){
+  const name = document.getElementById('userName').value.trim();
+  const age = document.getElementById('userAge').value.trim();
+  const phone = document.getElementById('userPhone').value.trim();
+  const req = document.getElementById('userReq').value.trim();
+  const service = document.getElementById('userService').value;
+
+  if(!name || !age || !phone || !req){
+    alert('Please fill all details!');
+    return;
+  }
+
+  const msg = New Service Request:%0AName: ${name}%0AAge: ${age}%0APhone: ${phone}%0AService: ${service}%0ARequirement: ${req};
+
+  const numbers = ['918092317965','918595674919'];
+  numbers.forEach(num=>{
+    window.open(https://wa.me/${num}?text=${msg},'_blank');
+  });
+
+  alert("Request sent successfully to both WhatsApp numbers!");
+  closeForm();
+}
+</script>
+
 </body>
 </html>
