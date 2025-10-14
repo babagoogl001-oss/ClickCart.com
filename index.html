@@ -26,6 +26,8 @@
     margin: 0;
     padding: 1rem;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   header {
     text-align: center;
@@ -50,6 +52,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
     gap: 28px;
+    flex-grow: 1;
   }
   .card {
     background: var(--glass);
@@ -201,6 +204,50 @@
       font-size: 0.9rem;
     }
   }
+
+  /* Contact section */
+  .contact {
+    background: rgba(255,255,255,0.08);
+    padding: 20px 18px;
+    max-width: 1100px;
+    margin: 0 auto 12px;
+    border-radius: 14px;
+  }
+  .contact h3 {
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px var(--accent);
+  }
+  .contact p {
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+  .contact a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .contact a:hover,
+  .contact a:focus {
+    text-decoration: underline;
+  }
+  /* Footer */
+  footer {
+    background: rgba(255,255,255,0.08);
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--white);
+    padding: 12px 10px calc(12px + env(safe-area-inset-bottom));
+    user-select: none;
+    margin-top: 24px;
+  }
+  .footer-line {
+    opacity: 0.78;
+    font-weight: 500;
+    line-height: 1.4;
+  }
 </style>
 </head>
 <body>
@@ -243,7 +290,7 @@
   </div>
 </section>
 
-<!-- Tatkal Ticket Modal -->
+<!-- Tatkal Modal -->
 <div id="tatkalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="tatkalTitle" aria-describedby="tatkalDesc">
   <div class="modalContent" role="document">
     <h2 id="tatkalTitle">Tatkal Ticket Booking</h2>
@@ -276,8 +323,8 @@
       <label for="preferredTrainsInput">Preferred Train(s)</label>
       <input type="text" id="preferredTrainsInput" placeholder="e.g. 12951, 12673 or Train names" />
       <div class="modalActions">
-        <button type="button" id="submitBtn" class="btnMain submit">Submit</button>
-        <button type="button" id="closeBtn" class="btnMain cancel">Cancel</button>
+        <button type="button" id="submitBtn" class="submit">Submit</button>
+        <button type="button" id="closeBtn" class="cancel">Cancel</button>
       </div>
     </form>
   </div>
@@ -304,21 +351,34 @@
       <label for="emailInput">Email</label>
       <input type="email" id="emailInput" placeholder="Your email" required />
       <label for="phoneInput">Phone (10 digits)</label>
-      <input type="tel" id="phoneInput" placeholder="1234567890" pattern="\\d{10}" minlength="10" maxlength="10" required />
+      <input type="tel" id="phoneInput" placeholder="1234567890" pattern="\d{10}" minlength="10" maxlength="10" required />
       <label for="serviceInput">Service</label>
       <input type="text" id="serviceInput" readonly />
       <label for="requirementsInput">Requirements</label>
       <textarea id="requirementsInput" placeholder="Enter your requirements" required></textarea>
       <div class="modalActions">
-        <button type="button" id="submitGeneralBtn" class="btnMain submit">Submit</button>
-        <button type="button" id="closeGeneralBtn" class="btnMain cancel">Cancel</button>
+        <button type="button" id="submitGeneralBtn" class="submit">Submit</button>
+        <button type="button" id="closeGeneralBtn" class="cancel">Cancel</button>
       </div>
     </form>
   </div>
 </div>
 
+<!-- Contact Us Section -->
+<section class="contact" aria-label="Contact information" style="max-width:1100px; margin: 0 auto 24px; padding: 0 12px;">
+  <h3>Contact Us</h3>
+  <p>Adarsh Gupta: <a href="tel:+918092317965" aria-label="Call Adarsh on plus nine one eight zero nine two three one seven nine six five">+91 8092317965</a></p>
+  <p>Ayush Pandey: <a href="tel:+918595674919" aria-label="Call Ayush on plus nine one eight five nine five six seven four nine one nine">+91 8595674919</a></p>
+  <p>Email: <a href="mailto:baba.googl001@gmail.com" aria-label="Email baba dot googl zero zero one at gmail dot com">baba.googl001@gmail.com</a></p>
+</section>
+
+<footer role="contentinfo" style="text-align:center; color:white; opacity:0.9; padding:16px 12px 20px; background: rgba(0,0,0,0.15); font-size: 0.9rem; user-select:none;">
+  <div>Made with ♥️ In Bharat by Adarsh & Ayush</div>
+  <div>© 2025 ClickCart & Co. All rights reserved</div>
+</footer>
+
 <script>
-  // Get elements
+  // Elements
   const tatkalModal = document.getElementById('tatkalModal');
   const generalModal = document.getElementById('generalModal');
 
@@ -343,7 +403,7 @@
   const serviceInput = document.getElementById('serviceInput');
   const requirementsInput = document.getElementById('requirementsInput');
 
-  // Open modals
+  // Open modals on card click
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       const service = card.dataset.service;
@@ -362,7 +422,6 @@
     });
   });
 
-  // Modal open/close helpers
   function openModal(modal){
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
@@ -374,7 +433,6 @@
   closeBtn.addEventListener('click', () => closeModal(tatkalModal));
   closeGeneralBtn.addEventListener('click', () => closeModal(generalModal));
 
-  // Close with Esc
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape'){
       closeModal(tatkalModal);
@@ -448,6 +506,19 @@
     closeModal(generalModal);
   });
 </script>
+
+<!-- Contact Us Section -->
+<section class="contact" aria-label="Contact information" style="max-width:1100px; margin: 0 auto 24px; padding: 0 12px;">
+  <h3>Contact Us</h3>
+  <p>Adarsh Gupta: <a href="tel:+918092317965" aria-label="Call Adarsh on plus nine one eight zero nine two three one seven nine six five">+91 8092317965</a></p>
+  <p>Ayush Pandey: <a href="tel:+918595674919" aria-label="Call Ayush on plus nine one eight five nine five six seven four nine one nine">+91 8595674919</a></p>
+  <p>Email: <a href="mailto:baba.googl001@gmail.com" aria-label="Email baba dot googl zero zero one at gmail dot com">baba.googl001@gmail.com</a></p>
+</section>
+
+<footer role="contentinfo" style="text-align:center; color:white; opacity:0.9; padding:16px 12px 20px; background: rgba(0,0,0,0.15); font-size: 0.9rem; user-select:none;">
+  <div>Made with ♥️ In Bharat by Adarsh & Ayush</div>
+  <div>© 2025 ClickCart & Co. All rights reserved</div>
+</footer>
 
 </body>
 </html>
