@@ -3,164 +3,305 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ClickCart & Co. - Online Services</title>
+<title>ClickCart & Co. - Animated Services + Game</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <style>
-  body {
+  /* Reset & base */
+  *, *::before, *::after {box-sizing: border-box;}
+  body, html {
+    margin:0; padding:0; height: 100%;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #00b4d8, #6d28d9);
+    background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
     color: white;
-    margin: 0; padding: 1rem;
+    overflow-x: hidden;
   }
+  /* Container */
   header {
     text-align: center;
-    padding: 48px 1rem 16px;
+    padding: 48px 10px 12px;
+    user-select: none;
   }
   header h1 {
-    font-size: 2.75rem;
-    margin-bottom: 0.1rem;
+    font-weight: 700;
+    font-size: 3rem;
+    background: linear-gradient(90deg, #6d28d9, #00b4d8);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: textGlow 4s ease-in-out infinite alternate;
   }
   header p {
-    opacity: 0.85;
-    font-size: 1.25rem;
+    margin-top: 8px;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #ddd;
   }
+
+  @keyframes textGlow {
+    0%, 100% {text-shadow: 0 0 10px #00b4d8, 0 0 20px #6d28d9;}
+    50% {text-shadow: 0 0 15px #6d28d9, 0 0 30px #00b4d8;}
+  }
+
+  /* Services Grid */
   .services {
+    max-width: 1200px;
+    margin: 1rem auto 3rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-    max-width: 1080px;
-    margin: 2rem auto 1rem;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 28px;
+    padding: 0 10px;
   }
   .card {
-    background: rgba(255,255,255,0.1);
-    padding: 24px;
-    border-radius: 18px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    position: relative;
+    background: linear-gradient(135deg, #3b82f6, #9333ea);
+    border-radius: 20px;
+    padding: 20px 24px;
+    box-shadow: 0 0 32px #9333ea66;
     cursor: pointer;
-    text-align: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    outline-offset: 3px;
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+    overflow: hidden;
   }
-  .card:hover, .card:focus-visible {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 26px #00b4d8;
-    outline: none;
+  .card:focus-visible,
+  .card:hover {
+    box-shadow:
+      0 0 40px #00e0ff,
+      0 0 60px #9333ea,
+      0 0 90px #00ffe7;
+    transform: translateY(-15px) rotate(-2deg) scale(1.03);
   }
   .card i {
-    font-size: 2.8rem;
-    margin-bottom: 12px;
-    color: #00b4d8;
+    font-size: 3.2rem;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 5px rgba(0,255,255,0.7));
+    animation: iconPulse 3s infinite ease-in-out alternate;
   }
   .card h3 {
-    margin: 8px 0 6px;
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 8px #fff3;
   }
   .card p {
-    color: #d6d6d6;
     font-size: 1rem;
+    line-height: 1.3;
+    color: #d0d7f9cc;
   }
-  /* Modal common styles */
-  .modal {
+  @keyframes iconPulse {
+    0% {filter: drop-shadow(0 0 3px #00ffffaa);}
+    50% {filter: drop-shadow(0 0 15px #70e6ffcc);}
+    100% {filter: drop-shadow(0 0 3px #00ffffaa);}
+  }
+
+  /* Game Toggle Button */
+  .gameToggle {
+    margin-top: 12px;
+    display: inline-block;
+    color: #a5f3fc;
+    cursor: pointer;
+    font-weight: 600;
+    text-shadow: 0 0 6px #00d4ffaa;
+    transition: color 0.3s ease;
+  }
+  .gameToggle:hover {
+    color: #00fff7;
+  }
+  /* Game Container */
+  .gameContainer {
+    margin-top: 14px;
+    width: 100%;
+    height: 180px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #111, #222);
+    box-shadow: inset 0 0 20px #00d4ffdd;
+    display: none;
+    position: relative;
+  }
+  .gameContainer.active {
+    display: block;
+  }
+
+  /* Modal Overlay */
+  .modalOverlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(5px);
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
     justify-content: center;
     align-items: center;
-    padding: 16px;
-    z-index: 1000;
+    z-index: 2000;
   }
-  .modal.active {
+  .modalOverlay.active {
     display: flex;
+    animation: fadeInScale 0.3s ease forwards;
   }
-  .modal-content {
-    background: rgba(255,255,255,0.1);
-    padding: 24px 28px;
-    border-radius: 14px;
-    max-width: 480px;
+  @keyframes fadeInScale {
+    0% {opacity:0; transform: scale(0.85);}
+    100% {opacity:1; transform: scale(1);}
+  }
+
+  /* Modal content */
+  .modalContent {
+    background: linear-gradient(135deg, #22c55e, #14b8a6);
+    border-radius: 18px;
+    padding: 28px 32px;
+    max-width: 460px;
     width: 100%;
-    color: #fff;
-    box-shadow: 0 0 26px #00b4d8;
+    box-shadow: 0 0 40px #14b8a6;
+    color: white;
+    position: relative;
   }
-  .modal-content h2 {
-    margin-bottom: 1rem;
-    font-weight: 600;
-    font-size: 1.8rem;
+  .modalContent h2 {
+    margin-bottom: 18px;
+    font-weight: 700;
+    font-size: 1.9rem;
+    text-shadow: 0 0 12px #e0ffe6;
   }
-  .modal-content label {
+  .modalContent label {
     display: block;
-    margin: 12px 0 6px 0;
-    font-size: 0.95rem;
     font-weight: 600;
-    opacity: 0.9;
+    font-size: 0.9rem;
+    margin: 12px 0 6px 0;
   }
-  .modal-content input, .modal-content select {
+  .modalContent input,
+  .modalContent select,
+  .modalContent textarea {
     width: 100%;
     padding: 10px 12px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: none;
-    background: rgba(255,255,255,0.13);
-    color: black;
-    font-weight: 500;
     font-size: 1rem;
+    font-weight: 500;
+    background: rgba(255,255,255,0.17);
+    color: black;
+    outline-offset: 0;
+    outline-color: transparent;
+    transition: outline-color 0.3s ease;
   }
-  .modal-content input::placeholder {
+  .modalContent input::placeholder,
+  .modalContent textarea::placeholder {
     color: #555;
   }
-  .modal-content button {
-    margin-top: 18px;
-    width: 100%;
-    padding: 12px 0;
-    background: linear-gradient(45deg, #6d28d9, #00b4d8);
-    border: none;
+  .modalContent input:focus,
+  .modalContent select:focus,
+  .modalContent textarea:focus {
+    outline-color: #22d5a3;
+  }
+  .modalActions {
+    margin-top: 22px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .btnMain {
+    flex: 1;
+    background: linear-gradient(45deg, #222, #44e0d0);
     border-radius: 14px;
+    border: none;
     color: white;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    padding: 14px 0;
     cursor: pointer;
-    transition: opacity 0.25s ease;
+    box-shadow: 0 0 18px #4ef5dbcc;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
-  .modal-content button:hover {
-    opacity: 0.9;
+  .btnMain:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -45%;
+    width: 70%;
+    height: 300%;
+    background: linear-gradient(90deg, transparent, #00ffd5aa, transparent);
+    transform: translateY(-50%) skewX(-20deg);
+    transition: left 0.5s ease;
   }
-  .modal-close {
-    margin-top: 12px;
-    width: 100%;
+  .btnMain:hover:before {
+    left: 130%;
+  }
+  .btnMain:hover {
+    box-shadow: 0 0 26px #00efddcc;
+    transform: scale(1.06);
+  }
+  .btnClose {
     background: #ef4444;
+    box-shadow: 0 0 16px #da1c1c;
   }
-  /* Preferred trains chips */
-  .chip-container {
+  .btnClose:hover {
+    box-shadow: 0 0 26px #ff3c3c;
+    transform: scale(1.06);
+  }
+  /* Train chips */
+  .chipList {
     margin-top: 8px;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
   }
   .chip {
-    background: #6d28d9;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
+    background: #22d5a3;
+    color: #003f34;
+    padding: 6px 12px;
+    border-radius: 32px;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-weight: 600;
+    gap: 6px;
+    user-select: none;
   }
   .chip button {
     background: transparent;
     border: none;
-    color: #d1d5db;
-    cursor: pointer;
+    font-weight: 700;
     font-size: 1.1rem;
+    color: #005b3d;
+    cursor: pointer;
     line-height: 1;
   }
-  footer {
-    margin-top: 2rem;
-    text-align: center;
-    opacity: 0.75;
-    font-size: 0.9rem;
+
+  /* Snake game styles */
+  .gameToggle {
+    margin-top: 8px;
+    font-weight: 700;
+    color: #6d28d9;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s ease;
+  }
+  .gameToggle:hover {
+    color: #00ffc3;
+  }
+  .gameWrapper {
+    margin-top: 12px;
+    border-radius: 12px;
+    background: #111;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 24px #00ffe6bb inset;
+  }
+  #snakeCanvas {
+    display: block;
+    background: #0a0a0a;
+    border-radius: 12px;
+    margin: auto;
+    max-width: 100%;
+  }
+  .scoreDisplay {
+    position: absolute;
+    top: 6px;
+    right: 14px;
+    color: #0ff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px #0ff;
+    user-select: none;
   }
 </style>
 
@@ -172,254 +313,279 @@
   <p>Hamare bina online duniya adhoori hai 😎</p>
 </header>
 
-<section class="services" aria-label="Available services">
-  <div tabindex="0" role="button" class="card" data-service="Tatkal Ticket Booking" aria-label="Open Tatkal Ticket Booking form">
+<section class="services" aria-label="Services list">
+  <div tabindex="0" role="button" class="card" data-service="Tatkal Ticket Booking" aria-label="Tatkal Ticket Booking">
     <i class="fas fa-train"></i>
     <h3>Tatkal Ticket Booking</h3>
-    <p>Book Tatkal tickets manually without API</p>
+    <p>Manual ticket booking form without API</p>
+    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
+    <div class="gameWrapper" style="display:none;">
+      <canvas id="snakeCanvas" width="320" height="180" aria-label="Snake game"></canvas>
+      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
+    </div>
   </div>
-  <div tabindex="0" role="button" class="card" data-service="Form Filling" aria-label="Open Form Filling form">
+
+  <div tabindex="0" role="button" class="card" data-service="Form Filling" aria-label="Form Filling">
     <i class="fas fa-pen"></i>
     <h3>Form Filling</h3>
     <p>Govt. & Private applications</p>
+    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
+    <div class="gameWrapper" style="display:none;">
+      <canvas id="snakeCanvas2" width="320" height="180" aria-label="Snake game"></canvas>
+      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
+    </div>
   </div>
-  <div tabindex="0" role="button" class="card" data-service="Resume & Documents" aria-label="Open Resume & Documents form">
+
+  <div tabindex="0" role="button" class="card" data-service="Resume & Documents" aria-label="Resume & Documents">
     <i class="fas fa-file-alt"></i>
     <h3>Resume & Documents</h3>
     <p>CVs, Cover letters, Docs</p>
+    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
+    <div class="gameWrapper" style="display:none;">
+      <canvas id="snakeCanvas3" width="320" height="180" aria-label="Snake game"></canvas>
+      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
+    </div>
   </div>
-  <div tabindex="0" role="button" class="card" data-service="Poster Designing" aria-label="Open Poster Designing form">
+
+  <div tabindex="0" role="button" class="card" data-service="Poster Designing" aria-label="Poster Designing">
     <i class="fas fa-paint-brush"></i>
     <h3>Poster Designing</h3>
     <p>Custom banners & social posts</p>
+    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
+    <div class="gameWrapper" style="display:none;">
+      <canvas id="snakeCanvas4" width="320" height="180" aria-label="Snake game"></canvas>
+      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
+    </div>
   </div>
-  <div tabindex="0" role="button" class="card" data-service="Photo Editing" aria-label="Open Photo Editing form">
+
+  <div tabindex="0" role="button" class="card" data-service="Photo Editing" aria-label="Photo Editing">
     <i class="fas fa-camera"></i>
     <h3>Photo Editing</h3>
     <p>Retouching, enhancements</p>
+    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
+    <div class="gameWrapper" style="display:none;">
+      <canvas id="snakeCanvas5" width="320" height="180" aria-label="Snake game"></canvas>
+      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
+    </div>
   </div>
-  <div tabindex="0" role="button" class="card" data-service="Freelancing" aria-label="Open Freelancing service form">
+
+  <div tabindex="0" role="button" class="card" data-service="Freelancing" aria-label="Freelancing">
     <i class="fas fa-briefcase"></i>
     <h3>Freelancing</h3>
     <p>Hire for projects</p>
+    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
+    <div class="gameWrapper" style="display:none;">
+      <canvas id="snakeCanvas6" width="320" height="180" aria-label="Snake game"></canvas>
+      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
+    </div>
   </div>
 </section>
 
-<!-- Modal for Tatkal Ticket Booking -->
-<div id="tatkalModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="tatkalModalTitle" aria-describedby="tatkalModalDesc">
-  <div class="modal-content">
-    <h2 id="tatkalModalTitle">Tatkal Ticket Booking</h2>
-    <p id="tatkalModalDesc" style="opacity:0.8;">Manually enter journey details and preferred trains, then submit to send WhatsApp message.</p>
-    <form id="tatkalForm">
-      <label for="sourceInput">Source Station Code</label>
-      <input type="text" id="sourceInput" placeholder="NDLS" pattern="^[A-Z]{2,5}$" required aria-required="true" title="Use 2-5 uppercase letters" />
-      <label for="destInput">Destination Station Code</label>
-      <input type="text" id="destInput" placeholder="BCT" pattern="^[A-Z]{2,5}$" required aria-required="true" title="Use 2-5 uppercase letters" />
-      <label for="dateInput">Date of Journey</label>
-      <input type="date" id="dateInput" required aria-required="true" />
-      <label for="classSelect">Class</label>
-      <select id="classSelect" required aria-required="true">
-        <option value="" disabled selected>Select Class</option>
+<!-- Tatkal Ticket Modal -->
+<div class="modalOverlay" id="tatkalModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+  <div class="modalContent" role="document">
+    <h2 id="modalTitle">Tatkal Ticket Booking</h2>
+    <p id="modalDesc">Fill journey details, preferred trains (any format) and submit.</p>
+    <form id="tatkalForm" autocomplete="off" novalidate>
+      <label for="sourceStation">Source Station</label>
+      <input id="sourceStation" type="text" placeholder="e.g. NDLS" required />
+      <label for="destinationStation">Destination Station</label>
+      <input id="destinationStation" type="text" placeholder="e.g. BCT" required />
+      <label for="journeyDate">Date of Journey</label>
+      <input id="journeyDateModal" type="date" required />
+      <label for="travelClass">Class</label>
+      <select id="travelClassModal" required>
+        <option value="" disabled selected>Select class</option>
         <option value="SL">Sleeper (SL)</option>
         <option value="3A">AC 3 Tier (3A)</option>
         <option value="2A">AC 2 Tier (2A)</option>
-        <option value="1A">AC First Class (1A)</option>
+        <option value="1A">AC First (1A)</option>
         <option value="CC">Chair Car (CC)</option>
         <option value="2S">Second Sitting (2S)</option>
       </select>
-      <label for="quotaSelect">Quota</label>
-      <select id="quotaSelect" required aria-required="true">
-        <option value="" disabled selected>Select Quota</option>
+      <label for="quotaModal">Quota</label>
+      <select id="quotaModal" required>
+        <option value="" disabled selected>Select quota</option>
         <option value="GN">General (GN)</option>
         <option value="TQ">Tatkal (TQ)</option>
         <option value="PT">Premium Tatkal (PT)</option>
         <option value="LD">Ladies (LD)</option>
       </select>
-      <label for="trainInput">Preferred Train(s)</label>
-      <input type="text" id="trainInput" placeholder="Type train no or name, press Enter to add" aria-describedby="trainChips" />
-      <div id="trainChips" class="chip-container" aria-live="polite" aria-atomic="true"></div>
-      <button type="button" id="submitTatkalBtn">Submit & Send WhatsApp</button>
-      <button type="button" id="closeTatkalBtn" class="modal-close">Cancel</button>
+      <label for="preferredTrainsModal">Preferred Train(s)</label>
+      <input id="preferredTrainsModal" placeholder="Type train numbers or names separated by commas" />
+      <button type="button" class="btnMain" id="submitTatkalBtn">Submit</button>
+      <button type="button" class="btnMain btnClose" id="closeTatkalBtn">Cancel</button>
     </form>
   </div>
 </div>
-
-<!-- Modal for other services -->
-<div id="generalModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="generalModalTitle" aria-describedby="generalModalDesc">
-  <div class="modal-content">
-    <h2 id="generalModalTitle">Service Request</h2>
-    <p id="generalModalDesc" style="opacity:0.8;">Please provide your details below.</p>
-    <form id="generalForm">
-      <label for="nameInput">Name</label>
-      <input type="text" id="nameInput" placeholder="Your full name" required aria-required="true" />
-      <label for="ageInput">Age</label>
-      <input type="number" id="ageInput" placeholder="Your age" min="1" max="120" required aria-required="true" />
-      <label for="genderSelect">Gender</label>
-      <select id="genderSelect" required aria-required="true">
-        <option value="" disabled selected>Select Gender</option>
-        <option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option>
-      </select>
-      <label for="emailInput">Email</label>
-      <input type="email" id="emailInput" placeholder="Your email" required aria-required="true" />
-      <label for="phoneInput">Phone (10 digits)</label>
-      <input type="tel" id="phoneInput" pattern="^\d{10}$" minlength="10" maxlength="10" placeholder="1234567890" required aria-required="true" />
-      <label for="serviceSelect">Service</label>
-      <select id="serviceSelect" readonly aria-readonly="true"></select>
-      <label for="requirementsInput">Requirements</label>
-      <textarea id="requirementsInput" placeholder="Tell us more..." required aria-required="true"></textarea>
-      <button type="button" id="submitGeneralBtn">Submit</button>
-      <button type="button" id="closeGeneralBtn" class="modal-close">Cancel</button>
-    </form>
-  </div>
-</div>
-
-<footer>
-  <p style="text-align:center; opacity:0.75; margin-top:2rem;">Made with ♥️ In Bharat by Adarsh & Ayush</p>
-</footer>
 
 <script>
-  // Utility for showing/hiding modal
-  function showModal(modal) { modal.classList.add('active'); modal.style.display = 'flex'; }
-  function hideModal(modal) { modal.classList.remove('active'); modal.style.display = 'none'; }
-
-  // Elements
+  // Modal open/close + keyboard accessibility
   const tatkalModal = document.getElementById('tatkalModal');
-  const generalModal = document.getElementById('generalModal');
-  const serviceCards = document.querySelectorAll('.card');
+  const submitTatkalBtn = document.getElementById('submitTatkalBtn');
+  const closeTatkalBtn = document.getElementById('closeTatkalBtn');
 
-  const trainInput = document.getElementById('trainInput');
-  const trainChips = document.getElementById('trainChips');
-  let trains = [];
-
-  // Add train chip
-  trainInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const val = trainInput.value.trim();
-      if (val && !trains.includes(val)) {
-        trains.push(val);
-        renderTrainChips();
-        trainInput.value = '';
-      }
-    }
-  });
-
-  function renderTrainChips() {
-    trainChips.innerHTML = '';
-    trains.forEach(train => {
-      const chip = document.createElement('div');
-      chip.className = 'chip';
-      chip.textContent = train;
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.textContent = '✕';
-      btn.title = 'Remove ' + train;
-      btn.addEventListener('click', () => {
-        trains = trains.filter(t => t !== train);
-        renderTrainChips();
-      });
-      chip.appendChild(btn);
-      trainChips.appendChild(chip);
-    });
-  }
-
-  // Open modal on card click
-  serviceCards.forEach(card => {
+  document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
-      const service = card.dataset.service;
-      if (service === 'Tatkal Ticket Booking') {
-        showModal(tatkalModal);
-      } else {
-        // Fill service select and show general modal
-        document.getElementById('serviceSelect').innerHTML = `<option>${service}</option>`;
-        showModal(generalModal);
+      if (card.dataset.service === 'Tatkal Ticket Booking') {
+        openModal(tatkalModal);
       }
     });
     card.addEventListener('keydown', e => {
-      if(e.key === 'Enter' || e.key === ' ') {
+      if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        card.click();
+        if (card.dataset.service === 'Tatkal Ticket Booking') {
+          openModal(tatkalModal);
+        }
       }
     });
   });
 
-  // Close buttons
-  document.getElementById('closeTatkalBtn').addEventListener('click', () => hideModal(tatkalModal));
-  document.getElementById('closeGeneralBtn').addEventListener('click', () => hideModal(generalModal));
+  function openModal(modal) {
+    modal.classList.add('active');
+    modal.style.display = 'flex';
+  }
+  function closeModal(modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
 
-  // Form submission for Tatkal
-  document.getElementById('submitTatkalBtn').addEventListener('click', () => {
-    const source = document.getElementById('sourceInput').value.trim().toUpperCase();
-    const dest = document.getElementById('destInput').value.trim().toUpperCase();
-    const date = document.getElementById('dateInput').value;
-    const cls = document.getElementById('classSelect').value;
-    const quota = document.getElementById('quotaSelect').value;
+  closeTatkalBtn.addEventListener('click', () => {
+    closeModal(tatkalModal);
+  });
 
-    if(!source.match(/^[A-Z]{2,5}$/)) return alert('Enter valid Source Station code (2-5 uppercase letters).');
-    if(!dest.match(/^[A-Z]{2,5}$/)) return alert('Enter valid Destination Station code (2-5 uppercase letters).');
-    if(!date) return alert('Please select Date of Journey.');
-    if(!cls) return alert('Please select Class.');
-    if(!quota) return alert('Please select Quota.');
-    if(trains.length === 0) return alert('Add at least one Preferred Train.');
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeModal(tatkalModal);
+    }
+  });
+
+  // Form submit
+  submitTatkalBtn.addEventListener('click', () => {
+    const src = document.getElementById('sourceStation').value.trim();
+    const dst = document.getElementById('destinationStation').value.trim();
+    const date = document.getElementById('journeyDateModal').value;
+    const cls = document.getElementById('travelClassModal').value;
+    const quota = document.getElementById('quotaModal').value;
+    const trains = document.getElementById('preferredTrainsModal').value.trim();
+
+    if (!src) return alert('Please enter Source Station.');
+    if (!dst) return alert('Please enter Destination Station.');
+    if (!date) return alert('Please select Date of Journey.');
+    if (!cls) return alert('Please select Class.');
+    if (!quota) return alert('Please select Quota.');
+    if (!trains) return alert('Please enter preferred trains.');
 
     let msg = `Tatkal Ticket Booking Request:%0A`;
-    msg += `Source: ${source}%0A`;
-    msg += `Destination: ${dest}%0A`;
-    msg += `Date of Journey: ${date}%0A`;
+    msg += `Source: ${src}%0A`;
+    msg += `Destination: ${dst}%0A`;
+    msg += `Date: ${date}%0A`;
     msg += `Class: ${cls}%0A`;
     msg += `Quota: ${quota}%0A`;
-    msg += `Preferred Train(s): ${trains.join(', ')}`;
+    msg += `Preferred Trains: ${trains}`;
 
-    ['918092317965', '918595674919'].forEach(num => {
-      window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+    ['918092317965', '918595674919'].forEach(number => {
+      window.open(`https://wa.me/${number}?text=${msg}`, '_blank', 'noopener,noreferrer');
     });
 
     alert('Details sent to WhatsApp!');
-    trains = [];
-    renderTrainChips();
-    hideModal(tatkalModal);
+    closeModal(tatkalModal);
   });
 
-  // Form submission for other services
-  document.getElementById('submitGeneralBtn').addEventListener('click', () => {
-    const name = document.getElementById('nameInput').value.trim();
-    const age = document.getElementById('ageInput').value.trim();
-    const gender = document.getElementById('genderSelect').value;
-    const email = document.getElementById('emailInput').value.trim();
-    const phone = document.getElementById('phoneInput').value.trim();
-    const service = document.getElementById('serviceSelect').value;
-    const req = document.getElementById('requirementsInput').value.trim();
+  // Snake Game Logic for each card
+  document.querySelectorAll('.gameToggle').forEach((toggle, idx) => {
+    const container = toggle.nextElementSibling;
+    const canvas = container.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    let scoreDisplay = container.querySelector('.scoreDisplay');
 
-    if(!name) return alert('Please enter your name.');
-    if(!(+age > 0 && +age <= 120)) return alert('Enter a valid age.');
-    if(!gender) return alert('Please select gender.');
-    if(!email) return alert('Please enter email.');
-    if(!phone.match(/^\d{10}$/)) return alert('Phone must be 10 digits.');
-    if(!req) return alert('Please enter requirements.');
+    let size = 16, tileCountX = canvas.width / size, tileCountY = canvas.height / size;
+    let snake = [{x: 10, y: 10}];
+    let food = {};
+    let vel = {x: 0, y: 0};
+    let score = 0;
+    let gameInterval;
 
-    let msg = `Service Request:%0A`;
-    msg += `Name: ${name}%0A`;
-    msg += `Age: ${age}%0A`;
-    msg += `Gender: ${gender}%0A`;
-    msg += `Email: ${email}%0A`;
-    msg += `Phone: ${phone}%0A`;
-    msg += `Service: ${service}%0A`;
-    msg += `Requirements: ${req}`;
-
-    ['918092317965', '918595674919'].forEach(num => {
-      window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
-    });
-
-    alert('Details sent to WhatsApp!');
-    hideModal(generalModal);
-  });
-
-  // Accessibility: close modal on Esc key
-  document.addEventListener('keydown', e => {
-    if(e.key === 'Escape'){
-      hideModal(tatkalModal);
-      hideModal(generalModal);
+    function newFood() {
+      food.x = Math.floor(Math.random() * tileCountX);
+      food.y = Math.floor(Math.random() * tileCountY);
     }
+
+    function draw() {
+      ctx.fillStyle = '#111';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Snake body
+      ctx.fillStyle = '#00ffc3';
+      snake.forEach(s => {
+        ctx.fillRect(s.x * size, s.y * size, size - 2, size - 2);
+      });
+
+      // Food
+      ctx.fillStyle = '#ff2b57';
+      ctx.fillRect(food.x * size, food.y * size, size - 2, size - 2);
+
+      scoreDisplay.textContent = `Score: ${score}`;
+    }
+
+    function update() {
+      const head = {...snake[0]};
+      head.x += vel.x;
+      head.y += vel.y;
+
+      if(head.x < 0) head.x = tileCountX - 1;
+      else if(head.x >= tileCountX) head.x = 0;
+      if(head.y < 0) head.y = tileCountY - 1;
+      else if(head.y >= tileCountY) head.y = 0;
+
+      if(snake.some(s => s.x === head.x && s.y === head.y)) {
+        // Snake collided with self -> Game over
+        resetGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if(head.x === food.x && head.y === food.y) {
+        score++;
+        newFood();
+      } else {
+        snake.pop();
+      }
+    }
+
+    function gameLoop() {
+      update();
+      draw();
+    }
+
+    function resetGame() {
+      clearInterval(gameInterval);
+      score = 0;
+      snake = [{x: 10, y: 10}];
+      vel = {x: 0, y: 0};
+      newFood();
+      gameInterval = setInterval(gameLoop, 150);
+    }
+
+    toggle.addEventListener('click', () => {
+      if(container.style.display === 'block') {
+        container.style.display = 'none';
+        clearInterval(gameInterval);
+      } else {
+        container.style.display = 'block';
+        resetGame();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      switch(e.key){
+        case 'ArrowUp': if(vel.y === 0){ vel.x = 0; vel.y = -1; } break;
+        case 'ArrowDown': if(vel.y === 0){ vel.x = 0; vel.y = 1; } break;
+        case 'ArrowLeft': if(vel.x === 0){ vel.x = -1; vel.y = 0; } break;
+        case 'ArrowRight': if(vel.x === 0){ vel.x = 1; vel.y = 0; } break;
+      }
+    });
   });
 </script>
 
