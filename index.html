@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>ClickCart & Co. - Services</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -17,18 +17,20 @@
     --accent: #ffdd57;
   }
   *, *::before, *::after {
-    box-sizing: border-box; margin: 0; padding: 0;
+    box-sizing: border-box;
   }
   body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, var(--secondary), var(--primary));
     color: var(--white);
-    min-height: 100vh;
+    margin: 0;
     padding: 1rem;
+    min-height: 100vh;
   }
   header {
     text-align: center;
-    padding: 64px 1rem 24px;
+    margin-bottom: 2rem;
+    user-select: none;
   }
   header h1 {
     font-size: 2.8rem;
@@ -43,11 +45,11 @@
   }
   .services {
     max-width: 1100px;
-    margin: 2rem auto 3rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 28px;
+    margin: 0 auto 3rem;
     padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+    gap: 28px;
   }
   .card {
     background: var(--glass);
@@ -58,10 +60,11 @@
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     outline-offset: 4px;
-    user-select: none;
   }
   .card:hover, .card:focus-visible {
-    box-shadow: 0 0 36px var(--secondary), 0 0 40px var(--primary);
+    box-shadow:
+      0 0 36px var(--secondary),
+      0 0 40px var(--primary);
     transform: translateY(-10px) rotate(-2deg) scale(1.05);
     outline: none;
     z-index: 2;
@@ -70,7 +73,7 @@
     font-size: 3rem;
     margin-bottom: 16px;
     color: var(--secondary);
-    filter: drop-shadow(0 0 8px var(--primary));
+    filter: drop-shadow(0 0 6px var(--primary));
   }
   .card h3 {
     font-weight: 700;
@@ -79,9 +82,10 @@
   }
   .card p {
     font-size: 1rem;
-    opacity: 0.88;
+    opacity: 0.9;
   }
-  /* Modal styling */
+
+  /* Modal */
   .modalOverlay {
     position: fixed;
     inset: 0;
@@ -90,52 +94,58 @@
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
-    padding: 16px;
+    z-index: 9000;
+    padding: 1rem;
   }
   .modalOverlay.active {
     display: flex;
-    animation: fadeInScale 0.3s ease forwards;
+    animation: fadeIn 0.3s ease forwards;
   }
-  @keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.85); }
-    to { opacity: 1; transform: scale(1); }
+  @keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
   }
   .modalContent {
     background: var(--glass);
-    border-radius: 22px;
-    padding: 30px 36px;
+    border-radius: 18px;
+    padding: 2rem 2.5rem;
     max-width: 480px;
     width: 100%;
-    color: var(--white);
     box-shadow: 0 0 40px var(--primary);
+    color: var(--white);
     font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
   }
   .modalContent h2 {
     font-weight: 700;
     font-size: 2rem;
-    margin-bottom: 18px;
+    margin-bottom: 1rem;
     color: var(--secondary);
-    text-shadow: 0 0 14px var(--accent);
+    text-shadow: 0 0 12px var(--accent);
   }
   label {
-    display: block;
-    margin-top: 1.25rem;
-    margin-bottom: 8px;
+    margin-top: 1.2rem;
+    margin-bottom: 0.6rem;
     font-weight: 700;
   }
   input, select, textarea {
     width: 100%;
     padding: 12px 14px;
-    font-size: 1rem;
-    font-weight: 600;
     border-radius: 14px;
     border: none;
-    background: rgba(255,255,255,0.2);
-    color: #111;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    background-color: rgba(255,255,255,0.2);
+    color: #222;
     outline: none;
     transition: outline-color 0.3s ease;
-    font-family: 'Poppins', sans-serif;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #555;
   }
   input:focus,
   select:focus,
@@ -143,51 +153,52 @@
     outline-color: var(--secondary);
   }
   textarea {
-    min-height: 90px;
     resize: vertical;
+    min-height: 80px;
   }
   .modalActions {
     display: flex;
-    gap: 16px;
-    margin-top: 28px;
+    gap: 1rem;
+    margin-top: 2rem;
   }
   button {
     flex: 1;
     border: none;
-    padding: 14px 0;
     border-radius: 22px;
     cursor: pointer;
     font-weight: 700;
     font-size: 1.15rem;
+    padding: 14px 0;
+    color: white;
     transition: background-color 0.3s ease, transform 0.3s ease;
   }
   button.submit {
     background: linear-gradient(45deg, var(--primary), var(--secondary));
-    color: white;
-    box-shadow: 0 0 30px var(--secondary);
+    box-shadow: 0 0 32px var(--secondary);
   }
   button.submit:hover {
     background: linear-gradient(45deg, var(--secondary), var(--primary));
-    transform: scale(1.06);
-    box-shadow: 0 0 40px var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 0 48px var(--primary);
   }
   button.cancel {
     background: #ef4444;
-    color: white;
-    box-shadow: 0 0 30px #b91c1c;
+    box-shadow: 0 0 32px #da1c1c;
   }
   button.cancel:hover {
     background: #ff4d4d;
-    box-shadow: 0 0 40px #ef4444;
-    transform: scale(1.06);
+    box-shadow: 0 0 48px #ef4444;
+    transform: scale(1.05);
   }
+
+  /* Responsive adjustments for mobile */
   @media (max-width: 520px) {
     body {
       padding: 1rem 0.5rem;
     }
     .modalContent {
-      padding: 24px 20px;
-      font-size: 0.95rem;
+      padding: 1.4rem 1.6rem;
+      font-size: 0.9rem;
     }
   }
 </style>
@@ -199,7 +210,7 @@
   <p>Hamare bina online duniya adhoori hai 😎</p>
 </header>
 
-<section class="services" aria-label="Services">
+<section class="services" aria-label="Services list">
   <div tabindex="0" role="button" class="card" data-service="Tatkal Ticket Booking" aria-label="Tatkal Ticket Booking">
     <i class="fas fa-train"></i>
     <h3>Tatkal Ticket Booking</h3>
@@ -236,9 +247,7 @@
 <div id="tatkalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="tatkalTitle" aria-describedby="tatkalDesc">
   <div class="modalContent" role="document">
     <h2 id="tatkalTitle">Tatkal Ticket Booking</h2>
-    <p id="tatkalDesc" style="opacity:0.8;margin-bottom:1rem;">
-      Fill your journey details and preferred trains
-    </p>
+    <p id="tatkalDesc" style="opacity:0.8;margin-bottom:1rem;">Fill your journey details and preferred trains</p>
     <form id="tatkalForm" autocomplete="off" novalidate>
       <label for="sourceInput">Source Station</label>
       <input type="text" id="sourceInput" placeholder="e.g. NDLS" required />
@@ -278,9 +287,7 @@
 <div id="generalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="generalTitle" aria-describedby="generalDesc">
   <div class="modalContent" role="document">
     <h2 id="generalTitle">Service Request</h2>
-    <p id="generalDesc" style="opacity: 0.8; margin-bottom: 1rem;">
-      Please provide your details below.
-    </p>
+    <p id="generalDesc" style="opacity: 0.8;margin-bottom:1rem;">Please provide your details below.</p>
     <form id="generalForm" autocomplete="off" novalidate>
       <label for="nameInput">Name</label>
       <input type="text" id="nameInput" placeholder="Your full name" required />
@@ -297,7 +304,7 @@
       <label for="emailInput">Email</label>
       <input type="email" id="emailInput" placeholder="Your email" required />
       <label for="phoneInput">Phone (10 digits)</label>
-      <input type="tel" id="phoneInput" pattern="\\d{10}" minlength="10" maxlength="10" placeholder="1234567890" required />
+      <input type="tel" id="phoneInput" placeholder="1234567890" pattern="\\d{10}" minlength="10" maxlength="10" required />
       <label for="serviceInput">Service</label>
       <input type="text" id="serviceInput" readonly />
       <label for="requirementsInput">Requirements</label>
@@ -311,6 +318,7 @@
 </div>
 
 <script>
+  // Get elements
   const tatkalModal = document.getElementById('tatkalModal');
   const generalModal = document.getElementById('generalModal');
 
@@ -335,6 +343,7 @@
   const serviceInput = document.getElementById('serviceInput');
   const requirementsInput = document.getElementById('requirementsInput');
 
+  // Open modals
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       const service = card.dataset.service;
@@ -353,6 +362,7 @@
     });
   });
 
+  // Modal open/close helpers
   function openModal(modal){
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
@@ -360,12 +370,11 @@
   function closeModal(modal){
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true');
-    clearErrors(modal);
   }
-
   closeBtn.addEventListener('click', () => closeModal(tatkalModal));
   closeGeneralBtn.addEventListener('click', () => closeModal(generalModal));
 
+  // Close with Esc
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape'){
       closeModal(tatkalModal);
@@ -373,115 +382,69 @@
     }
   });
 
-  // Clear errors
-  function clearErrors(modal) {
-    modal.querySelectorAll('.errorMsg').forEach(el => el.textContent = '');
-  }
-
-  // Submit Tatkal form with validation and WhatsApp
+  // Submit Tatkal form
   submitBtn.addEventListener('click', () => {
-    clearErrors(tatkalModal);
-    let valid = true;
-    
-    if(!sourceInput.value.trim()) {
-      alert("Please enter Source Station");
-      valid = false;
-    }
-    if(!destInput.value.trim()) {
-      alert("Please enter Destination Station");
-      valid = false;
-    }
-    if(!dateInput.value) {
-      alert("Please select Date of Journey");
-      valid = false;
-    }
-    if(!classSelect.value) {
-      alert("Please select Class");
-      valid = false;
-    }
-    if(!quotaSelect.value) {
-      alert("Please select Quota");
-      valid = false;
-    }
-    if(!valid) return;
+    if(!sourceInput.value.trim()) { alert('Please enter Source Station'); return; }
+    if(!destInput.value.trim()) { alert('Please enter Destination Station'); return; }
+    if(!dateInput.value) { alert('Please select Date of Journey'); return; }
+    if(!classSelect.value) { alert('Please select Class'); return; }
+    if(!quotaSelect.value) { alert('Please select Quota'); return; }
 
-    const trains = preferredTrainsInput.value.trim() || "Not specified";
+    const trains = preferredTrainsInput.value.trim() || 'Not specified';
+
     const msgLines = [
-      "Tatkal Ticket Booking Request:",
-      "",
+      'Tatkal Ticket Booking Request:',
+      '',
       `Source: ${sourceInput.value.trim()}`,
       `Destination: ${destInput.value.trim()}`,
       `Date of Journey: ${dateInput.value}`,
       `Class: ${classSelect.value}`,
       `Quota: ${quotaSelect.value}`,
       `Preferred Trains: ${trains}`,
-      "",
-      "Made with ♥ in Bharat by Adarsh & Ayush",
-      "© 2025 ClickCart & Co. All rights reserved"
+      '',
+      'Made with ♥ in Bharat by Adarsh & Ayush',
+      '© 2025 ClickCart & Co. All rights reserved'
     ];
 
-    const msg = encodeURIComponent(msgLines.join("\n"));
+    const msg = encodeURIComponent(msgLines.join('\n'));
     ['918092317965','918595674919'].forEach(num => {
       window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
     });
 
-    alert("Details sent to WhatsApp!");
+    alert('Details sent to WhatsApp!');
     closeModal(tatkalModal);
   });
 
-  // Submit General form
+  // Submit general form
   submitGeneralBtn.addEventListener('click', () => {
-    clearErrors(generalModal);
-    let valid = true;
+    if(!nameInput.value.trim()) { alert('Please enter your Name'); return; }
+    if(!(+ageInput.value > 0 && +ageInput.value <= 120)) { alert('Please enter valid Age'); return; }
+    if(!genderSelect.value) { alert('Please select Gender'); return; }
+    if(!emailInput.value.trim()) { alert('Please enter Email'); return; }
+    if(!phoneInput.value.match(/^\d{10}$/)) { alert('Please enter valid 10-digit Phone'); return; }
+    if(!requirementsInput.value.trim()) { alert('Please enter Requirements'); return; }
 
-    if(!nameInput.value.trim()) {
-      alert("Please enter Name");
-      valid = false;
-    }
-    if(!(+ageInput.value > 0 && +ageInput.value <= 120)) {
-      alert("Please enter valid Age");
-      valid = false;
-    }
-    if(!genderSelect.value) {
-      alert("Please select Gender");
-      valid = false;
-    }
-    if(!emailInput.value.trim()) {
-      alert("Please enter Email");
-      valid = false;
-    }
-    if(!phoneInput.value.match(/^\d{10}$/)) {
-      alert("Phone must be 10 digits");
-      valid = false;
-    }
-    if(!requirementsInput.value.trim()) {
-      alert("Please enter Requirements");
-      valid = false;
-    }
-
-    if(!valid) return;
-
-    const lines = [
-      "New Service Request:",
-      "",
+    const msgLines = [
+      'Service Request:',
+      '',
       `Name: ${nameInput.value.trim()}`,
-      `Age: ${ageInput.value.trim()}`,
+      `Age: ${ageInput.value}`,
       `Gender: ${genderSelect.value}`,
       `Email: ${emailInput.value.trim()}`,
       `Phone: ${phoneInput.value.trim()}`,
       `Service: ${serviceInput.value}`,
       `Requirements: ${requirementsInput.value.trim()}`,
-      "",
-      "Made with ♥ in Bharat by Adarsh & Ayush",
-      "© 2025 ClickCart & Co. All rights reserved"
+      '',
+      'Made with ♥ in Bharat by Adarsh & Ayush',
+      '© 2025 ClickCart & Co. All rights reserved'
     ];
 
-    const msg = encodeURIComponent(lines.join("\n"));
+    const msg = encodeURIComponent(msgLines.join('\n'));
     ['918092317965','918595674919'].forEach(num => {
       window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
     });
 
-    alert("Details sent to WhatsApp!");
+    alert('Details sent to WhatsApp!');
     closeModal(generalModal);
   });
 </script>
