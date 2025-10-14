@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ClickCart & Co. - Services WhatsApp Format Fix</title>
+<title>ClickCart & Co. - Services</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -16,55 +16,52 @@
     --white: #fff;
     --accent: #ffdd57;
   }
-  * {
-    box-sizing: border-box;
-    margin: 0; padding: 0;
+  *, *::before, *::after {
+    box-sizing: border-box; margin: 0; padding: 0;
   }
   body {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, var(--secondary), var(--primary));
     color: var(--white);
     min-height: 100vh;
-    overflow-x: hidden;
     padding: 1rem;
   }
   header {
     text-align: center;
-    margin-bottom: 2rem;
-    user-select: none;
+    padding: 64px 1rem 24px;
   }
   header h1 {
+    font-size: 2.8rem;
     font-weight: 700;
-    font-size: 3rem;
     text-shadow: 0 0 15px var(--primary);
   }
   header p {
-    opacity: 0.9;
-    font-size: 1.25rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+    opacity: 0.85;
+    margin-top: 6px;
   }
   .services {
     max-width: 1100px;
-    margin: 0 auto 3rem;
-    padding: 0 12px;
+    margin: 2rem auto 3rem;
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 28px;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    padding: 0 1rem;
   }
   .card {
     background: var(--glass);
-    border-radius: 20px;
+    border-radius: 18px;
     padding: 24px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.33);
+    box-shadow: 0 0 22px rgba(0,0,0,0.3);
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     outline-offset: 4px;
+    user-select: none;
   }
-  .card:focus-visible,
-  .card:hover {
-    box-shadow:
-      0 0 35px var(--secondary),
-      0 0 35px var(--primary);
+  .card:hover, .card:focus-visible {
+    box-shadow: 0 0 36px var(--secondary), 0 0 40px var(--primary);
     transform: translateY(-10px) rotate(-2deg) scale(1.05);
     outline: none;
     z-index: 2;
@@ -73,94 +70,72 @@
     font-size: 3rem;
     margin-bottom: 16px;
     color: var(--secondary);
-    filter: drop-shadow(0 0 6px var(--primary));
-    animation: iconPulse 3s ease-in-out infinite alternate;
-  }
-  @keyframes iconPulse {
-    from {
-      filter: drop-shadow(0 0 6px var(--secondary));
-    }
-    to {
-      filter: drop-shadow(0 0 18px var(--primary));
-    }
+    filter: drop-shadow(0 0 8px var(--primary));
   }
   .card h3 {
     font-weight: 700;
     font-size: 1.5rem;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .card p {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.88;
   }
+  /* Modal styling */
   .modalOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0,0,0,0.75);
     backdrop-filter: blur(6px);
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-    padding: 12px;
+    z-index: 2000;
+    padding: 16px;
   }
   .modalOverlay.active {
     display: flex;
     animation: fadeInScale 0.3s ease forwards;
   }
   @keyframes fadeInScale {
-    0% {
-      opacity: 0;
-      transform: scale(0.85);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
   }
   .modalContent {
     background: var(--glass);
-    border-radius: 18px;
-    padding: 28px 34px;
-    max-width: 500px;
+    border-radius: 22px;
+    padding: 30px 36px;
+    max-width: 480px;
     width: 100%;
     color: var(--white);
-    box-shadow: 0 0 38px var(--primary);
+    box-shadow: 0 0 40px var(--primary);
     font-weight: 600;
-    font-size: 1rem;
   }
   .modalContent h2 {
-    font-size: 1.9rem;
-    margin-bottom: 18px;
     font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 18px;
     color: var(--secondary);
-    text-shadow: 0 0 12px var(--accent);
+    text-shadow: 0 0 14px var(--accent);
   }
   label {
     display: block;
-    margin-top: 1rem;
-    margin-bottom: 6px;
+    margin-top: 1.25rem;
+    margin-bottom: 8px;
     font-weight: 700;
-    color: #ddd;
   }
-  input,
-  select,
-  textarea {
+  input, select, textarea {
     width: 100%;
     padding: 12px 14px;
     font-size: 1rem;
     font-weight: 600;
     border-radius: 14px;
     border: none;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255,255,255,0.2);
     color: #111;
     outline: none;
     transition: outline-color 0.3s ease;
-    font-family: "Poppins", sans-serif;
-  }
-  input::placeholder,
-  textarea::placeholder {
-    color: #555;
+    font-family: 'Poppins', sans-serif;
   }
   input:focus,
   select:focus,
@@ -168,50 +143,51 @@
     outline-color: var(--secondary);
   }
   textarea {
+    min-height: 90px;
     resize: vertical;
-    min-height: 80px;
   }
   .modalActions {
-    margin-top: 26px;
     display: flex;
     gap: 16px;
+    margin-top: 28px;
   }
-  .btnMain {
+  button {
     flex: 1;
-    cursor: pointer;
+    border: none;
     padding: 14px 0;
     border-radius: 22px;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    border: none;
-    color: white;
+    cursor: pointer;
     font-weight: 700;
     font-size: 1.15rem;
-    box-shadow: 0 0 32px var(--secondary);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
-  .btnMain:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 42px var(--primary);
+  button.submit {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    box-shadow: 0 0 30px var(--secondary);
   }
-  .btnClose {
-    background-color: #ef4444;
-    box-shadow: 0 0 24px #daf3ea;
+  button.submit:hover {
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    transform: scale(1.06);
+    box-shadow: 0 0 40px var(--primary);
   }
-  .btnClose:hover {
-    box-shadow: 0 0 36px #ef4444;
+  button.cancel {
+    background: #ef4444;
+    color: white;
+    box-shadow: 0 0 30px #b91c1c;
   }
-  @media (max-width: 480px) {
+  button.cancel:hover {
+    background: #ff4d4d;
+    box-shadow: 0 0 40px #ef4444;
+    transform: scale(1.06);
+  }
+  @media (max-width: 520px) {
     body {
-      padding: 12px;
+      padding: 1rem 0.5rem;
     }
     .modalContent {
-      padding: 18px 16px;
-    }
-    .services {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 18px;
+      padding: 24px 20px;
+      font-size: 0.95rem;
     }
   }
 </style>
@@ -256,11 +232,13 @@
   </div>
 </section>
 
-<!-- Tatkal Modal -->
+<!-- Tatkal Ticket Modal -->
 <div id="tatkalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="tatkalTitle" aria-describedby="tatkalDesc">
   <div class="modalContent" role="document">
     <h2 id="tatkalTitle">Tatkal Ticket Booking</h2>
-    <p id="tatkalDesc" style="opacity:0.8;margin-bottom:1rem;">Fill your journey details and preferred trains</p>
+    <p id="tatkalDesc" style="opacity:0.8;margin-bottom:1rem;">
+      Fill your journey details and preferred trains
+    </p>
     <form id="tatkalForm" autocomplete="off" novalidate>
       <label for="sourceInput">Source Station</label>
       <input type="text" id="sourceInput" placeholder="e.g. NDLS" required />
@@ -287,25 +265,27 @@
         <option value="LD">Ladies (LD)</option>
       </select>
       <label for="preferredTrainsInput">Preferred Train(s)</label>
-      <input type="text" id="preferredTrainsInput" placeholder="e.g. 12951, 12673" />
-      <div style="margin-top: 20px; display: flex; gap: 10px;">
-        <button type="button" id="submitBtn" class="btnMain">Submit</button>
-        <button type="button" id="closeBtn" class="btnMain btnClose">Close</button>
+      <input type="text" id="preferredTrainsInput" placeholder="e.g. 12951, 12673 or Train names" />
+      <div class="modalActions">
+        <button type="button" id="submitBtn" class="btnMain submit">Submit</button>
+        <button type="button" id="closeBtn" class="btnMain cancel">Cancel</button>
       </div>
     </form>
   </div>
 </div>
 
-<!-- General Modal -->
+<!-- General Service Modal -->
 <div id="generalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="generalTitle" aria-describedby="generalDesc">
   <div class="modalContent" role="document">
     <h2 id="generalTitle">Service Request</h2>
-    <p id="generalDesc" style="opacity: 0.8;margin-bottom:1rem;">Please provide your details.</p>
+    <p id="generalDesc" style="opacity: 0.8; margin-bottom: 1rem;">
+      Please provide your details below.
+    </p>
     <form id="generalForm" autocomplete="off" novalidate>
       <label for="nameInput">Name</label>
       <input type="text" id="nameInput" placeholder="Your full name" required />
       <label for="ageInput">Age</label>
-      <input type="number" id="ageInput" placeholder="Your age" min="1" max="120" required />
+      <input type="number" id="ageInput" min="1" max="120" placeholder="Your age" required />
       <label for="genderSelect">Gender</label>
       <select id="genderSelect" required>
         <option value="" disabled selected>Select Gender</option>
@@ -317,21 +297,20 @@
       <label for="emailInput">Email</label>
       <input type="email" id="emailInput" placeholder="Your email" required />
       <label for="phoneInput">Phone (10 digits)</label>
-      <input type="tel" id="phoneInput" placeholder="1234567890" pattern="\\d{10}" minlength="10" maxlength="10" required />
+      <input type="tel" id="phoneInput" pattern="\\d{10}" minlength="10" maxlength="10" placeholder="1234567890" required />
       <label for="serviceInput">Service</label>
       <input type="text" id="serviceInput" readonly />
       <label for="requirementsInput">Requirements</label>
       <textarea id="requirementsInput" placeholder="Enter your requirements" required></textarea>
-      <div style="margin-top: 20px; display: flex; gap: 10px;">
-        <button type="button" id="submitGeneralBtn" class="btnMain">Submit</button>
-        <button type="button" id="closeGeneralBtn" class="btnMain btnClose">Close</button>
+      <div class="modalActions">
+        <button type="button" id="submitGeneralBtn" class="btnMain submit">Submit</button>
+        <button type="button" id="closeGeneralBtn" class="btnMain cancel">Cancel</button>
       </div>
     </form>
   </div>
 </div>
 
 <script>
-  // Elements
   const tatkalModal = document.getElementById('tatkalModal');
   const generalModal = document.getElementById('generalModal');
 
@@ -356,15 +335,14 @@
   const serviceInput = document.getElementById('serviceInput');
   const requirementsInput = document.getElementById('requirementsInput');
 
-  // Open modal on service card click
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       const service = card.dataset.service;
       if(service === 'Tatkal Ticket Booking'){
-        tatkalModal.style.display = 'flex';
+        openModal(tatkalModal);
       } else {
         serviceInput.value = service;
-        generalModal.style.display = 'flex';
+        openModal(generalModal);
       }
     });
     card.addEventListener('keydown', e => {
@@ -375,29 +353,60 @@
     });
   });
 
-  // Close modals
-  closeBtn.addEventListener('click', () => tatkalModal.style.display = 'none');
-  closeGeneralBtn.addEventListener('click', () => generalModal.style.display = 'none');
+  function openModal(modal){
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+  }
+  function closeModal(modal){
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    clearErrors(modal);
+  }
 
-  // Close on Escape key
+  closeBtn.addEventListener('click', () => closeModal(tatkalModal));
+  closeGeneralBtn.addEventListener('click', () => closeModal(generalModal));
+
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape'){
-      tatkalModal.style.display = 'none';
-      generalModal.style.display = 'none';
+      closeModal(tatkalModal);
+      closeModal(generalModal);
     }
   });
 
-  // Submit Tatkal form with proper formatted WhatsApp message
+  // Clear errors
+  function clearErrors(modal) {
+    modal.querySelectorAll('.errorMsg').forEach(el => el.textContent = '');
+  }
+
+  // Submit Tatkal form with validation and WhatsApp
   submitBtn.addEventListener('click', () => {
-    if(!sourceInput.value.trim()) return alert("Please enter Source Station");
-    if(!destInput.value.trim()) return alert("Please enter Destination Station");
-    if(!dateInput.value) return alert("Please pick Date of Journey");
-    if(!classSelect.value) return alert("Please select Class");
-    if(!quotaSelect.value) return alert("Please select Quota");
+    clearErrors(tatkalModal);
+    let valid = true;
+    
+    if(!sourceInput.value.trim()) {
+      alert("Please enter Source Station");
+      valid = false;
+    }
+    if(!destInput.value.trim()) {
+      alert("Please enter Destination Station");
+      valid = false;
+    }
+    if(!dateInput.value) {
+      alert("Please select Date of Journey");
+      valid = false;
+    }
+    if(!classSelect.value) {
+      alert("Please select Class");
+      valid = false;
+    }
+    if(!quotaSelect.value) {
+      alert("Please select Quota");
+      valid = false;
+    }
+    if(!valid) return;
 
     const trains = preferredTrainsInput.value.trim() || "Not specified";
-
-    const lines = [
+    const msgLines = [
       "Tatkal Ticket Booking Request:",
       "",
       `Source: ${sourceInput.value.trim()}`,
@@ -411,32 +420,55 @@
       "© 2025 ClickCart & Co. All rights reserved"
     ];
 
-    const msg = encodeURIComponent(lines.join("\n"));
-
+    const msg = encodeURIComponent(msgLines.join("\n"));
     ['918092317965','918595674919'].forEach(num => {
       window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
     });
+
     alert("Details sent to WhatsApp!");
-    tatkalModal.style.display = 'none';
+    closeModal(tatkalModal);
   });
 
-  // Submit General form with proper WhatsApp message formatting
+  // Submit General form
   submitGeneralBtn.addEventListener('click', () => {
-    if(!nameInput.value.trim()) return alert("Please enter Name");
-    if(!(+ageInput.value >0 && +ageInput.value <=120)) return alert("Please enter valid Age");
-    if(!genderSelect.value) return alert("Please select Gender");
-    if(!emailInput.value.trim()) return alert("Please enter Email");
-    if(!phoneInput.value.match(/^\d{10}$/)) return alert("Phone must be 10 digits");
-    if(!requirementsInput.value.trim()) return alert("Please enter Requirements");
+    clearErrors(generalModal);
+    let valid = true;
+
+    if(!nameInput.value.trim()) {
+      alert("Please enter Name");
+      valid = false;
+    }
+    if(!(+ageInput.value > 0 && +ageInput.value <= 120)) {
+      alert("Please enter valid Age");
+      valid = false;
+    }
+    if(!genderSelect.value) {
+      alert("Please select Gender");
+      valid = false;
+    }
+    if(!emailInput.value.trim()) {
+      alert("Please enter Email");
+      valid = false;
+    }
+    if(!phoneInput.value.match(/^\d{10}$/)) {
+      alert("Phone must be 10 digits");
+      valid = false;
+    }
+    if(!requirementsInput.value.trim()) {
+      alert("Please enter Requirements");
+      valid = false;
+    }
+
+    if(!valid) return;
 
     const lines = [
       "New Service Request:",
       "",
       `Name: ${nameInput.value.trim()}`,
-      `Age: ${ageInput.value}`,
+      `Age: ${ageInput.value.trim()}`,
       `Gender: ${genderSelect.value}`,
       `Email: ${emailInput.value.trim()}`,
-      `Phone: ${phoneInput.value}`,
+      `Phone: ${phoneInput.value.trim()}`,
       `Service: ${serviceInput.value}`,
       `Requirements: ${requirementsInput.value.trim()}`,
       "",
@@ -445,12 +477,12 @@
     ];
 
     const msg = encodeURIComponent(lines.join("\n"));
-
     ['918092317965','918595674919'].forEach(num => {
       window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
     });
+
     alert("Details sent to WhatsApp!");
-    generalModal.style.display = 'none';
+    closeModal(generalModal);
   });
 </script>
 
