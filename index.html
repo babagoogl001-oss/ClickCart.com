@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <title>ClickCart & Co. - Services</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -19,55 +19,59 @@
   *, *::before, *::after {
     box-sizing: border-box;
   }
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
   body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, var(--secondary), var(--primary));
     color: var(--white);
     margin: 0;
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
   }
   header {
     text-align: center;
-    margin-bottom: 2rem;
+    padding: 64px 12px 18px;
     user-select: none;
   }
   header h1 {
     font-size: 2.8rem;
     font-weight: 700;
     text-shadow: 0 0 15px var(--primary);
+    margin: 0 0 8px;
   }
   header p {
     font-weight: 600;
-    font-size: 1.2rem;
-    opacity: 0.85;
-    margin-top: 6px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
   }
   .services {
     max-width: 1100px;
-    margin: 0 auto 3rem;
-    padding: 0 1rem;
+    margin: 0 auto 24px;
+    padding: 0 12px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 28px;
-    flex-grow: 1;
+    grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+    gap: 26px;
+    flex-grow: 1; /* makes sure footer sticks down */
   }
   .card {
     background: var(--glass);
     border-radius: 18px;
-    padding: 24px;
+    padding: 22px;
     box-shadow: 0 0 22px rgba(0,0,0,0.3);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
     outline-offset: 4px;
+    user-select: none;
   }
   .card:hover, .card:focus-visible {
-    box-shadow: 0 0 36px var(--secondary),
-                0 0 40px var(--primary);
     transform: translateY(-10px) rotate(-2deg) scale(1.05);
+    box-shadow: 0 0 36px var(--secondary), 0 0 40px var(--primary);
     outline: none;
     z-index: 2;
   }
@@ -78,16 +82,17 @@
     filter: drop-shadow(0 0 6px var(--primary));
   }
   .card h3 {
+    margin-bottom: 6px;
     font-weight: 700;
-    font-size: 1.5rem;
-    margin-bottom: 8px;
+    font-size: 1.4rem;
   }
   .card p {
-    font-size: 1rem;
     opacity: 0.9;
+    font-size: 1rem;
+    margin: 0;
   }
 
-  /* Modal */
+  /* Modal Styles */
   .modalOverlay {
     position: fixed;
     inset: 0;
@@ -104,8 +109,8 @@
     animation: fadeIn 0.3s ease forwards;
   }
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {opacity:0;}
+    to {opacity:1;}
   }
   .modalContent {
     background: var(--glass);
@@ -204,13 +209,14 @@
     }
   }
 
-  /* Contact section */
+  /* Contact Section */
   .contact {
     background: rgba(255,255,255,0.08);
     padding: 20px 18px;
     max-width: 1100px;
     margin: 0 auto 24px;
     border-radius: 14px;
+    text-align: center;
   }
   .contact h3 {
     font-weight: 700;
@@ -220,7 +226,7 @@
   }
   .contact p {
     font-weight: 500;
-    margin-bottom: 8px;
+    margin: 6px 0;
     font-size: 1rem;
   }
   .contact a {
@@ -241,7 +247,7 @@
     color: var(--white);
     padding: 12px 10px calc(12px + env(safe-area-inset-bottom));
     user-select: none;
-    margin-top: 24px;
+    margin-top: auto;
   }
   .footer-line {
     opacity: 0.78;
@@ -291,10 +297,10 @@
 </section>
 
 <!-- Tatkal Modal -->
-<div id="tatkalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="tatkalTitle" aria-describedby="tatkalDesc">
+<div id="tatkalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="tatkalTitle" aria-describedby="tatkalDesc" tabindex="-1">
   <div class="modalContent" role="document">
     <h2 id="tatkalTitle">Tatkal Ticket Booking</h2>
-    <p id="tatkalDesc" style="opacity:0.8;margin-bottom:1rem;">Fill your journey details and preferred trains</p>
+    <p id="tatkalDesc" style="opacity:0.8; margin-bottom:1rem;">Fill your journey details and preferred trains</p>
     <form id="tatkalForm" autocomplete="off" novalidate>
       <label for="sourceInput">Source Station</label>
       <input type="text" id="sourceInput" placeholder="e.g. NDLS" required />
@@ -331,10 +337,10 @@
 </div>
 
 <!-- General Service Modal -->
-<div id="generalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="generalTitle" aria-describedby="generalDesc">
+<div id="generalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="generalTitle" aria-describedby="generalDesc" tabindex="-1">
   <div class="modalContent" role="document">
     <h2 id="generalTitle">Service Request</h2>
-    <p id="generalDesc" style="opacity: 0.8;margin-bottom:1rem;">Please provide your details below.</p>
+    <p id="generalDesc" style="opacity: 0.8; margin-bottom: 1rem;">Please provide your details below.</p>
     <form id="generalForm" autocomplete="off" novalidate>
       <label for="nameInput">Name</label>
       <input type="text" id="nameInput" placeholder="Your full name" required />
@@ -378,13 +384,10 @@
 </footer>
 
 <script>
-  // Elements
   const tatkalModal = document.getElementById('tatkalModal');
   const generalModal = document.getElementById('generalModal');
-
   const submitBtn = document.getElementById('submitBtn');
   const closeBtn = document.getElementById('closeBtn');
-
   const submitGeneralBtn = document.getElementById('submitGeneralBtn');
   const closeGeneralBtn = document.getElementById('closeGeneralBtn');
 
@@ -403,7 +406,6 @@
   const serviceInput = document.getElementById('serviceInput');
   const requirementsInput = document.getElementById('requirementsInput');
 
-  // Open modals on card click
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       const service = card.dataset.service;
@@ -440,7 +442,6 @@
     }
   });
 
-  // Submit Tatkal form
   submitBtn.addEventListener('click', () => {
     if(!sourceInput.value.trim()) { alert('Please enter Source Station'); return; }
     if(!destInput.value.trim()) { alert('Please enter Destination Station'); return; }
@@ -463,17 +464,14 @@
       'Made with ♥ in Bharat by Adarsh & Ayush',
       '© 2025 ClickCart & Co. All rights reserved'
     ];
-
     const msg = encodeURIComponent(msgLines.join('\n'));
     ['918092317965','918595674919'].forEach(num => {
-      window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
+      window.open(`https://wa.me/${num}?text=${msg}`, '_blank','noopener,noreferrer');
     });
-
     alert('Details sent to WhatsApp!');
     closeModal(tatkalModal);
   });
 
-  // Submit general form
   submitGeneralBtn.addEventListener('click', () => {
     if(!nameInput.value.trim()) { alert('Please enter your Name'); return; }
     if(!(+ageInput.value > 0 && +ageInput.value <= 120)) { alert('Please enter valid Age'); return; }
@@ -496,12 +494,10 @@
       'Made with ♥ in Bharat by Adarsh & Ayush',
       '© 2025 ClickCart & Co. All rights reserved'
     ];
-
     const msg = encodeURIComponent(msgLines.join('\n'));
     ['918092317965','918595674919'].forEach(num => {
-      window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
+      window.open(`https://wa.me/${num}?text=${msg}`, '_blank','noopener,noreferrer');
     });
-
     alert('Details sent to WhatsApp!');
     closeModal(generalModal);
   });
