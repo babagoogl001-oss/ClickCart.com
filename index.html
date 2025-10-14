@@ -4,139 +4,340 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ClickCart & Co. — Online Services</title>
+
+<!-- Performance: preconnect + fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
 <style>
-body{font-family:sans-serif; background:#121212; color:#fff;}
-.services{display:flex; gap:20px; flex-wrap:wrap;}
-.card{background:#333; padding:20px; border-radius:10px; cursor:pointer;}
-.hidden{display:none;}
-#formPopup{position:fixed; inset:0; background:rgba(0,0,0,0.8); display:none; justify-content:center; align-items:center;}
-.form-box{background:#222; padding:20px; border-radius:10px; width:90%; max-width:500px;}
-input, select, textarea{width:100%; margin:5px 0; padding:8px; border-radius:5px; border:none;}
-button{padding:8px 12px; margin-top:10px; cursor:pointer;}
+:root{
+  --primary:#6d28d9; --secondary:#00b4d8; --bg:#121212; --glass:rgba(255,255,255,0.1);
+  --white:#fff; --accent:#ffdd57; --success:#25D366;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,var(--secondary),var(--primary));
+  color:var(--white); overflow-x:hidden;
+}
+header{ text-align:center; padding:70px 20px 20px 20px; }
+header h1{ font-size:3rem; text-shadow:0 0 15px var(--primary); }
+header p{ opacity:0.9; font-size:1.2rem; }
+
+/* Services grid */
+.services{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px; padding:40px 20px; max-width:1100px; margin:auto;
+}
+.card{
+  background:var(--glass); padding:25px; border-radius:15px; text-align:center;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+  transition:transform .3s, box-shadow .3s; cursor:pointer; outline:none;
+}
+.card:hover{ transform:translateY(-10px); box-shadow:0 0 25px var(--secondary); }
+.card:focus-visible{ box-shadow:0 0 0 3px var(--accent); }
+.card i{ font-size:2rem; color:var(--secondary); margin-bottom:12px; }
+.card h3{ margin-bottom:8px; }
+.card p{ opacity:0.85; }
+
+/* Contact */
+.contact{
+  text-align:center; background:rgba(0,0,0,0.4);
+  padding:50px 20px; border-top:1px solid rgba(255,255,255,0.1);
+}
+.contact a{ color:var(--success); text-decoration:none; font-weight:600; }
+
+/* Footer */
+footer{
+  text-align:center; padding:22px; background:rgba(0,0,0,0.5); font-size:0.95rem;
+}
+.footer-people{
+  display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap; margin-bottom:6px;
+}
+.badge{
+  display:inline-flex; align-items:center; gap:8px;
+  background:linear-gradient(45deg,var(--primary),var(--secondary));
+  padding:8px 12px; border-radius:999px; font-weight:600;
+  box-shadow:0 6px 18px rgba(0,0,0,0.25);
+}
+.madein{ opacity:0.95; }
+
+/* Modal (accessible) */
+#formPopup{
+  display:none; position:fixed; inset:0; z-index:999;
+  background:rgba(0,0,0,0.65); backdrop-filter:blur(6px);
+  justify-content:center; align-items:center; padding:20px;
+}
+.form-box{
+  background:var(--glass); padding:24px; border-radius:16px; width:min(520px,92%);
+  box-shadow:0 0 25px var(--primary);
+}
+.form-box header{ padding:0 0 10px 0; }
+.form-title{ font-size:1.4rem; margin-bottom:8px; }
+.form-desc{ font-size:0.95rem; opacity:0.9; margin-bottom:16px; }
+
+.form-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+}
+.form-grid .full{ grid-column:1 / -1; }
+
+.form-box input, .form-box select, .form-box textarea{
+  width:100%; margin:0; padding:10px; border-radius:8px; border:none; outline:none;
+  background:rgba(255,255,255,0.12); color:#fff;
+}
+.form-box textarea{ resize:vertical; min-height:84px; }
+
+.form-actions{ display:flex; gap:12px; margin-top:12px; }
+.btn{
+  background:linear-gradient(45deg,var(--primary),var(--secondary));
+  color:white; border:none; padding:10px 14px; border-radius:8px; cursor:pointer;
+  transition:.25s; flex:1;
+}
+.btn:hover{ opacity:0.9; transform:translateY(-1px); }
+.btn.secondary{ background:#ff4d4d; }
+
+.hidden{ display:none !important; }
 </style>
 </head>
 <body>
 
-<h1>ClickCart & Co. — Services</h1>
-<div class="services">
-  <div class="card" data-service="Tatkal Ticket Booking">Tatkal Ticket Booking</div>
-  <div class="card" data-service="Form Filling">Form Filling</div>
-  <div class="card" data-service="Resume & Documents">Resume & Documents</div>
-  <div class="card" data-service="Poster Designing">Poster Designing</div>
-  <div class="card" data-service="Photo Editing">Photo Editing</div>
-  <div class="card" data-service="Freelancing / Work With Us">Freelancing / Work With Us</div>
-</div>
+<header>
+  <h1>⚡ ClickCart & Co.</h1>
+  <p>Hamare bina online duniya adhoori hai 😎</p>
+  <!-- Poster image removed as requested -->
+</header>
 
-<div id="formPopup">
+<section class="services" id="services">
+  <div class="card" data-service="Tatkal Ticket Booking" role="button" tabindex="0" aria-label="Tatkal Ticket Booking form open">
+    <i class="fas fa-train"></i>
+    <h3>Tatkal Ticket Booking</h3>
+    <p>Fast IRCTC ticket booking</p>
+  </div>
+
+  <div class="card" data-service="Form Filling" role="button" tabindex="0" aria-label="Form Filling form open">
+    <i class="fas fa-pen"></i>
+    <h3>Form Filling</h3>
+    <p>Govt. & Private applications</p>
+  </div>
+
+  <div class="card" data-service="Resume & Documents" role="button" tabindex="0" aria-label="Resume & Documents form open">
+    <i class="fas fa-file-alt"></i>
+    <h3>Resume & Documents</h3>
+    <p>CVs, Cover letters, Docs</p>
+  </div>
+
+  <div class="card" data-service="Poster Designing" role="button" tabindex="0" aria-label="Poster Designing form open">
+    <i class="fas fa-paint-brush"></i>
+    <h3>Poster Designing</h3>
+    <p>Custom banners & social posts</p>
+  </div>
+
+  <div class="card" data-service="Photo Editing" role="button" tabindex="0" aria-label="Photo Editing form open">
+    <i class="fas fa-camera"></i>
+    <h3>Photo Editing</h3>
+    <p>Retouching, enhancements</p>
+  </div>
+</section>
+
+<section class="contact">
+  <h2>Contact Us</h2>
+  <p>Adarsh Gupta: <a href="tel:+918092317965">+91 80923 17965</a></p>
+  <p>Ayush Pandey: <a href="tel:+918595674919">+91 85956 74919</a></p>
+  <p>Email: <a href="mailto:baba.googl001@gmail.com">baba.googl001@gmail.com</a></p>
+</section>
+
+<footer>
+  <div class="footer-people">
+    <span class="badge"><i class="fa-solid fa-user-tie"></i> Adarsh Gupta</span>
+    <span class="badge"><i class="fa-solid fa-user-tie"></i> Ayush Pandey</span>
+  </div>
+  <div class="madein">Made with ♥ in India • © 2025 ClickCart & Co. · All Rights Reserved ⚡</div>
+</footer>
+
+<!-- Accessible Modal -->
+<div id="formPopup" role="dialog" aria-modal="true" aria-labelledby="formTitle" aria-describedby="formDesc">
   <div class="form-box">
-    <h2 id="formTitle"></h2>
+    <header>
+      <div id="formTitle" class="form-title">Service Form</div>
+      <div id="formDesc" class="form-desc">Provide details to proceed with the selected service.</div>
+    </header>
 
-    <label>Full Name</label><input id="userName" type="text">
-    <label>Age</label><input id="userAge" type="number">
-    <label>Gender</label>
-    <select id="userGender">
-      <option value="">Select</option>
-      <option>Male</option><option>Female</option><option>Other</option>
-    </select>
-    <label>Phone</label><input id="userPhone">
-    <label>Email</label><input id="userEmail">
-    <label>Requirement / Note</label><textarea id="userReq"></textarea>
+    <form id="leadForm" novalidate>
+      <div class="form-grid">
+        <div>
+          <label class="hidden" for="userName">Full Name</label>
+          <input type="text" id="userName" placeholder="Full Name" required />
+        </div>
+        <div>
+          <label class="hidden" for="userAge">Age</label>
+          <input type="number" id="userAge" placeholder="Age" min="1" max="120" required />
+        </div>
 
-    <!-- Tatkal -->
-    <div id="tatkalSection" class="hidden">
-      <label>Source</label><input id="t_source">
-      <label>Destination</label><input id="t_destination">
-      <label>Date</label><input id="t_date" type="date">
-    </div>
+        <div>
+          <label class="hidden" for="userGender">Gender</label>
+          <select id="userGender" required>
+            <option value="">Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+        <div>
+          <label class="hidden" for="userService">Service Required</label>
+          <select id="userService" required>
+            <option value="Tatkal Ticket Booking">Tatkal Ticket Booking</option>
+            <option value="Form Filling">Form Filling</option>
+            <option value="Resume & Documents">Resume & Documents</option>
+            <option value="Poster Designing">Poster Designing</option>
+            <option value="Photo Editing">Photo Editing</option>
+          </select>
+        </div>
 
-    <!-- Form Filling -->
-    <div id="formFillSection" class="hidden">
-      <label>Form Type</label>
-      <select id="ff_type">
-        <option value="">Select</option>
-        <option>Sarkari</option>
-        <option>Private</option>
-      </select>
-      <label>Form Name</label><input id="ff_formname">
-    </div>
+        <div>
+          <label class="hidden" for="userEmail">Email</label>
+          <input type="email" id="userEmail" placeholder="Email" required />
+        </div>
+        <div>
+          <label class="hidden" for="userPhone">Phone Number</label>
+          <input type="tel" id="userPhone" placeholder="Phone Number" required />
+        </div>
 
-    <!-- Freelancing -->
-    <div id="freelanceSection" class="hidden">
-      <label>Project Title</label><input id="fr_title">
-      <label>Budget</label><input id="fr_budget">
-      <label>Project Description</label><textarea id="fr_desc"></textarea>
-    </div>
+        <div class="full">
+          <label class="hidden" for="userReq">Requirement</label>
+          <textarea id="userReq" placeholder="Write your requirement here..." required></textarea>
+        </div>
+      </div>
 
-    <button id="sendBtn">Submit & Send</button>
-    <button id="closeBtn">Close</button>
+      <div class="form-actions">
+        <button type="button" class="btn" id="sendBtn">Submit & Send</button>
+        <button type="button" class="btn secondary" id="closeBtn">Close</button>
+      </div>
+    </form>
   </div>
 </div>
 
 <script>
-// common references
+// Open modal from any card + focus trapping
 const formPopup = document.getElementById('formPopup');
 const formTitle = document.getElementById('formTitle');
-const tatkalSection = document.getElementById('tatkalSection');
-const formFillSection = document.getElementById('formFillSection');
-const freelanceSection = document.getElementById('freelanceSection');
+const userService = document.getElementById('userService');
+const leadForm = document.getElementById('leadForm');
+let lastTrigger = null;
 
-const commonFields = ['userName','userAge','userGender','userPhone','userEmail','userReq'];
-
-// open modal function
 function openForm(service){
-  formTitle.textContent = service;
-  tatkalSection.classList.add('hidden');
-  formFillSection.classList.add('hidden');
-  freelanceSection.classList.add('hidden');
-
-  if(service==='Tatkal Ticket Booking') tatkalSection.classList.remove('hidden');
-  else if(service==='Form Filling') formFillSection.classList.remove('hidden');
-  else if(service.startsWith('Freelancing')) freelanceSection.classList.remove('hidden');
-
-  // load common data
-  let saved = localStorage.getItem('common_user_info');
-  if(saved){ 
-    saved = JSON.parse(saved);
-    commonFields.forEach(f=>{ if(saved[f]) document.getElementById(f).value = saved[f]; });
-  }
-
+  formTitle.textContent = service + " Form";
+  userService.value = service;
   formPopup.style.display='flex';
+  formPopup.scrollTop = 0;
+
+  // Set initial focus for accessibility
+  const firstInput = document.getElementById('userName');
+  firstInput.focus();
+
+  // Trap focus inside modal
+  trapFocus(formPopup);
 }
 
-// close
-document.getElementById('closeBtn').onclick = ()=> formPopup.style.display='none';
+function closeForm(){
+  formPopup.style.display='none';
+  leadForm.reset();
+  if(lastTrigger){ lastTrigger.focus(); }
+  releaseFocusTrap();
+}
 
-// attach cards
+// Attach to cards
 document.querySelectorAll('.card').forEach(card=>{
-  card.onclick = ()=> openForm(card.dataset.service);
+  const open = ()=>{
+    lastTrigger = card;
+    const service = card.dataset.service;
+    openForm(service);
+  };
+  card.addEventListener('click', open);
+  card.addEventListener('keydown', e=>{
+    if(e.key==='Enter' || e.key===' '){
+      e.preventDefault();
+      open();
+    }
+  });
 });
 
-// send button
-document.getElementById('sendBtn').onclick = ()=>{
-  const data = {};
-  commonFields.forEach(f=> data[f]=document.getElementById(f).value);
-  localStorage.setItem('common_user_info', JSON.stringify(data));
+// WhatsApp send (two contacts, individually)
+document.getElementById('sendBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('userName').value.trim();
+  const age = document.getElementById('userAge').value.trim();
+  const gender = document.getElementById('userGender').value;
+  const email = document.getElementById('userEmail').value.trim();
+  const phone = document.getElementById('userPhone').value.trim();
+  const req = document.getElementById('userReq').value.trim();
+  const service = document.getElementById('userService').value;
 
-  // build message
-  let msg = New Request:\nName: ${data.userName}\nAge: ${data.userAge}\nGender: ${data.userGender}\nPhone: ${data.userPhone}\nEmail: ${data.userEmail}\nNote: ${data.userReq};
-
-  if(!tatkalSection.classList.contains('hidden')){
-    msg += \nTatkal: ${document.getElementById('t_source').value} → ${document.getElementById('t_destination').value} on ${document.getElementById('t_date').value};
-  }
-  if(!formFillSection.classList.contains('hidden')){
-    msg += \nForm: ${document.getElementById('ff_type').value} - ${document.getElementById('ff_formname').value};
-  }
-  if(!freelanceSection.classList.contains('hidden')){
-    msg += \nProject: ${document.getElementById('fr_title').value}, Budget: ${document.getElementById('fr_budget').value}, Desc: ${document.getElementById('fr_desc').value};
+  if(!name || !age || !gender || !email || !phone || !req){
+    alert('Please fill all details!');
+    return;
   }
 
-  // send to WhatsApp
+  const lines = [
+    'New Service Request:',
+    Name: ${name},
+    Age: ${age},
+    Gender: ${gender},
+    Phone: ${phone},
+    Email: ${email},
+    Service: ${service},
+    Requirement: ${req}
+  ];
+  const msg = encodeURIComponent(lines.join('
+'));
+
   const numbers = ['918092317965','918595674919'];
-  numbers.forEach(n=> window.open(https://wa.me/${n}?text=${encodeURIComponent(msg)},'_blank'));
+  numbers.forEach(num=>{
+    window.open(https://wa.me/${num}?text=${msg},'_blank');
+  });
 
-  alert('WhatsApp opened for sending.');
-  formPopup.style.display='none';
-};
+  alert("Request sent successfully to both WhatsApp numbers!");
+  closeForm();
+});
+
+// Close handlers
+document.getElementById('closeBtn').addEventListener('click', closeForm);
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='Escape' && formPopup.style.display==='flex'){ closeForm(); }
+});
+
+// Focus trap (vanilla)
+let trapHandler = null;
+function trapFocus(container){
+  const selectors = [
+    'a[href]','button','textarea','input','select','[tabindex]:not([tabindex="-1"])'
+  ];
+  const getFocusable = ()=>Array.from(container.querySelectorAll(selectors.join(',')))
+    .filter(el=>!el.hasAttribute('disabled') && el.offsetParent!==null);
+  trapHandler = (e)=>{
+    if(e.key !== 'Tab') return;
+    const focusables = getFocusable();
+    if(focusables.length===0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length-1];
+    if(e.shiftKey && document.activeElement===first){
+      e.preventDefault(); last.focus();
+    } else if(!e.shiftKey && document.activeElement===last){
+      e.preventDefault(); first.focus();
+    }
+  };
+  container.addEventListener('keydown', trapHandler);
+}
+function releaseFocusTrap(){
+  if(trapHandler){
+    formPopup.removeEventListener('keydown', trapHandler);
+    trapHandler = null;
+  }
+}
 </script>
+
 </body>
 </html>
