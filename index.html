@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ClickCart & Co. - Services & Game</title>
+<title>ClickCart & Co. - Services</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <style>
-  /* Same styles as before - omitted for brevity */
   :root {
     --primary: #6d28d9;
     --secondary: #00b4d8;
-    --glass: rgba(255, 255, 255, 0.1);
+    --glass: rgba(255,255,255,0.1);
     --white: #fff;
     --accent: #ffdd57;
   }
@@ -29,9 +28,192 @@
     overflow-x: hidden;
     padding: 1rem;
   }
-  /* ...similar styles for header, cards, modals, buttons, etc... */
-  /* (Use the same CSS as previous answer for brevity) */
-  /* Be sure to include .modalOverlay, .modalContent, .services and floating game button styles */
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+    user-select: none;
+  }
+  header h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    text-shadow: 0 0 15px var(--primary);
+  }
+  header p {
+    opacity: 0.9;
+    font-size: 1.25rem;
+  }
+  .services {
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+    padding: 0 12px;
+    display: grid;
+    gap: 28px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+  .card {
+    background: var(--glass);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.33);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    outline-offset: 4px;
+  }
+  .card:focus-visible,
+  .card:hover {
+    box-shadow:
+      0 0 35px var(--secondary),
+      0 0 35px var(--primary);
+    transform: translateY(-10px) rotate(-2deg) scale(1.05);
+    outline: none;
+    z-index: 2;
+  }
+  .card i {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    color: var(--secondary);
+    filter: drop-shadow(0 0 6px var(--primary));
+    animation: iconPulse 3s ease-in-out infinite alternate;
+  }
+  @keyframes iconPulse {
+    from {
+      filter: drop-shadow(0 0 6px var(--secondary));
+    }
+    to {
+      filter: drop-shadow(0 0 18px var(--primary));
+    }
+  }
+  .card h3 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+  }
+  .card p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 12px;
+  }
+  .modalOverlay.active {
+    display: flex;
+    animation: fadeInScale 0.3s ease forwards;
+  }
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .modalContent {
+    background: var(--glass);
+    border-radius: 18px;
+    padding: 28px 34px;
+    max-width: 500px;
+    width: 100%;
+    color: var(--white);
+    box-shadow: 0 0 38px var(--primary);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .modalContent h2 {
+    font-size: 1.9rem;
+    margin-bottom: 18px;
+    font-weight: 700;
+    color: var(--secondary);
+    text-shadow: 0 0 12px var(--accent);
+  }
+  label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: #ddd;
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 14px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #111;
+    outline: none;
+    transition: outline-color 0.3s ease;
+    font-family: "Poppins", sans-serif;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #555;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline-color: var(--secondary);
+  }
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .modalActions {
+    margin-top: 26px;
+    display: flex;
+    gap: 16px;
+  }
+  .btnMain {
+    flex: 1;
+    cursor: pointer;
+    padding: 14px 0;
+    border-radius: 22px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.15rem;
+    box-shadow: 0 0 32px var(--secondary);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .btnMain:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 42px var(--primary);
+  }
+  .btnClose {
+    background-color: #ef4444;
+    box-shadow: 0 0 24px #daf3ea;
+  }
+  .btnClose:hover {
+    box-shadow: 0 0 36px #ef4444;
+  }
+  @media (max-width: 480px) {
+    body {
+      padding: 12px;
+    }
+    .modalContent {
+      padding: 18px 16px;
+    }
+    .services {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -42,7 +224,13 @@
 </header>
 
 <section class="services" aria-label="Services">
-  <div tabindex="0" role="button" class="card" data-service="Tatkal Ticket Booking" aria-label="Tatkal Ticket Booking">
+  <div
+    tabindex="0"
+    role="button"
+    class="card"
+    data-service="Tatkal Ticket Booking"
+    aria-label="Tatkal Ticket Booking"
+  >
     <i class="fas fa-train"></i>
     <h3>Tatkal Ticket Booking</h3>
     <p>Get your Ticket Only on one click</p>
@@ -74,11 +262,11 @@
   </div>
 </section>
 
-<!-- Tatkal Ticket Modal -->
+<!-- Tatkal Modal -->
 <div id="tatkalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="tatkalTitle" aria-describedby="tatkalDesc">
   <div class="modalContent" role="document">
     <h2 id="tatkalTitle">Tatkal Ticket Booking</h2>
-    <p id="tatkalDesc" style="opacity:0.8;margin-bottom:1rem;">Manually enter journey details and preferred trains.</p>
+    <p id="tatkalDesc" style="opacity:0.8;margin-bottom:1rem;">Fill your journey details and preferred trains</p>
     <form id="tatkalForm" autocomplete="off" novalidate>
       <label for="sourceInput">Source Station</label>
       <input type="text" id="sourceInput" placeholder="e.g. NDLS" required />
@@ -105,38 +293,41 @@
         <option value="LD">Ladies (LD)</option>
       </select>
       <label for="preferredTrainsInput">Preferred Train(s)</label>
-      <input type="text" id="preferredTrainsInput" placeholder="Enter trains separated by commas" />
+      <input type="text" id="preferredTrainsInput" placeholder="e.g. 12951, 12673" />
       <div style="margin-top: 20px; display: flex; gap: 10px;">
-        <button type="button" id="submitTatkalBtn" class="btnMain">Submit</button>
-        <button type="button" id="closeTatkalBtn" class="btnMain btnClose">Close</button>
+        <button type="button" id="submitBtn" class="btnMain">Submit</button>
+        <button type="button" id="closeBtn" class="btnMain btnClose">Close</button>
       </div>
     </form>
   </div>
 </div>
 
-<!-- General Service Modal -->
-<div id="generalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="genTitle" aria-describedby="genDesc">
+<!-- General Modal -->
+<div id="generalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="generalTitle" aria-describedby="generalDesc">
   <div class="modalContent" role="document">
-    <h2 id="genTitle">Service Request</h2>
-    <p id="genDesc" style="opacity:0.8;margin-bottom:1rem;">Please provide your details.</p>
+    <h2 id="generalTitle">Service Request</h2>
+    <p id="generalDesc" style="opacity: 0.8;margin-bottom:1rem;">Please provide your details below.</p>
     <form id="generalForm" autocomplete="off" novalidate>
-      <label for="genName">Name</label>
-      <input type="text" id="genName" required placeholder="Your full name" />
-      <label for="genAge">Age</label>
-      <input type="number" id="genAge" min="1" max="120" required placeholder="Your age" />
-      <label for="genGender">Gender</label>
-      <select id="genGender" required>
+      <label for="nameInput">Name</label>
+      <input type="text" id="nameInput" placeholder="Your full name" required />
+      <label for="ageInput">Age</label>
+      <input type="number" id="ageInput" placeholder="Your age" min="1" max="120" required />
+      <label for="genderSelect">Gender</label>
+      <select id="genderSelect" required>
         <option value="" disabled selected>Select Gender</option>
-        <option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+        <option>Prefer not to say</option>
       </select>
-      <label for="genEmail">Email</label>
-      <input type="email" id="genEmail" required placeholder="Your email" />
-      <label for="genPhone">Phone (10 digits)</label>
-      <input type="tel" id="genPhone" pattern="^\d{10}$" minlength="10" maxlength="10" required placeholder="1234567890" />
-      <label for="genService">Service</label>
-      <input type="text" id="genService" readonly />
-      <label for="genRequirements">Requirements</label>
-      <textarea id="genRequirements" required placeholder="Describe your needs"></textarea>
+      <label for="emailInput">Email</label>
+      <input type="email" id="emailInput" placeholder="Your email" required />
+      <label for="phoneInput">Phone (10 digits)</label>
+      <input type="tel" id="phoneInput" placeholder="1234567890" pattern="\\d{10}" minlength="10" maxlength="10" required />
+      <label for="serviceInput">Service</label>
+      <input type="text" id="serviceInput" readonly />
+      <label for="requirementsInput">Requirements</label>
+      <textarea id="requirementsInput" placeholder="Enter your requirements" required></textarea>
       <div style="margin-top: 20px; display: flex; gap: 10px;">
         <button type="button" id="submitGeneralBtn" class="btnMain">Submit</button>
         <button type="button" id="closeGeneralBtn" class="btnMain btnClose">Close</button>
@@ -145,262 +336,114 @@
   </div>
 </div>
 
-<!-- Floating Game Button -->
-<div id="gameToggle" title="Pass time while in wait" role="button" tabindex="0" aria-label="Open snake game" style="
-  position: fixed; bottom: 20px; right: 20px; 
-  width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary), var(--secondary)); 
-  border-radius: 50%; box-shadow: 0 0 28px var(--secondary);
-  display: flex; justify-content: center; align-items: center; cursor: pointer; z-index:11001; user-select:none;
-">
-  <i class="fas fa-gamepad" style="font-size:2.3rem; color:#fff;"></i>
-</div>
-
-<!-- Game Modal -->
-<div id="gameModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="gameTitle" aria-describedby="gameDesc">
-  <div class="modalContent" role="document" style="text-align:center;">
-    <h2 id="gameTitle">Pass time while in wait</h2>
-    <canvas id="snakeCanvas" width="320" height="180" aria-label="Snake game" style="border-radius:14px;box-shadow: 0 0 28px var(--secondary) inset;"></canvas>
-    <div class="scoreDisplay" aria-live="polite" style="color: var(--secondary); font-weight: 700; font-size: 1.2rem; margin-top: 8px;">Score: 0</div>
-    <div style="margin-top:18px;">
-      <button type="button" id="closeGameBtn" class="btnMain btnClose" style="max-width:160px;">Close Game</button>
-    </div>
-  </div>
-</div>
-
 <script>
-  // Elements
   const tatkalModal = document.getElementById('tatkalModal');
   const generalModal = document.getElementById('generalModal');
-  const gameModal = document.getElementById('gameModal');
-
-  const submitTatkalBtn = document.getElementById('submitTatkalBtn');
-  const closeTatkalBtn = document.getElementById('closeTatkalBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  const closeBtn = document.getElementById('closeBtn');
+  const sourceInput = document.getElementById('sourceInput');
+  const destInput = document.getElementById('destInput');
+  const dateInput = document.getElementById('dateInput');
+  const classSelect = document.getElementById('classSelect');
+  const quotaSelect = document.getElementById('quotaSelect');
+  const preferredTrainsInput = document.getElementById('preferredTrainsInput');
 
   const submitGeneralBtn = document.getElementById('submitGeneralBtn');
   const closeGeneralBtn = document.getElementById('closeGeneralBtn');
 
-  const closeGameBtn = document.getElementById('closeGameBtn');
-  const gameToggle = document.getElementById('gameToggle');
+  const nameInput = document.getElementById('nameInput');
+  const ageInput = document.getElementById('ageInput');
+  const genderSelect = document.getElementById('genderSelect');
+  const emailInput = document.getElementById('emailInput');
+  const phoneInput = document.getElementById('phoneInput');
+  const serviceInput = document.getElementById('serviceInput');
+  const requirementsInput = document.getElementById('requirementsInput');
 
-  // Service cards and modal logic
+  // Show modals on card click
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       const service = card.dataset.service;
-      if(service === 'Tatkal Ticket Booking'){
-        openModal(tatkalModal);
+      if (service === 'Tatkal Ticket Booking') {
+        tatkalModal.style.display = 'flex';
       } else {
-        // Populate general modal service input
-        document.getElementById('genService').value = service;
-        openModal(generalModal);
+        generalModal.style.display = 'flex';
+        serviceInput.value = service;
       }
     });
     card.addEventListener('keydown', e => {
-      if(e.key === 'Enter' || e.key === ' '){
+      if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         card.click();
       }
     });
   });
 
-  // Open and close modals
-  function openModal(modal){
-    modal.style.display = 'flex';
-    modal.classList.add('active');
-  }
-  function closeModal(modal){
-    modal.classList.remove('active');
-    modal.style.display = 'none';
-  }
-  closeTatkalBtn.addEventListener('click', () => closeModal(tatkalModal));
-  closeGeneralBtn.addEventListener('click', () => closeModal(generalModal));
-  closeGameBtn.addEventListener('click', () => {
-    closeModal(gameModal);
-    stopGame();
+  // Close modal buttons
+  closeBtn.addEventListener('click', () => {
+    tatkalModal.style.display = 'none';
+  });
+  closeGeneralBtn.addEventListener('click', () => {
+    generalModal.style.display = 'none';
   });
 
+  // Escape key close modal
   document.addEventListener('keydown', e => {
-    if(e.key === 'Escape'){
-      closeModal(tatkalModal);
-      closeModal(generalModal);
-      closeModal(gameModal);
-      stopGame();
+    if (e.key === 'Escape') {
+      tatkalModal.style.display = 'none';
+      generalModal.style.display = 'none';
     }
   });
 
-  // Tatkal form submit
-  submitTatkalBtn.addEventListener('click', () => {
-    const src = document.getElementById('sourceInput').value.trim();
-    const dst = document.getElementById('destInput').value.trim();
-    const date = document.getElementById('dateInput').value;
-    const cls = document.getElementById('classSelect').value;
-    const quota = document.getElementById('quotaSelect').value;
-    const trains = document.getElementById('preferredTrainsInput').value.trim() || 'Not specified';
+  // Submit Tatkal form
+  submitBtn.addEventListener('click', () => {
+    if (!sourceInput.value.trim()) return alert('Please enter Source Station');
+    if (!destInput.value.trim()) return alert('Please enter Destination Station');
+    if (!dateInput.value) return alert('Please select Date of Journey');
+    if (!classSelect.value) return alert('Please select Class');
+    if (!quotaSelect.value) return alert('Please select Quota');
 
-    if(!src) return alert("Source Station required");
-    if(!dst) return alert("Destination Station required");
-    if(!date) return alert("Journey Date required");
-    if(!cls) return alert("Class required");
-    if(!quota) return alert("Quota required");
+    const trains = preferredTrainsInput.value.trim() || 'Not specified';
 
-    const msg = encodeURIComponent(
-      `Tatkal Ticket Booking Request:%0A` +
-      `Source: ${src}%0A` +
-      `Destination: ${dst}%0A` +
-      `Date: ${date}%0A` +
-      `Class: ${cls}%0A` +
-      `Quota: ${quota}%0A` +
-      `Preferred Trains: ${trains}`
-    );
+    const msg = encodeURIComponent(`Tatkal Ticket Booking Request:%0A` +
+      `Source: ${sourceInput.value.trim()}%0A` +
+      `Destination: ${destInput.value.trim()}%0A` +
+      `Date: ${dateInput.value}%0A` +
+      `Class: ${classSelect.value}%0A` +
+      `Quota: ${quotaSelect.value}%0A` +
+      `Preferred Trains: ${trains}`);
 
-    ['918092317965', '918595674919'].forEach(num =>
-      window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer')
-    );
+    ['918092317965', '918595674919'].forEach(num => {
+      window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
+    });
 
-    alert("Details sent to WhatsApp!");
-    closeModal(tatkalModal);
+    alert('Details sent to WhatsApp!');
+    tatkalModal.style.display = 'none';
   });
 
-  // General form submit
+  // Submit General form
   submitGeneralBtn.addEventListener('click', () => {
-    const name = document.getElementById('genName').value.trim();
-    const age = document.getElementById('genAge').value.trim();
-    const gender = document.getElementById('genGender').value;
-    const email = document.getElementById('genEmail').value.trim();
-    const phone = document.getElementById('genPhone').value.trim();
-    const service = document.getElementById('genService').value;
-    const req = document.getElementById('genRequirements').value.trim();
+    if (!nameInput.value.trim()) return alert('Please enter your name');
+    if (!(+ageInput.value > 0 && +ageInput.value <= 120)) return alert('Please enter a valid age');
+    if (!genderSelect.value) return alert('Please select your gender');
+    if (!emailInput.value.trim()) return alert('Please enter your email');
+    if (!phoneInput.value.match(/^\d{10}$/)) return alert('Please enter a 10-digit phone number');
+    if (!requirementsInput.value.trim()) return alert('Please enter your requirements');
 
-    if(!name) return alert("Name required");
-    if(!(age > 0 && age <= 120)) return alert("Valid age required");
-    if(!gender) return alert("Gender required");
-    if(!email) return alert("Email required");
-    if(!phone.match(/^\d{10}$/)) return alert("Phone should be 10 digits");
-    if(!req) return alert("Requirements required");
+    const msg = encodeURIComponent(`Service Request:%0A` +
+      `Name: ${nameInput.value.trim()}%0A` +
+      `Age: ${ageInput.value}%0A` +
+      `Gender: ${genderSelect.value}%0A` +
+      `Email: ${emailInput.value.trim()}%0A` +
+      `Phone: ${phoneInput.value}%0A` +
+      `Service: ${serviceInput.value}%0A` +
+      `Requirements: ${requirementsInput.value.trim()}`);
 
-    const msg = encodeURIComponent(
-      `Service Request:%0A` +
-      `Name: ${name}%0A` +
-      `Age: ${age}%0A` +
-      `Gender: ${gender}%0A` +
-      `Email: ${email}%0A` +
-      `Phone: ${phone}%0A` +
-      `Service: ${service}%0A` +
-      `Requirements: ${req}`
-    );
+    ['918092317965', '918595674919'].forEach(num => {
+      window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
+    });
 
-    ['918092317965', '918595674919'].forEach(num =>
-      window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer')
-    );
-
-    alert("Details sent to WhatsApp!");
-    closeModal(generalModal);
-  });
-
-  // Snake Game Logic
-
-  const canvas = document.getElementById('snakeCanvas');
-  const ctx = canvas.getContext('2d');
-  const scoreDisplay = gameModal.querySelector('.scoreDisplay');
-
-  const tileSize = 16;
-  const tilesX = canvas.width / tileSize;
-  const tilesY = canvas.height / tileSize;
-
-  let snake = [{x: 10, y: 10}];
-  let food = {x: 5, y: 5};
-  let velocity = {x: 0, y: 0};
-  let intervalId = null;
-  let score = 0;
-
-  function placeFood(){
-    food.x = Math.floor(Math.random() * tilesX);
-    food.y = Math.floor(Math.random() * tilesY);
-    // avoid food on snake body
-    if(snake.some(s => s.x === food.x && s.y === food.y)) placeFood();
-  }
-
-  function draw(){
-    ctx.fillStyle = '#121212';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    ctx.fillStyle = '#00b4d8';
-    ctx.fillRect(food.x*tileSize, food.y*tileSize, tileSize - 2, tileSize - 2);
-
-    ctx.fillStyle = '#6d28d9';
-    snake.forEach(s => ctx.fillRect(s.x*tileSize, s.y*tileSize, tileSize-2, tileSize-2));
-  }
-
-  function update(){
-    const head = {...snake[0]};
-    head.x = (head.x + velocity.x + tilesX) % tilesX;
-    head.y = (head.y + velocity.y + tilesY) % tilesY;
-
-    if(snake.some(s => s.x === head.x && s.y === head.y)){
-      alert('Game Over! Score: ' + score);
-      resetGame();
-      return;
-    }
-
-    snake.unshift(head);
-
-    if(head.x === food.x && head.y === food.y){
-      score++;
-      placeFood();
-    } else {
-      snake.pop();
-    }
-    updateScore();
-  }
-
-  function gameLoop(){
-    update();
-    draw();
-  }
-
-  function startGame(){
-    if(intervalId) return;
-    resetGame();
-    intervalId = setInterval(gameLoop, 120);
-  }
-
-  function stopGame(){
-    if(intervalId){
-      clearInterval(intervalId);
-      intervalId = null;
-    }
-  }
-
-  function resetGame(){
-    snake = [{x: 10, y: 10}];
-    velocity = {x: 0, y: 0};
-    score = 0;
-    placeFood();
-    updateScore();
-  }
-
-  function updateScore(){
-    scoreDisplay.textContent = "Score: " + score;
-  }
-
-  document.addEventListener('keydown', e => {
-    if(!intervalId) return;
-    switch(e.key){
-      case 'ArrowUp': if(velocity.y === 0){ velocity.x=0; velocity.y=-1; } break;
-      case 'ArrowDown': if(velocity.y === 0){ velocity.x=0; velocity.y=1; } break;
-      case 'ArrowLeft': if(velocity.x === 0){ velocity.x=-1; velocity.y=0; } break;
-      case 'ArrowRight': if(velocity.x === 0){ velocity.x=1; velocity.y=0; } break;
-    }
-  });
-
-  // Game toggle
-  gameToggle.addEventListener('click', () => {
-    if(gameModal.classList.contains('active')){
-      closeModal(gameModal);
-      stopGame();
-    } else {
-      openModal(gameModal);
-      startGame();
-    }
+    alert('Details sent to WhatsApp!');
+    generalModal.style.display = 'none';
   });
 </script>
 
