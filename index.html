@@ -2,309 +2,220 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ClickCart & Co. - Animated Services + Game</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>ClickCart & Co. - Mobile Friendly Tatkal Ticket</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
 <style>
-  /* Reset & base */
-  *, *::before, *::after {box-sizing: border-box;}
-  body, html {
-    margin:0; padding:0; height: 100%;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
-    color: white;
-    overflow-x: hidden;
+  /* Basic resets and vars */
+  :root {
+    --primary: #6d28d9;
+    --secondary: #00b4d8;
+    --glass: rgba(255,255,255,0.1);
+    --white: #fff;
+    --accent: #ffdd57;
   }
-  /* Container */
+  * {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: var(--white);
+    min-height: 100vh;
+    padding: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   header {
     text-align: center;
-    padding: 48px 10px 12px;
+    margin-bottom: 1rem;
     user-select: none;
   }
   header h1 {
+    font-size: 2.8rem;
     font-weight: 700;
-    font-size: 3rem;
-    background: linear-gradient(90deg, #6d28d9, #00b4d8);
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: textGlow 4s ease-in-out infinite alternate;
+    text-shadow: 0 0 18px var(--primary);
   }
   header p {
-    margin-top: 8px;
     font-weight: 500;
-    font-size: 1.2rem;
-    color: #ddd;
+    color: #d3d3d3ff;
+    margin-top: 8px;
+    font-size: 1.1rem;
   }
 
-  @keyframes textGlow {
-    0%, 100% {text-shadow: 0 0 10px #00b4d8, 0 0 20px #6d28d9;}
-    50% {text-shadow: 0 0 15px #6d28d9, 0 0 30px #00b4d8;}
-  }
-
-  /* Services Grid */
+  /* Responsive service cards */
   .services {
-    max-width: 1200px;
-    margin: 1rem auto 3rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 28px;
-    padding: 0 10px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
   }
   .card {
-    position: relative;
-    background: linear-gradient(135deg, #3b82f6, #9333ea);
+    background: var(--glass);
     border-radius: 20px;
-    padding: 20px 24px;
-    box-shadow: 0 0 32px #9333ea66;
+    padding: 18px 20px;
+    box-shadow: 0 0 22px rgba(0,0,0,0.3);
+    text-align: center;
     cursor: pointer;
-    transition:
-      box-shadow 0.3s ease,
-      transform 0.3s ease;
-    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    outline-offset: 4px;
   }
   .card:focus-visible,
   .card:hover {
-    box-shadow:
-      0 0 40px #00e0ff,
-      0 0 60px #9333ea,
-      0 0 90px #00ffe7;
-    transform: translateY(-15px) rotate(-2deg) scale(1.03);
+    box-shadow: 0 0 35px var(--secondary), 0 0 35px var(--primary);
+    transform: translateY(-10px) rotate(-2deg) scale(1.05);
+    outline: none;
   }
   .card i {
-    font-size: 3.2rem;
-    margin-bottom: 16px;
-    filter: drop-shadow(0 0 5px rgba(0,255,255,0.7));
-    animation: iconPulse 3s infinite ease-in-out alternate;
-  }
-  .card h3 {
-    margin-bottom: 8px;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-shadow: 0 0 8px #fff3;
-  }
-  .card p {
-    font-size: 1rem;
-    line-height: 1.3;
-    color: #d0d7f9cc;
+    font-size: 3rem;
+    margin-bottom: 18px;
+    color: var(--secondary);
+    filter: drop-shadow(0 0 6px var(--primary));
+    animation: iconPulse ease-in-out infinite 3s alternate;
   }
   @keyframes iconPulse {
-    0% {filter: drop-shadow(0 0 3px #00ffffaa);}
-    50% {filter: drop-shadow(0 0 15px #70e6ffcc);}
-    100% {filter: drop-shadow(0 0 3px #00ffffaa);}
+    from {filter: drop-shadow(0 0 6px var(--secondary));}
+    to {filter: drop-shadow(0 0 18px var(--primary));}
+  }
+  .card h3 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+  }
+  .card p {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #eee;
+    line-height: 1.3;
   }
 
-  /* Game Toggle Button */
-  .gameToggle {
-    margin-top: 12px;
-    display: inline-block;
-    color: #a5f3fc;
-    cursor: pointer;
-    font-weight: 600;
-    text-shadow: 0 0 6px #00d4ffaa;
-    transition: color 0.3s ease;
-  }
-  .gameToggle:hover {
-    color: #00fff7;
-  }
-  /* Game Container */
-  .gameContainer {
-    margin-top: 14px;
-    width: 100%;
-    height: 180px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #111, #222);
-    box-shadow: inset 0 0 20px #00d4ffdd;
-    display: none;
-    position: relative;
-  }
-  .gameContainer.active {
-    display: block;
-  }
-
-  /* Modal Overlay */
+  /* Modal Background Overlay */
   .modalOverlay {
-    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(7px);
+    display: none;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
+    z-index: 1100;
+    padding: 12px;
   }
   .modalOverlay.active {
     display: flex;
     animation: fadeInScale 0.3s ease forwards;
   }
+  
   @keyframes fadeInScale {
-    0% {opacity:0; transform: scale(0.85);}
-    100% {opacity:1; transform: scale(1);}
+    0% { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
   }
 
-  /* Modal content */
+  /* Modal Content */
   .modalContent {
-    background: linear-gradient(135deg, #22c55e, #14b8a6);
-    border-radius: 18px;
-    padding: 28px 32px;
-    max-width: 460px;
+    background: var(--glass);
+    border-radius: 22px;
+    padding: 28px 30px;
+    max-width: 440px;
     width: 100%;
-    box-shadow: 0 0 40px #14b8a6;
-    color: white;
-    position: relative;
+    box-shadow: 0 0 38px var(--primary);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1rem;
   }
   .modalContent h2 {
-    margin-bottom: 18px;
     font-weight: 700;
     font-size: 1.9rem;
-    text-shadow: 0 0 12px #e0ffe6;
+    color: var(--secondary);
+    margin-bottom: 18px;
+    text-shadow: 0 0 18px var(--accent);
   }
-  .modalContent label {
+
+  label {
     display: block;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin: 12px 0 6px 0;
+    margin-top: 1rem;
+    margin-bottom: 6px;
+    font-weight: 700;
   }
-  .modalContent input,
-  .modalContent select,
-  .modalContent textarea {
+  input, select {
     width: 100%;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: none;
+    padding: 11px 14px;
     font-size: 1rem;
     font-weight: 500;
-    background: rgba(255,255,255,0.17);
-    color: black;
+    border-radius: 14px;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: #111;
     outline-offset: 0;
     outline-color: transparent;
     transition: outline-color 0.3s ease;
+    font-family: 'Poppins',sans-serif;
   }
-  .modalContent input::placeholder,
-  .modalContent textarea::placeholder {
-    color: #555;
+  input::placeholder {
+    color: #666;
   }
-  .modalContent input:focus,
-  .modalContent select:focus,
-  .modalContent textarea:focus {
-    outline-color: #22d5a3;
+  input:focus, select:focus {
+    outline-color: var(--secondary);
   }
-  .modalActions {
-    margin-top: 22px;
+
+  .btnGroup {
+    margin-top: 2rem;
     display: flex;
-    justify-content: space-between;
     gap: 16px;
   }
-  .btnMain {
+
+  .btn {
     flex: 1;
-    background: linear-gradient(45deg, #222, #44e0d0);
-    border-radius: 14px;
+    cursor: pointer;
+    padding: 14px 0;
+    border-radius: 22px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
     border: none;
     color: white;
     font-weight: 700;
     font-size: 1.15rem;
-    padding: 14px 0;
-    cursor: pointer;
-    box-shadow: 0 0 18px #4ef5dbcc;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 32px var(--secondary);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
     overflow: hidden;
   }
-  .btnMain:before {
+  .btn::before {
     content: "";
     position: absolute;
     top: 50%;
-    left: -45%;
-    width: 70%;
+    left: -60%;
+    width: 80%;
     height: 300%;
-    background: linear-gradient(90deg, transparent, #00ffd5aa, transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     transform: translateY(-50%) skewX(-20deg);
-    transition: left 0.5s ease;
+    transition: left 0.6s ease;
+    pointer-events: none;
   }
-  .btnMain:hover:before {
+  .btn:hover::before {
     left: 130%;
   }
-  .btnMain:hover {
-    box-shadow: 0 0 26px #00efddcc;
-    transform: scale(1.06);
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 42px var(--primary);
   }
   .btnClose {
-    background: #ef4444;
-    box-shadow: 0 0 16px #da1c1c;
+    background-color: #ef4444;
+    box-shadow: 0 0 24px #daf3ea;
   }
   .btnClose:hover {
-    box-shadow: 0 0 26px #ff3c3c;
-    transform: scale(1.06);
-  }
-  /* Train chips */
-  .chipList {
-    margin-top: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .chip {
-    background: #22d5a3;
-    color: #003f34;
-    padding: 6px 12px;
-    border-radius: 32px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    user-select: none;
-  }
-  .chip button {
-    background: transparent;
-    border: none;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #005b3d;
-    cursor: pointer;
-    line-height: 1;
+    box-shadow: 0 0 36px #ef4444;
   }
 
-  /* Snake game styles */
-  .gameToggle {
-    margin-top: 8px;
-    font-weight: 700;
-    color: #6d28d9;
-    cursor: pointer;
-    user-select: none;
-    transition: color 0.3s ease;
-  }
-  .gameToggle:hover {
-    color: #00ffc3;
-  }
-  .gameWrapper {
-    margin-top: 12px;
-    border-radius: 12px;
-    background: #111;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 24px #00ffe6bb inset;
-  }
-  #snakeCanvas {
-    display: block;
-    background: #0a0a0a;
-    border-radius: 12px;
-    margin: auto;
-    max-width: 100%;
-  }
-  .scoreDisplay {
-    position: absolute;
-    top: 6px;
-    right: 14px;
-    color: #0ff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-shadow: 0 0 10px #0ff;
-    user-select: none;
+  /* Responsive */
+  @media(max-width: 480px){
+    body {padding: 12px;}
+    .modalContent {padding: 18px 16px;}
+    .services { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
   }
 </style>
-
 </head>
 <body>
 
@@ -313,89 +224,57 @@
   <p>Hamare bina online duniya adhoori hai 😎</p>
 </header>
 
-<section class="services" aria-label="Services list">
+<section class="services" aria-label="Services">
   <div tabindex="0" role="button" class="card" data-service="Tatkal Ticket Booking" aria-label="Tatkal Ticket Booking">
     <i class="fas fa-train"></i>
     <h3>Tatkal Ticket Booking</h3>
-    <p>Manual ticket booking form without API</p>
-    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
-    <div class="gameWrapper" style="display:none;">
-      <canvas id="snakeCanvas" width="320" height="180" aria-label="Snake game"></canvas>
-      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
-    </div>
+    <p>Get your Ticket Only on one click</p>
   </div>
-
   <div tabindex="0" role="button" class="card" data-service="Form Filling" aria-label="Form Filling">
     <i class="fas fa-pen"></i>
     <h3>Form Filling</h3>
     <p>Govt. & Private applications</p>
-    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
-    <div class="gameWrapper" style="display:none;">
-      <canvas id="snakeCanvas2" width="320" height="180" aria-label="Snake game"></canvas>
-      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
-    </div>
   </div>
-
   <div tabindex="0" role="button" class="card" data-service="Resume & Documents" aria-label="Resume & Documents">
     <i class="fas fa-file-alt"></i>
     <h3>Resume & Documents</h3>
     <p>CVs, Cover letters, Docs</p>
-    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
-    <div class="gameWrapper" style="display:none;">
-      <canvas id="snakeCanvas3" width="320" height="180" aria-label="Snake game"></canvas>
-      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
-    </div>
   </div>
-
   <div tabindex="0" role="button" class="card" data-service="Poster Designing" aria-label="Poster Designing">
     <i class="fas fa-paint-brush"></i>
     <h3>Poster Designing</h3>
     <p>Custom banners & social posts</p>
-    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
-    <div class="gameWrapper" style="display:none;">
-      <canvas id="snakeCanvas4" width="320" height="180" aria-label="Snake game"></canvas>
-      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
-    </div>
   </div>
-
   <div tabindex="0" role="button" class="card" data-service="Photo Editing" aria-label="Photo Editing">
     <i class="fas fa-camera"></i>
     <h3>Photo Editing</h3>
     <p>Retouching, enhancements</p>
-    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
-    <div class="gameWrapper" style="display:none;">
-      <canvas id="snakeCanvas5" width="320" height="180" aria-label="Snake game"></canvas>
-      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
-    </div>
   </div>
-
   <div tabindex="0" role="button" class="card" data-service="Freelancing" aria-label="Freelancing">
     <i class="fas fa-briefcase"></i>
     <h3>Freelancing</h3>
     <p>Hire for projects</p>
-    <div class="gameToggle" tabindex="0" title="Play a snake game!">▶️ Play Snake Game</div>
-    <div class="gameWrapper" style="display:none;">
-      <canvas id="snakeCanvas6" width="320" height="180" aria-label="Snake game"></canvas>
-      <div class="scoreDisplay" aria-live="polite">Score: 0</div>
-    </div>
   </div>
 </section>
 
-<!-- Tatkal Ticket Modal -->
-<div class="modalOverlay" id="tatkalModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+<!-- Tatkal Modal -->
+<div id="tatkalModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
   <div class="modalContent" role="document">
     <h2 id="modalTitle">Tatkal Ticket Booking</h2>
-    <p id="modalDesc">Fill journey details, preferred trains (any format) and submit.</p>
+    <p id="modalDesc" style="opacity:0.8;margin-bottom:1rem;">Fill your journey details and preferred trains</p>
     <form id="tatkalForm" autocomplete="off" novalidate>
-      <label for="sourceStation">Source Station</label>
-      <input id="sourceStation" type="text" placeholder="e.g. NDLS" required />
-      <label for="destinationStation">Destination Station</label>
-      <input id="destinationStation" type="text" placeholder="e.g. BCT" required />
-      <label for="journeyDate">Date of Journey</label>
-      <input id="journeyDateModal" type="date" required />
-      <label for="travelClass">Class</label>
-      <select id="travelClassModal" required>
-        <option value="" disabled selected>Select class</option>
+      <label for="sourceInput">Source Station</label>
+      <input type="text" id="sourceInput" placeholder="e.g. NDLS" required />
+
+      <label for="destInput">Destination Station</label>
+      <input type="text" id="destInput" placeholder="e.g. BCT" required />
+
+      <label for="dateInput">Date of Journey</label>
+      <input type="date" id="dateInput" required />
+
+      <label for="classInput">Class</label>
+      <select id="classInput" required>
+        <option value="" disabled selected>Select Class</option>
         <option value="SL">Sleeper (SL)</option>
         <option value="3A">AC 3 Tier (3A)</option>
         <option value="2A">AC 2 Tier (2A)</option>
@@ -403,190 +282,226 @@
         <option value="CC">Chair Car (CC)</option>
         <option value="2S">Second Sitting (2S)</option>
       </select>
-      <label for="quotaModal">Quota</label>
-      <select id="quotaModal" required>
-        <option value="" disabled selected>Select quota</option>
+
+      <label for="quotaInput">Quota</label>
+      <select id="quotaInput" required>
+        <option value="" disabled selected>Select Quota</option>
         <option value="GN">General (GN)</option>
         <option value="TQ">Tatkal (TQ)</option>
         <option value="PT">Premium Tatkal (PT)</option>
         <option value="LD">Ladies (LD)</option>
       </select>
-      <label for="preferredTrainsModal">Preferred Train(s)</label>
-      <input id="preferredTrainsModal" placeholder="Type train numbers or names separated by commas" />
-      <button type="button" class="btnMain" id="submitTatkalBtn">Submit</button>
-      <button type="button" class="btnMain btnClose" id="closeTatkalBtn">Cancel</button>
+
+      <label for="preferredTrainsInput">Preferred Train(s)</label>
+      <input type="text" id="preferredTrainsInput" placeholder="Enter train numbers or names separated by commas" />
+
+      <div class="btnGroup">
+        <button type="button" class="btn" id="submitTicketBtn">Submit</button>
+        <button type="button" class="btn btnClose" id="closeModalBtn">Close</button>
+      </div>
     </form>
   </div>
 </div>
 
-<script>
-  // Modal open/close + keyboard accessibility
-  const tatkalModal = document.getElementById('tatkalModal');
-  const submitTatkalBtn = document.getElementById('submitTatkalBtn');
-  const closeTatkalBtn = document.getElementById('closeTatkalBtn');
+<!-- Floating Game Button -->
+<div id="gameToggle" title="Pass time while in wait" role="button" tabindex="0" aria-label="Open snake game" style="
+  position: fixed; bottom: 20px; right: 20px; 
+  width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+  border-radius: 50%; box-shadow: 0 0 26px var(--secondary);
+  display: flex; justify-content: center; align-items: center; cursor: pointer; z-index:11001; user-select:none;">
+  <i class="fas fa-gamepad" style="font-size: 2.5rem; color: white;"></i>
+</div>
 
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('click', () => {
-      if (card.dataset.service === 'Tatkal Ticket Booking') {
-        openModal(tatkalModal);
-      }
-    });
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        if (card.dataset.service === 'Tatkal Ticket Booking') {
-          openModal(tatkalModal);
-        }
-      }
-    });
+<!-- Game Modal -->
+<div id="gameModal" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="gameTitle" aria-describedby="gameDesc">
+  <div class="modalContent" role="document" style="text-align:center;">
+    <h2 id="gameTitle" style="margin-bottom: 12px;">Pass time while in wait</h2>
+    <canvas id="snakeCanvas" width="320" height="180" aria-label="Snake game" style="border-radius:12px;box-shadow:0 0 30px var(--secondary) inset;background:#121212;user-select:none;"></canvas>
+    <div class="scoreDisplay" aria-live="polite" style="color: var(--secondary); font-weight: 700; font-size: 1.2rem; margin-top: 8px;">Score: 0</div>
+    <div class="btnGroup">
+      <button type="button" class="btn btnClose" id="closeGameBtn">Close Game</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal elements & controls
+  const tatkalModal = document.getElementById('tatkalModal');
+  const submitTicketBtn = document.getElementById('submitTicketBtn');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const sourceInput = document.getElementById('sourceInput');
+  const destInput = document.getElementById('destInput');
+  const dateInput = document.getElementById('dateInput');
+  const classInput = document.getElementById('classInput');
+  const quotaInput = document.getElementById('quotaInput');
+  const preferredTrainsInput = document.getElementById('preferredTrainsInput');
+
+  // Floating game button & modal
+  const gameToggle = document.getElementById('gameToggle');
+  const gameModal = document.getElementById('gameModal');
+  const closeGameBtn = document.getElementById('closeGameBtn');
+  const canvas = document.getElementById('snakeCanvas');
+  const ctx = canvas.getContext('2d');
+  const scoreDisplay = gameModal.querySelector('.scoreDisplay');
+
+  // Open modal on card click
+  document.querySelector('.card[data-service="Tatkal Ticket Booking"]').addEventListener('click', () => {
+    openModal(tatkalModal);
   });
 
-  function openModal(modal) {
+  // Modal open/close helpers
+  function openModal(modal){
     modal.classList.add('active');
     modal.style.display = 'flex';
   }
-  function closeModal(modal) {
+  function closeModal(modal){
     modal.classList.remove('active');
     modal.style.display = 'none';
   }
 
-  closeTatkalBtn.addEventListener('click', () => {
+  // Close Tatkal modal close button
+  closeModalBtn.addEventListener('click', () => closeModal(tatkalModal));
+  // Escape closes modals
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape'){
+      closeModal(tatkalModal);
+      closeModal(gameModal);
+    }
+  });
+
+  // Submit ticket form
+  submitTicketBtn.addEventListener('click', () => {
+    if(!sourceInput.value.trim()){ alert('Please enter Source Station'); sourceInput.focus(); return; }
+    if(!destInput.value.trim()){ alert('Please enter Destination Station'); destInput.focus(); return; }
+    if(!dateInput.value){ alert('Please select Date of Journey'); dateInput.focus(); return; }
+    if(!classInput.value){ alert('Please select Class'); classInput.focus(); return; }
+    if(!quotaInput.value){ alert('Please select Quota'); quotaInput.focus(); return; }
+
+    const trains = preferredTrainsInput.value.trim() || 'Not specified';
+    const msg = encodeURIComponent(
+      `Tatkal Ticket Booking Request:\n` +
+      `Source: ${sourceInput.value.trim()}\n` +
+      `Destination: ${destInput.value.trim()}\n` +
+      `Date: ${dateInput.value}\n` +
+      `Class: ${classInput.value}\n` +
+      `Quota: ${quotaInput.value}\n` +
+      `Preferred Trains: ${trains}`
+    );
+
+    ['918092317965', '918595674919'].forEach(num => {
+      window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
+    });
+
+    alert('Details sent on WhatsApp!');
     closeModal(tatkalModal);
   });
+
+  // Game toggle & modal handling
+  gameToggle.addEventListener('click', () => {
+    if (gameModal.style.display === 'flex') {
+      closeModal(gameModal);
+      stopGame();
+    } else {
+      openModal(gameModal);
+      startGame();
+    }
+  });
+  closeGameBtn.addEventListener('click', () => {
+    closeModal(gameModal);
+    stopGame();
+  });
+
+  // Snake Game Variables & functions
+  const tileSize = 16;
+  const tileCountX = canvas.width / tileSize;
+  const tileCountY = canvas.height / tileSize;
+
+  let snake = [{x: 10, y: 10}];
+  let food = {x: 5, y: 5};
+  let velocity = {x: 0, y: 0};
+  let gameLoopInterval = null;
+  let score = 0;
+
+  function placeFood(){
+    food.x = Math.floor(Math.random() * tileCountX);
+    food.y = Math.floor(Math.random() * tileCountY);
+    if (snake.some(seg => seg.x === food.x && seg.y === food.y)) {
+      placeFood(); // reposition if collides with snake
+    }
+  }
+
+  function drawGame(){
+    ctx.fillStyle = '#121212';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#00b4d8';
+    ctx.fillRect(food.x * tileSize, food.y * tileSize, tileSize-2, tileSize-2);
+
+    ctx.fillStyle = '#6d28d9';
+    snake.forEach(seg => {
+      ctx.fillRect(seg.x * tileSize, seg.y * tileSize, tileSize-2, tileSize-2);
+    });
+  }
+
+  function updateGame(){
+    const newHead = {x: (snake[0].x + velocity.x + tileCountX) % tileCountX, y: (snake[0].y + velocity.y + tileCountY) % tileCountY};
+
+    if(snake.some(seg => seg.x === newHead.x && seg.y === newHead.y)){
+      alert('Game over! Your score: ' + score);
+      resetGame();
+      return;
+    }
+
+    snake.unshift(newHead);
+
+    if(newHead.x === food.x && newHead.y === food.y){
+      score++;
+      placeFood();
+    } else {
+      snake.pop();
+    }
+    updateScore();
+  }
+
+  function gameLoop(){
+    updateGame();
+    drawGame();
+  }
+
+  function startGame(){
+    if(gameLoopInterval !== null) return; // Already running
+    resetGame();
+    gameLoopInterval = setInterval(gameLoop, 120);
+  }
+
+  function stopGame(){
+    if(gameLoopInterval !== null){
+      clearInterval(gameLoopInterval);
+      gameLoopInterval = null;
+    }
+  }
+
+  function resetGame(){
+    snake = [{x: 10, y: 10}];
+    velocity = {x:0, y:0};
+    score = 0;
+    placeFood();
+    updateScore();
+  }
+
+  function updateScore(){
+    scoreDisplay.textContent = "Score: " + score;
+  }
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      closeModal(tatkalModal);
+    switch(e.key){
+      case 'ArrowUp': if(velocity.y === 0){ velocity.x = 0; velocity.y = -1;} break;
+      case 'ArrowDown': if(velocity.y === 0){ velocity.x = 0; velocity.y = 1;} break;
+      case 'ArrowLeft': if(velocity.x === 0){ velocity.x = -1; velocity.y = 0;} break;
+      case 'ArrowRight': if(velocity.x === 0){ velocity.x = 1; velocity.y = 0;} break;
     }
   });
 
-  // Form submit
-  submitTatkalBtn.addEventListener('click', () => {
-    const src = document.getElementById('sourceStation').value.trim();
-    const dst = document.getElementById('destinationStation').value.trim();
-    const date = document.getElementById('journeyDateModal').value;
-    const cls = document.getElementById('travelClassModal').value;
-    const quota = document.getElementById('quotaModal').value;
-    const trains = document.getElementById('preferredTrainsModal').value.trim();
-
-    if (!src) return alert('Please enter Source Station.');
-    if (!dst) return alert('Please enter Destination Station.');
-    if (!date) return alert('Please select Date of Journey.');
-    if (!cls) return alert('Please select Class.');
-    if (!quota) return alert('Please select Quota.');
-    if (!trains) return alert('Please enter preferred trains.');
-
-    let msg = `Tatkal Ticket Booking Request:%0A`;
-    msg += `Source: ${src}%0A`;
-    msg += `Destination: ${dst}%0A`;
-    msg += `Date: ${date}%0A`;
-    msg += `Class: ${cls}%0A`;
-    msg += `Quota: ${quota}%0A`;
-    msg += `Preferred Trains: ${trains}`;
-
-    ['918092317965', '918595674919'].forEach(number => {
-      window.open(`https://wa.me/${number}?text=${msg}`, '_blank', 'noopener,noreferrer');
-    });
-
-    alert('Details sent to WhatsApp!');
-    closeModal(tatkalModal);
-  });
-
-  // Snake Game Logic for each card
-  document.querySelectorAll('.gameToggle').forEach((toggle, idx) => {
-    const container = toggle.nextElementSibling;
-    const canvas = container.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    let scoreDisplay = container.querySelector('.scoreDisplay');
-
-    let size = 16, tileCountX = canvas.width / size, tileCountY = canvas.height / size;
-    let snake = [{x: 10, y: 10}];
-    let food = {};
-    let vel = {x: 0, y: 0};
-    let score = 0;
-    let gameInterval;
-
-    function newFood() {
-      food.x = Math.floor(Math.random() * tileCountX);
-      food.y = Math.floor(Math.random() * tileCountY);
-    }
-
-    function draw() {
-      ctx.fillStyle = '#111';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Snake body
-      ctx.fillStyle = '#00ffc3';
-      snake.forEach(s => {
-        ctx.fillRect(s.x * size, s.y * size, size - 2, size - 2);
-      });
-
-      // Food
-      ctx.fillStyle = '#ff2b57';
-      ctx.fillRect(food.x * size, food.y * size, size - 2, size - 2);
-
-      scoreDisplay.textContent = `Score: ${score}`;
-    }
-
-    function update() {
-      const head = {...snake[0]};
-      head.x += vel.x;
-      head.y += vel.y;
-
-      if(head.x < 0) head.x = tileCountX - 1;
-      else if(head.x >= tileCountX) head.x = 0;
-      if(head.y < 0) head.y = tileCountY - 1;
-      else if(head.y >= tileCountY) head.y = 0;
-
-      if(snake.some(s => s.x === head.x && s.y === head.y)) {
-        // Snake collided with self -> Game over
-        resetGame();
-        return;
-      }
-
-      snake.unshift(head);
-
-      if(head.x === food.x && head.y === food.y) {
-        score++;
-        newFood();
-      } else {
-        snake.pop();
-      }
-    }
-
-    function gameLoop() {
-      update();
-      draw();
-    }
-
-    function resetGame() {
-      clearInterval(gameInterval);
-      score = 0;
-      snake = [{x: 10, y: 10}];
-      vel = {x: 0, y: 0};
-      newFood();
-      gameInterval = setInterval(gameLoop, 150);
-    }
-
-    toggle.addEventListener('click', () => {
-      if(container.style.display === 'block') {
-        container.style.display = 'none';
-        clearInterval(gameInterval);
-      } else {
-        container.style.display = 'block';
-        resetGame();
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      switch(e.key){
-        case 'ArrowUp': if(vel.y === 0){ vel.x = 0; vel.y = -1; } break;
-        case 'ArrowDown': if(vel.y === 0){ vel.x = 0; vel.y = 1; } break;
-        case 'ArrowLeft': if(vel.x === 0){ vel.x = -1; vel.y = 0; } break;
-        case 'ArrowRight': if(vel.x === 0){ vel.x = 1; vel.y = 0; } break;
-      }
-    });
-  });
 </script>
 
 </body>
