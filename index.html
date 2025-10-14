@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Mobile viewport already correct -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>ClickCart & Co. - Services</title>
 
@@ -16,79 +17,82 @@
       --white: #fff;
       --accent: #ffdd57;
     }
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, var(--secondary), var(--primary));
       color: var(--white);
-      margin: 0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
+    body.modal-open { overflow: hidden; }
+
     header {
       text-align: center;
-      padding: 56px 14px 10px;
+      padding: 48px 14px 10px;
       user-select: none;
     }
     header h1 {
-      font-size: 2.8rem;
+      font-size: clamp(1.8rem, 3.5vw + 0.5rem, 2.8rem);
       font-weight: 700;
-      text-shadow: 0 0 15px var(--primary);
+      text-shadow: 0 0 15px rgba(109,40,217,0.8);
       margin: 0 0 6px;
     }
     header p {
       font-weight: 600;
-      font-size: 1.1rem;
-      opacity: 0.9;
+      font-size: 1rem;
+      opacity: 0.95;
       margin: 0;
     }
+
     .services {
       max-width: 1100px;
       margin: 0 auto 24px;
       padding: 0 12px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 26px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 22px;
       flex-grow: 1;
     }
+
     .card {
       background: var(--glass);
       border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 0 22px rgba(0,0,0,0.3);
+      padding: 20px;
+      box-shadow: 0 0 18px rgba(0,0,0,0.25);
       text-align: center;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       outline-offset: 4px;
       user-select: none;
-    }
-    .card:hover, .card:focus-visible {
-      box-shadow: 0 0 36px var(--secondary), 0 0 40px var(--primary);
-      transform: translateY(-10px) rotate(-2deg) scale(1.05);
-      outline: none;
-      z-index: 2;
+      will-change: transform;
     }
     .card i {
-      font-size: 3rem;
-      margin-bottom: 16px;
+      font-size: 2.4rem;
+      margin-bottom: 12px;
       color: var(--secondary);
       filter: drop-shadow(0 0 6px var(--primary));
     }
     .card h3 {
       font-weight: 700;
-      font-size: 1.5rem;
-      margin-bottom: 8px;
+      font-size: 1.25rem;
+      margin-bottom: 6px;
     }
     .card p {
-      font-size: 1rem;
-      opacity: 0.9;
+      font-size: 0.95rem;
+      opacity: 0.95;
+      margin: 0;
+    }
+    /* Hover effects only on devices that actually support hover */
+    @media (hover: hover) {
+      .card:hover, .card:focus-visible {
+        box-shadow: 0 0 28px var(--secondary), 0 0 32px var(--primary);
+        transform: translateY(-6px) rotate(-1deg) scale(1.02);
+        outline: none;
+        z-index: 2;
+      }
     }
 
     /* Modal */
@@ -103,37 +107,36 @@
       z-index: 9000;
       padding: 1rem;
     }
-    .modalOverlay.active {
-      display: flex;
-      animation: fadeIn 0.3s ease forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    .modalOverlay.active { display: flex; animation: fadeIn 0.25s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
     .modalContent {
       background: var(--glass);
       border-radius: 18px;
-      padding: 2rem 2.5rem;
-      max-width: 480px;
+      padding: 1.5rem 1.75rem;
+      max-width: 520px;
       width: 100%;
-      box-shadow: 0 0 40px var(--primary);
+      max-height: 92vh;
+      overflow: auto;
+      box-shadow: 0 0 32px var(--primary);
       color: var(--white);
       font-weight: 600;
       font-size: 1rem;
       display: flex;
       flex-direction: column;
+      outline: none;
     }
     .modalContent h2 {
       font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
       color: var(--secondary);
-      text-shadow: 0 0 12px var(--accent);
+      text-shadow: 0 0 10px var(--accent);
     }
+
     label {
-      margin-top: 1.2rem;
-      margin-bottom: 0.6rem;
+      margin-top: 1rem;
+      margin-bottom: 0.45rem;
       font-weight: 700;
     }
     input, select, textarea {
@@ -147,25 +150,17 @@
       background-color: rgba(255,255,255,0.2);
       color: #222;
       outline: none;
-      transition: outline-color 0.3s ease;
+      transition: outline-color 0.2s ease;
     }
-    input::placeholder,
-    textarea::placeholder {
-      color: #555;
-    }
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline-color: var(--secondary);
-    }
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
+    input::placeholder, textarea::placeholder { color: #555; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--secondary); }
+
+    textarea { resize: vertical; min-height: 80px; }
+
     .modalActions {
       display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
     }
     button {
       flex: 1;
@@ -173,45 +168,32 @@
       border-radius: 22px;
       cursor: pointer;
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       padding: 14px 0;
+      min-height: 48px; /* comfortable tap target */
       color: white;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+      transition: background-color 0.2s ease, transform 0.2s ease;
     }
     button.submit {
       background: linear-gradient(45deg, var(--primary), var(--secondary));
-      box-shadow: 0 0 32px var(--secondary);
+      box-shadow: 0 0 24px var(--secondary);
     }
-    button.submit:hover {
-      background: linear-gradient(45deg, var(--secondary), var(--primary));
-      transform: scale(1.05);
-      box-shadow: 0 0 48px var(--primary);
-    }
-    button.cancel {
-      background: #ef4444;
-      box-shadow: 0 0 32px #da1c1c;
-    }
-    button.cancel:hover {
-      background: #ff4d4d;
-      box-shadow: 0 0 48px #ef4444;
-      transform: scale(1.05);
-    }
-
-    /* Responsive adjustments for mobile */
-    @media (max-width: 520px) {
-      body {
-        padding: 1rem 0.5rem;
+    @media (hover: hover) {
+      button.submit:hover {
+        background: linear-gradient(45deg, var(--secondary), var(--primary));
+        transform: translateY(-1px) scale(1.02);
+        box-shadow: 0 0 36px var(--primary);
       }
-      .modalContent {
-        padding: 1.4rem 1.6rem;
-        font-size: 0.9rem;
-      }
+    }
+    button.cancel { background: #ef4444; box-shadow: 0 0 24px #da1c1c; }
+    @media (hover: hover) {
+      button.cancel:hover { background: #ff4d4d; box-shadow: 0 0 36px #ef4444; transform: translateY(-1px) scale(1.02); }
     }
 
     /* Contact Section */
     .contact {
       background: rgba(255,255,255,0.08);
-      padding: 20px 18px;
+      padding: 18px;
       max-width: 1100px;
       margin: 0 auto 24px;
       border-radius: 14px;
@@ -220,24 +202,13 @@
     .contact h3 {
       font-weight: 700;
       color: var(--secondary);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       text-shadow: 0 0 10px var(--accent);
-      font-size: 1.5rem;
+      font-size: 1.35rem;
     }
-    .contact p {
-      font-weight: 500;
-      margin: 6px 0;
-      font-size: 1rem;
-    }
-    .contact a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .contact a:focus,
-    .contact a:hover {
-      text-decoration: underline;
-    }
+    .contact p { font-weight: 500; margin: 6px 0; font-size: 0.95rem; }
+    .contact a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .contact a:focus, .contact a:hover { text-decoration: underline; }
 
     /* Footer */
     footer {
@@ -249,10 +220,19 @@
       user-select: none;
       margin-top: auto;
     }
-    .footer-line {
-      opacity: 0.78;
-      font-weight: 500;
-      line-height: 1.4;
+    .footer-line { opacity: 0.78; font-weight: 500; line-height: 1.4; }
+
+    /* Mobile tweaks */
+    @media (max-width: 520px) {
+      header { padding: 32px 12px 8px; }
+      .services { grid-template-columns: 1fr; gap: 16px; }
+      .card { padding: 16px; }
+      .modalContent { padding: 1.1rem 1.25rem; font-size: 0.95rem; max-width: 100%; border-radius: 16px; }
+    }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     }
   </style>
 </head>
@@ -301,11 +281,11 @@
   <div class="modalContent" role="document">
     <h2 id="tatkalTitle">Tatkal Ticket Booking</h2>
     <p id="tatkalDesc">Fill your journey details and preferred trains</p>
-    <form id="tatkalForm" autocomplete="off" novalidate>
+    <form id="tatkalForm" autocomplete="on" novalidate>
       <label for="sourceInput">Source Station</label>
-      <input type="text" id="sourceInput" placeholder="e.g. NDLS" required />
+      <input type="text" id="sourceInput" placeholder="e.g. NDLS" required autocomplete="off" inputmode="latin" />
       <label for="destInput">Destination Station</label>
-      <input type="text" id="destInput" placeholder="e.g. BCT" required />
+      <input type="text" id="destInput" placeholder="e.g. BCT" required autocomplete="off" inputmode="latin" />
       <label for="dateInput">Date of Journey</label>
       <input type="date" id="dateInput" required />
       <label for="classSelect">Class</label>
@@ -341,20 +321,20 @@
   <div class="modalContent" role="document">
     <h2 id="generalTitle">Service Request</h2>
     <p id="generalDesc">Please provide your details below.</p>
-    <form id="generalForm" autocomplete="off" novalidate>
+    <form id="generalForm" autocomplete="on" novalidate>
       <label for="nameInput">Name</label>
-      <input type="text" id="nameInput" placeholder="Your full name" required />
+      <input type="text" id="nameInput" placeholder="Your full name" required autocomplete="name" />
       <label for="ageInput">Age</label>
-      <input type="number" id="ageInput" min="1" max="120" placeholder="Your age" required />
+      <input type="number" id="ageInput" min="1" max="120" placeholder="Your age" required inputmode="numeric" />
       <label for="genderSelect">Gender</label>
       <select id="genderSelect" required>
         <option value="" disabled selected>Select Gender</option>
         <option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option>
       </select>
       <label for="emailInput">Email</label>
-      <input type="email" id="emailInput" placeholder="Your email" required />
+      <input type="email" id="emailInput" placeholder="Your email" required autocomplete="email" inputmode="email" />
       <label for="phoneInput">Phone (10 digits)</label>
-      <input type="tel" id="phoneInput" placeholder="1234567890" pattern="\d{10}" minlength="10" maxlength="10" required />
+      <input type="tel" id="phoneInput" placeholder="1234567890" pattern="\\d{10}" minlength="10" maxlength="10" required autocomplete="tel" inputmode="numeric" />
       <label for="serviceInput">Service</label>
       <input type="text" id="serviceInput" readonly />
       <label for="requirementsInput">Requirements</label>
@@ -377,8 +357,8 @@
   </div>
 </section>
 
-<footer role="contentinfo" style="text-align:center; color:white; opacity:0.9; padding:16px 12px 20px; background: rgba(0,0,0,0.15); font-size: 0.9rem; user-select:none;">
-  <div>Made with ♥️ In Bharat by Adarsh & Ayush</div>
+<footer role="contentinfo" style="text-align:center; color:white; opacity:0.9; padding:16px 12px calc(20px + env(safe-area-inset-bottom)); background: rgba(0,0,0,0.15); font-size: 0.9rem; user-select:none;">
+  <div>Made with ♥ In Bharat by Adarsh & Ayush</div>
   <div>© 2025 ClickCart & Co. All rights reserved</div>
 </footer>
 
@@ -405,10 +385,58 @@
   const serviceInput = document.getElementById('serviceInput');
   const requirementsInput = document.getElementById('requirementsInput');
 
+  // Set min date = today for journey date
+  (function setMinDateToday() {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+  })();
+
+  // Open/Close helpers with body scroll lock and focus trap
+  let lastActive = null;
+  function openModal(modal) {
+    lastActive = document.activeElement;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    trapFocus(modal);
+    const firstFocusable = modal.querySelector('input, select, textarea, button');
+    if (firstFocusable) firstFocusable.focus({ preventScroll: true });
+  }
+  function closeModal(modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    if (lastActive) lastActive.focus({ preventScroll: true });
+    releaseTrap(modal);
+  }
+
+  // Focus trap
+  const FOCUSABLE = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  function trapFocus(modal) {
+    function handler(e) {
+      if (e.key !== 'Tab') return;
+      const focusables = Array.from(modal.querySelectorAll(FOCUSABLE));
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+    modal._trapHandler = handler;
+    modal.addEventListener('keydown', handler);
+  }
+  function releaseTrap(modal) {
+    if (modal._trapHandler) {
+      modal.removeEventListener('keydown', modal._trapHandler);
+      modal._trapHandler = null;
+    }
+  }
+
+  // Cards: open appropriate modal
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       const service = card.dataset.service;
-      if(service === 'Tatkal Ticket Booking'){
+      if (service === 'Tatkal Ticket Booking') {
         openModal(tatkalModal);
       } else {
         serviceInput.value = service;
@@ -416,40 +444,38 @@
       }
     });
     card.addEventListener('keydown', e => {
-      if(e.key === 'Enter' || e.key === ' '){
-        e.preventDefault();
-        card.click();
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
     });
   });
 
-  function openModal(modal){
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden','false');
-  }
-  function closeModal(modal){
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden','true');
-  }
+  // Close buttons
   closeBtn.addEventListener('click', () => closeModal(tatkalModal));
   closeGeneralBtn.addEventListener('click', () => closeModal(generalModal));
 
+  // Close on overlay click
+  [tatkalModal, generalModal].forEach(overlay => {
+    overlay.addEventListener('mousedown', e => {
+      if (e.target === overlay) closeModal(overlay);
+    });
+  });
+
+  // ESC to close
   document.addEventListener('keydown', e => {
-    if(e.key === 'Escape'){
-      closeModal(tatkalModal);
-      closeModal(generalModal);
+    if (e.key === 'Escape') {
+      if (tatkalModal.classList.contains('active')) closeModal(tatkalModal);
+      if (generalModal.classList.contains('active')) closeModal(generalModal);
     }
   });
 
+  // Submit Tatkal
   submitBtn.addEventListener('click', () => {
-    if(!sourceInput.value.trim()) { alert('Please enter Source Station'); return; }
-    if(!destInput.value.trim()) { alert('Please enter Destination Station'); return; }
-    if(!dateInput.value) { alert('Please select Date of Journey'); return; }
-    if(!classSelect.value) { alert('Please select Class'); return; }
-    if(!quotaSelect.value) { alert('Please select Quota'); return; }
+    if (!sourceInput.value.trim()) { alert('Please enter Source Station'); return; }
+    if (!destInput.value.trim()) { alert('Please enter Destination Station'); return; }
+    if (!dateInput.value) { alert('Please select Date of Journey'); return; }
+    if (!classSelect.value) { alert('Please select Class'); return; }
+    if (!quotaSelect.value) { alert('Please select Quota'); return; }
 
     const trains = preferredTrainsInput.value.trim() || 'Not specified';
-
     const msgLines = [
       'Tatkal Ticket Booking Request:',
       '',
@@ -465,19 +491,20 @@
     ];
     const msg = encodeURIComponent(msgLines.join('\n'));
     ['918092317965','918595674919'].forEach(num => {
-      window.open(`https://wa.me/${num}?text=${msg}`, '_blank','noopener,noreferrer');
+      window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
     });
     alert('Details sent to WhatsApp!');
     closeModal(tatkalModal);
   });
 
+  // Submit General
   submitGeneralBtn.addEventListener('click', () => {
-    if(!nameInput.value.trim()) { alert('Please enter your Name'); return; }
-    if(!(+ageInput.value > 0 && +ageInput.value <= 120)) { alert('Please enter valid Age'); return; }
-    if(!genderSelect.value) { alert('Please select Gender'); return; }
-    if(!emailInput.value.trim()) { alert('Please enter Email'); return; }
-    if(!phoneInput.value.match(/^\d{10}$/)) { alert('Please enter valid 10-digit Phone'); return; }
-    if(!requirementsInput.value.trim()) { alert('Please enter Requirements'); return; }
+    if (!nameInput.value.trim()) { alert('Please enter your Name'); return; }
+    if (!(+ageInput.value > 0 && +ageInput.value <= 120)) { alert('Please enter valid Age'); return; }
+    if (!genderSelect.value) { alert('Please select Gender'); return; }
+    if (!emailInput.value.trim()) { alert('Please enter Email'); return; }
+    if (!phoneInput.value.match(/^\d{10}$/)) { alert('Please enter valid 10-digit Phone'); return; }
+    if (!requirementsInput.value.trim()) { alert('Please enter Requirements'); return; }
 
     const msgLines = [
       'Service Request:',
@@ -495,25 +522,12 @@
     ];
     const msg = encodeURIComponent(msgLines.join('\n'));
     ['918092317965','918595674919'].forEach(num => {
-      window.open(`https://wa.me/${num}?text=${msg}`, '_blank','noopener,noreferrer');
+      window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener,noreferrer');
     });
     alert('Details sent to WhatsApp!');
     closeModal(generalModal);
   });
 </script>
-
-<!-- Contact Us Section -->
-<section class="contact" aria-label="Contact information" style="max-width:1100px; margin: 0 auto 24px; padding: 0 12px;">
-  <h3>Contact Us</h3>
-  <p>Adarsh Gupta: <a href="tel:+918092317965" aria-label="Call Adarsh on plus nine one eight zero nine two three one seven nine six five">+91 8092317965</a></p>
-  <p>Ayush Pandey: <a href="tel:+918595674919" aria-label="Call Ayush on plus nine one eight five nine five six seven four nine one nine">+91 8595674919</a></p>
-  <p>Email: <a href="mailto:baba.googl001@gmail.com" aria-label="Email baba dot googl zero zero one at gmail dot com">baba.googl001@gmail.com</a></p>
-</section>
-
-<footer role="contentinfo" style="text-align:center; color:white; opacity:0.9; padding:16px 12px 20px; background: rgba(0,0,0,0.15); font-size: 0.9rem; user-select:none;">
-  <div>Made with ♥️ In Bharat by Adarsh & Ayush</div>
-  <div>© 2025 ClickCart & Co. All rights reserved</div>
-</footer>
 
 </body>
 </html>
