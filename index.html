@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ClickCart & Co. — Online Services</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
@@ -11,98 +11,212 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <style>
-:root{
-  --primary:#6d28d9; --secondary:#00b4d8; --bg:#121212; --glass:rgba(255,255,255,0.1);
-  --white:#fff; --accent:#ffdd57; --success:#25D366;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,var(--secondary),var(--primary));
-  color:var(--white); overflow-x:hidden;
-}
-header{ text-align:center; padding:70px 20px 20px 20px; }
-header h1{ font-size:3rem; text-shadow:0 0 15px var(--primary); }
-header p{ opacity:0.9; font-size:1.2rem; }
+  :root {
+    --primary: #6d28d9;
+    --secondary: #00b4d8;
+    --bg: #121212;
+    --glass: rgba(255, 255, 255, 0.1);
+    --white: #fff;
+    --accent: #ffdd57;
+    --success: #25D366;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: var(--white);
+    overflow-x: hidden;
+  }
+  header {
+    text-align: center;
+    padding: 70px 20px 20px 20px;
+  }
+  header h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 15px var(--primary);
+  }
+  header p {
+    opacity: 0.9;
+    font-size: 1.2rem;
+  }
+  .services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: auto;
+  }
+  .card {
+    background: var(--glass);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    outline: none;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px var(--secondary);
+  }
+  .card:focus-visible {
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+  .card i {
+    font-size: 2rem;
+    color: var(--secondary);
+    margin-bottom: 12px;
+  }
+  .card h3 {
+    margin-bottom: 8px;
+  }
+  .card p {
+    opacity: 0.85;
+  }
+  .contact {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 50px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .contact a {
+    color: var(--success);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer {
+    text-align: center;
+    padding: 22px;
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 0.95rem;
+  }
+  .footer-people {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  }
+  .madein {
+    opacity: 0.9;
+    margin-top: 6px;
+  }
 
-/* Services grid */
-.services{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px; padding:40px 20px; max-width:1100px; margin:auto;
-}
-.card{
-  background:var(--glass); padding:25px; border-radius:15px; text-align:center;
-  box-shadow:0 0 20px rgba(0,0,0,0.3);
-  transition:transform .3s, box-shadow .3s; cursor:pointer; outline:none;
-}
-.card:hover{ transform:translateY(-10px); box-shadow:0 0 25px var(--secondary); }
-.card:focus-visible{ box-shadow:0 0 0 3px var(--accent); }
-.card i{ font-size:2rem; color:var(--secondary); margin-bottom:12px; }
-.card h3{ margin-bottom:8px; }
-.card p{ opacity:0.85; }
-
-/* Contact */
-.contact{
-  text-align:center; background:rgba(0,0,0,0.4);
-  padding:50px 20px; border-top:1px solid rgba(255,255,255,0.1);
-}
-.contact a{ color:var(--success); text-decoration:none; font-weight:600; }
-
-/* Footer */
-footer{
-  text-align:center; padding:22px; background:rgba(0,0,0,0.5); font-size:0.95rem;
-}
-.footer-people{
-  display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap; margin-bottom:6px;
-}
-.badge{
-  display:inline-flex; align-items:center; gap:8px;
-  background:linear-gradient(45deg,var(--primary),var(--secondary));
-  padding:8px 12px; border-radius:999px; font-weight:600;
-  box-shadow:0 6px 18px rgba(0,0,0,0.25);
-}
-.madein{ opacity:0.95; }
-
-/* Modal (accessible) */
-#formPopup{
-  display:none; position:fixed; inset:0; z-index:999;
-  background:rgba(0,0,0,0.65); backdrop-filter:blur(6px);
-  justify-content:center; align-items:center; padding:20px;
-}
-.form-box{
-  background:var(--glass); padding:24px; border-radius:16px; width:min(520px,92%);
-  box-shadow:0 0 25px var(--primary);
-}
-.form-box header{ padding:0 0 10px 0; }
-.form-title{ font-size:1.4rem; margin-bottom:8px; }
-.form-desc{ font-size:0.95rem; opacity:0.9; margin-bottom:16px; }
-
-.form-grid{
-  display:grid; grid-template-columns:1fr 1fr; gap:12px;
-}
-.form-grid .full{ grid-column:1 / -1; }
-
-.form-box input, .form-box select, .form-box textarea{
-  width:100%; margin:0; padding:10px; border-radius:8px; border:none; outline:none;
-  background:rgba(255,255,255,0.12); color:#fff;
-}
-.form-box textarea{ resize:vertical; min-height:84px; }
-
-.form-actions{ display:flex; gap:12px; margin-top:12px; }
-.btn{
-  background:linear-gradient(45deg,var(--primary),var(--secondary));
-  color:white; border:none; padding:10px 14px; border-radius:8px; cursor:pointer;
-  transition:.25s; flex:1;
-}
-.btn:hover{ opacity:0.9; transform:translateY(-1px); }
-.btn.secondary{ background:#ff4d4d; }
-
-.hidden{ display:none !important; }
-
-/* small dropdown lists */
-.suggest{ position:absolute; background:rgba(0,0,0,0.8); padding:6px; border-radius:8px; margin-top:4px; max-height:180px; overflow:auto; z-index:1000; }
-.suggest .opt{ padding:6px 8px; cursor:pointer; }
-.suggest .opt:hover{ background:rgba(255,255,255,0.1); }
+  /* Modal */
+  #formPopup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .form-box {
+    background: var(--glass);
+    padding: 24px;
+    border-radius: 16px;
+    width: min(600px, 92%);
+    box-shadow: 0 0 25px var(--primary);
+  }
+  .form-box header {
+    padding: 0 0 10px 0;
+  }
+  .form-title {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .form-desc {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 16px;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .form-grid .full {
+    grid-column: 1 / -1;
+  }
+  .form-box input,
+  .form-box select,
+  .form-box textarea {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+  .form-box textarea {
+    resize: vertical;
+    min-height: 84px;
+  }
+  .form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .btn {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+    flex: 1;
+  }
+  .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+  .btn.secondary {
+    background: #ff4d4d;
+  }
+  .hidden {
+    display: none !important;
+  }
+  .suggest {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 6px;
+    border-radius: 8px;
+    margin-top: 4px;
+    max-height: 200px;
+    overflow: auto;
+    z-index: 1000;
+    width: 100%;
+  }
+  .suggest .opt {
+    padding: 6px 8px;
+    cursor: pointer;
+  }
+  .suggest .opt:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
 </style>
 </head>
 <body>
@@ -113,10 +227,10 @@ footer{
 </header>
 
 <section class="services" id="services">
-  <div class="card" data-service="Tatkal Ticket Booking" role="button" tabindex="0" aria-label="Tatkal Ticket Booking form open">
+  <div class="card" data-service="Train Ticket Booking" role="button" tabindex="0" aria-label="Train Ticket Booking form open">
     <i class="fas fa-train"></i>
-    <h3>Tatkal Ticket Booking</h3>
-    <p>Fast IRCTC ticket booking</p>
+    <h3>Train Ticket Booking</h3>
+    <p>Book any train tickets with real-time availability</p>
   </div>
 
   <div class="card" data-service="Form Filling" role="button" tabindex="0" aria-label="Form Filling form open">
@@ -143,7 +257,6 @@ footer{
     <p>Retouching, enhancements</p>
   </div>
 
-  <!-- New Service -->
   <div class="card" data-service="Freelancing" role="button" tabindex="0" aria-label="Freelancing form open">
     <i class="fas fa-briefcase"></i>
     <h3>Freelancing</h3>
@@ -163,10 +276,11 @@ footer{
     <span class="badge"><i class="fa-solid fa-user-tie"></i> Adarsh Gupta</span>
     <span class="badge"><i class="fa-solid fa-user-tie"></i> Ayush Pandey</span>
   </div>
-  <div class="madein">Made with ♥️ in India • © 2025 ClickCart & Co. · All Rights Reserved ⚡</div>
+  <div class="madein">Made with ♥️ In Bharat by Adarsh & Ayush</div>
+  <div class="madein">© 2025 ClickCart & Co. · All Rights Reserved ⚡</div>
 </footer>
 
-<!-- Accessible Modal -->
+<!-- Modal -->
 <div id="formPopup" role="dialog" aria-modal="true" aria-labelledby="formTitle" aria-describedby="formDesc">
   <div class="form-box">
     <header>
@@ -176,7 +290,7 @@ footer{
 
     <form id="leadForm" novalidate>
       <div class="form-grid">
-        <!-- Common required fields for all services -->
+        <!-- Common fields for all services -->
         <div>
           <label class="hidden" for="userName">Full Name</label>
           <input type="text" id="userName" placeholder="Full Name" required />
@@ -185,7 +299,6 @@ footer{
           <label class="hidden" for="userAge">Age</label>
           <input type="number" id="userAge" placeholder="Age" min="1" max="120" required />
         </div>
-
         <div>
           <label class="hidden" for="userGender">Gender</label>
           <select id="userGender" required>
@@ -199,7 +312,7 @@ footer{
         <div>
           <label class="hidden" for="userService">Service Required</label>
           <select id="userService" required>
-            <option value="Tatkal Ticket Booking">Tatkal Ticket Booking</option>
+            <option value="Train Ticket Booking">Train Ticket Booking</option>
             <option value="Form Filling">Form Filling</option>
             <option value="Resume & Documents">Resume & Documents</option>
             <option value="Poster Designing">Poster Designing</option>
@@ -207,7 +320,6 @@ footer{
             <option value="Freelancing">Freelancing</option>
           </select>
         </div>
-
         <div>
           <label class="hidden" for="userEmail">Email</label>
           <input type="email" id="userEmail" placeholder="Email" required />
@@ -216,26 +328,24 @@ footer{
           <label class="hidden" for="userPhone">Phone Number</label>
           <input type="tel" id="userPhone" placeholder="Phone (10 digits)" minlength="10" maxlength="10" pattern="^\d{10}$" required />
         </div>
-
         <div class="full">
           <label class="hidden" for="userReq">Requirement</label>
           <textarea id="userReq" placeholder="Write your requirement here..." required></textarea>
         </div>
 
-        <!-- Tatkal-only dynamic block (hidden for other services) -->
-        <div class="full tatkal-only hidden" id="tatkalBlock">
+        <!-- Train ticket booking dynamic block -->
+        <div class="full rail-only hidden" id="railBlock">
           <div class="form-grid">
             <div style="position:relative;">
               <label class="hidden" for="fromStn">Source Station</label>
-              <input type="text" id="fromStn" placeholder="Source (code or name)" autocomplete="off" />
+              <input type="text" id="fromStn" placeholder="Source (code/name)" autocomplete="off" />
               <div id="fromStnList" class="suggest hidden"></div>
             </div>
             <div style="position:relative;">
               <label class="hidden" for="toStn">Destination Station</label>
-              <input type="text" id="toStn" placeholder="Destination (code or name)" autocomplete="off" />
+              <input type="text" id="toStn" placeholder="Destination (code/name)" autocomplete="off" />
               <div id="toStnList" class="suggest hidden"></div>
             </div>
-
             <div>
               <label class="hidden" for="journeyDate">Date</label>
               <input type="date" id="journeyDate" />
@@ -249,19 +359,27 @@ footer{
                 <option value="2A">AC 2 Tier (2A)</option>
                 <option value="1A">AC First (1A)</option>
                 <option value="CC">Chair Car (CC)</option>
+                <option value="2S">Second Sitting (2S)</option>
               </select>
             </div>
-
-            <div class="full">
-              <label class="hidden" for="prefTrains">Preferred Trains</label>
-              <input type="text" id="prefTrains" placeholder="Type train no./name and press Enter to add" />
+            <div>
+              <label class="hidden" for="quota">Quota</label>
+              <select id="quota">
+                <option value="GN">General (GN)</option>
+                <option value="TQ">Tatkal (TQ)</option>
+                <option value="PT">Premium Tatkal (PT)</option>
+                <option value="LD">Ladies (LD)</option>
+              </select>
+            </div>
+            <div class="full" style="position:relative;">
+              <label class="hidden" for="trainSearch">Search Trains</label>
+              <input type="text" id="trainSearch" placeholder="Type to search trains between stations..." autocomplete="off" />
+              <div id="trainSearchList" class="suggest hidden"></div>
               <div id="trainChips" style="margin-top:8px;"></div>
             </div>
-
             <div class="full" id="availabilityBoard" style="margin-top:6px;"></div>
           </div>
         </div>
-        <!-- End Tatkal block -->
 
       </div>
 
@@ -274,222 +392,244 @@ footer{
 </div>
 
 <script>
-// Open modal from any card + focus trapping (existing)
 const formPopup = document.getElementById('formPopup');
 const formTitle = document.getElementById('formTitle');
 const userService = document.getElementById('userService');
 const leadForm = document.getElementById('leadForm');
 let lastTrigger = null;
 
-function openForm(service){
+function openForm(service) {
   formTitle.textContent = service + " Form";
   userService.value = service;
-  formPopup.style.display='flex';
+  formPopup.style.display = 'flex';
   formPopup.scrollTop = 0;
   document.getElementById('userName').focus();
   trapFocus(formPopup);
+  document.getElementById('railBlock').classList.toggle('hidden', service !== 'Train Ticket Booking');
+  if (service !== 'Train Ticket Booking') {
+    // clear tickets data on other services
+    clearTrainSelection();
+  }
 }
 
-function closeForm(){
-  formPopup.style.display='none';
+function closeForm() {
+  formPopup.style.display = 'none';
   leadForm.reset();
-  document.getElementById('tatkalBlock').classList.add('hidden');
-  selectedTrains = [];
-  renderChips();
-  if(lastTrigger){ lastTrigger.focus(); }
+  document.getElementById('railBlock').classList.add('hidden');
+  clearTrainSelection();
+  hideSuggest(document.getElementById('fromStnList'));
+  hideSuggest(document.getElementById('toStnList'));
+  hideSuggest(document.getElementById('trainSearchList'));
+  if (lastTrigger) lastTrigger.focus();
   releaseFocusTrap();
 }
 
-// Attach to cards
-document.querySelectorAll('.card').forEach(card=>{
-  const open = ()=>{
-    lastTrigger = card;
-    const service = card.dataset.service;
-    openForm(service);
-  };
-  card.addEventListener('click', open);
-  card.addEventListener('keydown', e=>{
-    if(e.key==='Enter' || e.key===' '){
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => openForm(card.dataset.service));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      open();
+      openForm(card.dataset.service);
     }
   });
 });
 
-// Show Tatkal block only for Tatkal
-const tatkalBlock = document.getElementById('tatkalBlock');
-userService.addEventListener('change', ()=>{
-  tatkalBlock.classList.toggle('hidden', userService.value !== 'Tatkal Ticket Booking');
-});
-
-// Phone validation: exactly 10 digits
+// Phone validation
 const phoneEl = document.getElementById('userPhone');
-function isTenDigits(v){ return /^\d{10}$/.test(v); } // 10 digits only
-phoneEl.addEventListener('input', ()=>{
-  // Trim non-digits and enforce maxlength
-  phoneEl.value = phoneEl.value.replace(/\D/g,'').slice(0,10);
+phoneEl.addEventListener('input', () => {
+  phoneEl.value = phoneEl.value.replace(/\D/g, '').slice(0, 10);
 });
-function validatePhoneOrAlert(){
-  if(!isTenDigits(phoneEl.value)){
-    alert('Phone number must be exactly 10 digits.');
-    phoneEl.focus();
-    return false;
-  }
-  return true;
-}
 
-// Indian Rail API helpers (replace APIKEY)
-const APIKEY = 'YOUR_INDIANRAIL_API_KEY';
-const stationEndpoint = (q)=>`https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/${APIKEY}/StationCodeOrName/${encodeURIComponent(q)}/`;
-const trainAutoEndpoint = (q)=>`https://indianrailapi.com/api/v2/AutoCompleteTrainInformation/apikey/${APIKEY}/TrainNoOrName/${encodeURIComponent(q)}/`;
-const seatAvailEndpoint = (t,from,to,ymd,cls)=>`https://indianrailapi.com/api/v2/SeatAvailability/apikey/${APIKEY}/TrainNumber/${t}/From/${from}/To/${to}/Date/${ymd}/Quota/TQ/Class/${cls}/`;
+// API key and endpoints
+const APIKEY = 'YOUR_INDIANRAIL_API_KEY'; // Replace with your actual API key
+const stationEndpoint = q => `https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/${APIKEY}/StationCodeOrName/${encodeURIComponent(q)}/`;
+const trainsBetweenEndpoint = (from, to) => `https://indianrailapi.com/api/v2/TrainBetweenStation/apikey/${APIKEY}/From/${from}/To/${to}/`;
+const seatAvailEndpoint = (train, from, to, dateYmd, cls, quota) => 
+  `https://indianrailapi.com/api/v2/SeatAvailability/apikey/${APIKEY}/TrainNumber/${train}/From/${from}/To/${to}/Date/${dateYmd}/Quota/${quota}/Class/${cls}/`;
 
-async function fetchJSON(url){
+async function fetchJSON(url) {
   const r = await fetch(url);
-  if(!r.ok) throw new Error('Network error');
+  if (!r.ok) throw new Error('Network error');
   return r.json();
 }
 
-// Station autocomplete
-function attachStationAutocomplete(inputId, listId){
+function showSuggest(el) { el.classList.remove('hidden'); }
+function hideSuggest(el) { el.classList.add('hidden'); el.innerHTML = ''; }
+
+function attachStationAutocomplete(inputId, listId) {
   const input = document.getElementById(inputId);
   const list = document.getElementById(listId);
-  let t=null;
-  input.addEventListener('input', ()=>{
+  let timer;
+  input.addEventListener('input', () => {
     const q = input.value.trim();
-    if(t) clearTimeout(t);
-    if(q.length < 2){ list.classList.add('hidden'); list.innerHTML=''; return; }
-    t = setTimeout(async ()=>{
-      try{
+    if (timer) clearTimeout(timer);
+    if (q.length < 2) {
+      hideSuggest(list);
+      return;
+    }
+    timer = setTimeout(async () => {
+      try {
         const data = await fetchJSON(stationEndpoint(q));
-        const items = (data.Station||[]).slice(0,7).map(s=>({name:s.NameEn, code:s.StationCode}));
-        list.innerHTML = items.map(it=>`<div class="opt" data-code="${it.code}">${it.name} (${it.code})</div>`).join('');
-        list.classList.remove('hidden');
-        list.querySelectorAll('.opt').forEach(opt=>{
-          opt.addEventListener('click', ()=>{
-            input.value = `${opt.dataset.code}`;
-            list.classList.add('hidden');
-            maybeAutoAvailability();
+        const items = (data.Station || []).slice(0, 7).map(s => ({ name: s.NameEn, code: s.StationCode }));
+        list.innerHTML = items.map(it => `<div class="opt" data-code="${it.code}">${it.name} (${it.code})</div>`).join('');
+        showSuggest(list);
+        list.querySelectorAll('.opt').forEach(opt => {
+          opt.addEventListener('click', () => {
+            input.value = opt.dataset.code;
+            hideSuggest(list);
+            maybeLoadTrains();
           });
         });
-      }catch(e){ list.classList.add('hidden'); }
+      } catch {
+        hideSuggest(list);
+      }
     }, 250);
   });
-  input.addEventListener('blur', ()=>setTimeout(()=>list.classList.add('hidden'), 200));
+  input.addEventListener('blur', () => setTimeout(() => hideSuggest(list), 200));
 }
+attachStationAutocomplete('fromStn', 'fromStnList');
+attachStationAutocomplete('toStn', 'toStnList');
 
-attachStationAutocomplete('fromStn','fromStnList');
-attachStationAutocomplete('toStn','toStnList');
+const fromStn = document.getElementById('fromStn');
+const toStn = document.getElementById('toStn');
+const journeyDate = document.getElementById('journeyDate');
+const travelClass = document.getElementById('travelClass');
+const quotaSel = document.getElementById('quota');
 
-// Train chips
-const prefTrains = document.getElementById('prefTrains');
+const trainSearch = document.getElementById('trainSearch');
+const trainSearchList = document.getElementById('trainSearchList');
 const trainChips = document.getElementById('trainChips');
 let selectedTrains = [];
 
-prefTrains.addEventListener('keydown', async (e)=>{
-  if(e.key === 'Enter'){
-    e.preventDefault();
-    const q = prefTrains.value.trim();
-    if(!q) return;
-    try{
-      let trainNo = q.replace(/\D/g,'');
-      if(!trainNo){
-        const data = await fetchJSON(trainAutoEndpoint(q));
-        const first = (data.Trains||[])[0];
-        if(first && first.TrainNo) trainNo = String(first.TrainNo);
-      }
-      if(trainNo && !selectedTrains.includes(trainNo)){
-        selectedTrains.push(trainNo);
-        renderChips();
-        maybeAutoAvailability();
-      }
-    }catch(e){}
-    prefTrains.value='';
-  }
-});
+async function clearTrainSelection() {
+  selectedTrains = [];
+  renderChips();
+  document.getElementById('availabilityBoard').innerHTML = '';
+  trainSearch.value = '';
+}
 
-function renderChips(){
-  trainChips.innerHTML = selectedTrains.map(no=>`
+async function maybeLoadTrains() {
+  const from = fromStn.value.trim().toUpperCase();
+  const to = toStn.value.trim().toUpperCase();
+  if (from.length < 2 || to.length < 2) {
+    hideSuggest(trainSearchList);
+    return;
+  }
+  try {
+    const data = await fetchJSON(trainsBetweenEndpoint(from, to));
+    const items = (data.Trains || []).slice(0, 20);
+    if (items.length === 0) {
+      trainSearchList.innerHTML = '<div class="opt">No trains found</div>';
+      showSuggest(trainSearchList);
+      return;
+    }
+    trainSearchList.innerHTML = items.map(t => `<div class="opt" data-no="${t.TrainNo}">${t.TrainNo} — ${t.TrainName} (${t.DepartureTime} ➜ ${t.ArrivalTime})</div>`).join('');
+    showSuggest(trainSearchList);
+    trainSearchList.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        const no = opt.dataset.no;
+        if (no && !selectedTrains.includes(no)) {
+          selectedTrains.push(no);
+          renderChips();
+          maybeAutoAvailability();
+        }
+        hideSuggest(trainSearchList);
+        trainSearch.value = '';
+      });
+    });
+  } catch {
+    hideSuggest(trainSearchList);
+  }
+}
+
+[fromStn, toStn].forEach(el => {
+  el.addEventListener('change', maybeLoadTrains);
+  el.addEventListener('input', () => { });
+});
+trainSearch.addEventListener('focus', maybeLoadTrains);
+
+function renderChips() {
+  trainChips.innerHTML = selectedTrains.map(no => `
     <span class="badge" data-train="${no}" style="margin:4px; cursor:default;">
       ${no}
-      <button type="button" class="chip-x" aria-label="remove ${no}" style="margin-left:6px;background:transparent;border:none;color:#fff;cursor:pointer;">✕</button>
-    </span>
-  `).join('');
-  trainChips.querySelectorAll('.chip-x').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
+      <button type="button" class="chip-x" aria-label="Remove ${no}" style="margin-left:6px;background:transparent;border:none;color:#fff;cursor:pointer;">✕</button>
+    </span>`).join('');
+  trainChips.querySelectorAll('.chip-x').forEach(btn => {
+    btn.addEventListener('click', () => {
       const no = btn.parentElement.getAttribute('data-train');
-      selectedTrains = selectedTrains.filter(t=>t!==no);
+      selectedTrains = selectedTrains.filter(t => t !== no);
       renderChips();
       maybeAutoAvailability();
     });
   });
 }
 
-// Availability
-const availabilityBoard = document.getElementById('availabilityBoard');
-const travelClass = document.getElementById('travelClass');
-const journeyDate = document.getElementById('journeyDate');
-const fromStn = document.getElementById('fromStn');
-const toStn = document.getElementById('toStn');
-
-function formatDateYYYYMMDD(d){
-  try{
-    const dt = new Date(d);
-    const y = dt.getFullYear();
-    const m = String(dt.getMonth()+1).padStart(2,'0');
-    const day = String(dt.getDate()).padStart(2,'0');
-    return `${y}${m}${day}`;
-  }catch(e){ return ''; }
+function formatDateYYYYMMDD(d) {
+  if (!d) return '';
+  const dt = new Date(d);
+  const y = dt.getFullYear();
+  const m = String(dt.getMonth() + 1).padStart(2, '0');
+  const day = String(dt.getDate()).padStart(2, '0');
+  return `${y}${m}${day}`;
 }
 
+const availabilityBoard = document.getElementById('availabilityBoard');
 let inflight = 0;
 let cache = new Map();
 
-async function fetchAvailability(train, from, to, dateYmd, cls){
-  const key = `${train}|${from}|${to}|${dateYmd}|${cls}|TQ`;
+async function fetchAvailability(train, from, to, dateYmd, cls, quota) {
+  const key = `${train}|${from}|${to}|${dateYmd}|${cls}|${quota}`;
   const now = Date.now();
-  const hit = cache.get(key);
-  if(hit && now - hit.ts < 60000) return hit.html;
-
-  try{
-    const data = await fetchJSON(seatAvailEndpoint(train, from, to, dateYmd, cls));
+  const cached = cache.get(key);
+  if (cached && now - cached.ts < 60000) return cached.html;
+  try {
+    const data = await fetchJSON(seatAvailEndpoint(train, from, to, dateYmd, cls, quota));
     let status = 'N/A';
-    if(data && data.Availability && data.Availability[0] && data.Availability[0].Status){
-      status = data.Availability[0].Status;
+    if (data && data.Availability) {
+      if (Array.isArray(data.Availability) && data.Availability[0]) {
+        status = data.Availability[0].Status || data.Availability[0].Availability || 'N/A';
+      } else if (typeof data.Availability === 'string') {
+        status = data.Availability;
+      }
     }
-    const html = `<div class="badge" style="gap:6px;"><i class="fas fa-train"></i> ${train} • ${cls} • ${status}</div>`;
-    cache.set(key, {ts: now, html});
+    const html = `<div class="badge" style="gap:6px;"><i class="fas fa-train"></i> ${train} • ${cls} • ${quota} • ${status}</div>`;
+    cache.set(key, { ts: now, html });
     return html;
-  }catch(e){
+  } catch {
     return `<div class="badge" style="gap:6px;background:#b91c1c;">${train} • Error</div>`;
   }
 }
 
-async function maybeAutoAvailability(){
-  if(userService.value !== 'Tatkal Ticket Booking') return;
+async function maybeAutoAvailability() {
+  if (userService.value !== 'Train Ticket Booking') return;
   const from = fromStn.value.trim().toUpperCase();
   const to = toStn.value.trim().toUpperCase();
   const cls = travelClass.value.trim();
+  const quota = quotaSel.value.trim() || 'GN';
   const dateYmd = formatDateYYYYMMDD(journeyDate.value);
-  if(!from || !to || !cls || !dateYmd || selectedTrains.length===0){
+  if (!from || !to || !cls || !dateYmd || selectedTrains.length === 0) {
     availabilityBoard.innerHTML = '';
     return;
   }
   inflight++;
-  const me = inflight;
-  availabilityBoard.innerHTML = `<div style="opacity:0.8;">Checking availability…</div>`;
-  const rows = await Promise.all(selectedTrains.map(no=>fetchAvailability(no, from, to, dateYmd, cls)));
-  if(me !== inflight) return;
+  const current = inflight;
+  availabilityBoard.innerHTML = `<div style="opacity:0.8;">Checking availability...</div>`;
+  const rows = await Promise.all(selectedTrains.map(train => fetchAvailability(train, from, to, dateYmd, cls, quota)));
+  if (current !== inflight) return;
   availabilityBoard.innerHTML = rows.join(' ');
 }
 
-[fromStn, toStn, travelClass, journeyDate].forEach(el=>{
-  el.addEventListener('change', maybeAutoAvailability);
-  el.addEventListener('input', ()=>{ if(el===fromStn || el===toStn) maybeAutoAvailability(); });
+['fromStn', 'toStn', 'travelClass', 'quota', 'journeyDate'].forEach(id => {
+  document.getElementById(id).addEventListener('change', maybeAutoAvailability);
+  document.getElementById(id).addEventListener('input', maybeAutoAvailability);
 });
 
-// WhatsApp send (two contacts)
-document.getElementById('sendBtn').addEventListener('click', ()=>{
+function openWhatsApp(url) {
+  const win = window.open(url, '_blank', 'noopener,noreferrer');
+  if (!win) window.location.href = url;
+}
+
+document.getElementById('sendBtn').addEventListener('click', () => {
   const name = document.getElementById('userName').value.trim();
   const age = document.getElementById('userAge').value.trim();
   const gender = document.getElementById('userGender').value;
@@ -498,23 +638,25 @@ document.getElementById('sendBtn').addEventListener('click', ()=>{
   const req = document.getElementById('userReq').value.trim();
   const service = document.getElementById('userService').value;
 
-  if(!name || !age || !gender || !email || !phone || !req){
-    alert('Please fill all details!');
+  if (!name || !age || !gender || !email || !phone || !req) {
+    alert('Please fill all fields!');
     return;
   }
-  if(!/^\d{10}$/.test(phone)){
-    alert('Phone number must be exactly 10 digits.');
+  if (!/^\d{10}$/.test(phone)) {
+    alert('Phone number must be exactly 10 digits!');
+    document.getElementById('userPhone').focus();
     return;
   }
 
   let extra = [];
-  if(service === 'Tatkal Ticket Booking'){
+  if (service === 'Train Ticket Booking') {
     const from = fromStn.value.trim().toUpperCase();
     const to = toStn.value.trim().toUpperCase();
     const cls = travelClass.value.trim();
+    const quota = quotaSel.value.trim() || 'GN';
     const dateYmd = formatDateYYYYMMDD(journeyDate.value);
-    if(!from || !to || !cls || !dateYmd || selectedTrains.length===0){
-      alert('Tatkal: Please add From, To, Date, Class and at least one Preferred Train.');
+    if (!from || !to || !cls || !dateYmd || selectedTrains.length === 0) {
+      alert('Please fill Source, Destination, Class, Date, and select at least one train.');
       return;
     }
     extra = [
@@ -522,7 +664,7 @@ document.getElementById('sendBtn').addEventListener('click', ()=>{
       `To: ${to}`,
       `Date: ${dateYmd}`,
       `Class: ${cls}`,
-      `Quota: TQ`,
+      `Quota: ${quota}`,
       `Trains: ${selectedTrains.join(', ')}`
     ];
   }
@@ -539,44 +681,43 @@ document.getElementById('sendBtn').addEventListener('click', ()=>{
     `Requirement: ${req}`
   ];
   const msg = encodeURIComponent(lines.join('\n'));
+  const numbers = ['918092317965', '918595674919'];
 
-  const numbers = ['918092317965','918595674919'];
-  numbers.forEach(num=>{
-    window.open(`https://wa.me/${num}?text=${msg}`,'_blank');
+  numbers.forEach(num => {
+    openWhatsApp(`https://wa.me/${num}?text=${msg}`);
   });
 
-  alert("Request sent successfully to both WhatsApp numbers!");
+  alert('Request sent successfully to both WhatsApp numbers!');
   closeForm();
 });
 
-// Close handlers
 document.getElementById('closeBtn').addEventListener('click', closeForm);
-document.addEventListener('keydown', (e)=>{
-  if(e.key==='Escape' && formPopup.style.display==='flex'){ closeForm(); }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && formPopup.style.display === 'flex') closeForm();
 });
 
-// Focus trap (vanilla)
 let trapHandler = null;
-function trapFocus(container){
-  const selectors = ['a[href]','button','textarea','input','select','[tabindex]:not([tabindex="-1"])'];
-  const getFocusable = ()=>Array.from(container.querySelectorAll(selectors.join(',')))
-    .filter(el=>!el.hasAttribute('disabled') && el.offsetParent!==null);
-  trapHandler = (e)=>{
-    if(e.key !== 'Tab') return;
+function trapFocus(container) {
+  const selectors = ['a[href]', 'button', 'textarea', 'input', 'select', '[tabindex]:not([tabindex="-1"])'];
+  const getFocusable = () => Array.from(container.querySelectorAll(selectors.join(','))).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+  trapHandler = e => {
+    if (e.key !== 'Tab') return;
     const focusables = getFocusable();
-    if(focusables.length===0) return;
+    if (focusables.length === 0) return;
     const first = focusables[0];
-    const last = focusables[focusables.length-1];
-    if(e.shiftKey && document.activeElement===first){
-      e.preventDefault(); last.focus();
-    } else if(!e.shiftKey && document.activeElement===last){
-      e.preventDefault(); first.focus();
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
     }
   };
   container.addEventListener('keydown', trapHandler);
 }
-function releaseFocusTrap(){
-  if(trapHandler){
+function releaseFocusTrap() {
+  if (trapHandler) {
     formPopup.removeEventListener('keydown', trapHandler);
     trapHandler = null;
   }
