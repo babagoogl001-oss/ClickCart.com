@@ -5,12 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ClickCart & Co. — Online Services</title>
 
-<!-- Performance: preconnect + fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-
-<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <style>
@@ -101,6 +98,11 @@ footer{
 .btn.secondary{ background:#ff4d4d; }
 
 .hidden{ display:none !important; }
+
+/* small dropdown lists */
+.suggest{ position:absolute; background:rgba(0,0,0,0.8); padding:6px; border-radius:8px; margin-top:4px; max-height:180px; overflow:auto; z-index:1000; }
+.suggest .opt{ padding:6px 8px; cursor:pointer; }
+.suggest .opt:hover{ background:rgba(255,255,255,0.1); }
 </style>
 </head>
 <body>
@@ -108,7 +110,6 @@ footer{
 <header>
   <h1>⚡ ClickCart & Co.</h1>
   <p>Hamare bina online duniya adhoori hai 😎</p>
-  <!-- Poster image removed as requested -->
 </header>
 
 <section class="services" id="services">
@@ -141,6 +142,13 @@ footer{
     <h3>Photo Editing</h3>
     <p>Retouching, enhancements</p>
   </div>
+
+  <!-- New Service -->
+  <div class="card" data-service="Freelancing" role="button" tabindex="0" aria-label="Freelancing form open">
+    <i class="fas fa-briefcase"></i>
+    <h3>Freelancing</h3>
+    <p>Hire for projects</p>
+  </div>
 </section>
 
 <section class="contact">
@@ -155,7 +163,7 @@ footer{
     <span class="badge"><i class="fa-solid fa-user-tie"></i> Adarsh Gupta</span>
     <span class="badge"><i class="fa-solid fa-user-tie"></i> Ayush Pandey</span>
   </div>
-  <div class="madein">Made with ♥ in India • © 2025 ClickCart & Co. · All Rights Reserved ⚡</div>
+  <div class="madein">Made with ♥️ in India • © 2025 ClickCart & Co. · All Rights Reserved ⚡</div>
 </footer>
 
 <!-- Accessible Modal -->
@@ -168,6 +176,7 @@ footer{
 
     <form id="leadForm" novalidate>
       <div class="form-grid">
+        <!-- Common required fields for all services -->
         <div>
           <label class="hidden" for="userName">Full Name</label>
           <input type="text" id="userName" placeholder="Full Name" required />
@@ -195,6 +204,7 @@ footer{
             <option value="Resume & Documents">Resume & Documents</option>
             <option value="Poster Designing">Poster Designing</option>
             <option value="Photo Editing">Photo Editing</option>
+            <option value="Freelancing">Freelancing</option>
           </select>
         </div>
 
@@ -204,13 +214,55 @@ footer{
         </div>
         <div>
           <label class="hidden" for="userPhone">Phone Number</label>
-          <input type="tel" id="userPhone" placeholder="Phone Number" required />
+          <input type="tel" id="userPhone" placeholder="Phone (10 digits)" minlength="10" maxlength="10" pattern="^\d{10}$" required />
         </div>
 
         <div class="full">
           <label class="hidden" for="userReq">Requirement</label>
           <textarea id="userReq" placeholder="Write your requirement here..." required></textarea>
         </div>
+
+        <!-- Tatkal-only dynamic block (hidden for other services) -->
+        <div class="full tatkal-only hidden" id="tatkalBlock">
+          <div class="form-grid">
+            <div style="position:relative;">
+              <label class="hidden" for="fromStn">Source Station</label>
+              <input type="text" id="fromStn" placeholder="Source (code or name)" autocomplete="off" />
+              <div id="fromStnList" class="suggest hidden"></div>
+            </div>
+            <div style="position:relative;">
+              <label class="hidden" for="toStn">Destination Station</label>
+              <input type="text" id="toStn" placeholder="Destination (code or name)" autocomplete="off" />
+              <div id="toStnList" class="suggest hidden"></div>
+            </div>
+
+            <div>
+              <label class="hidden" for="journeyDate">Date</label>
+              <input type="date" id="journeyDate" />
+            </div>
+            <div>
+              <label class="hidden" for="travelClass">Class</label>
+              <select id="travelClass">
+                <option value="">Class</option>
+                <option value="SL">Sleeper (SL)</option>
+                <option value="3A">AC 3 Tier (3A)</option>
+                <option value="2A">AC 2 Tier (2A)</option>
+                <option value="1A">AC First (1A)</option>
+                <option value="CC">Chair Car (CC)</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <label class="hidden" for="prefTrains">Preferred Trains</label>
+              <input type="text" id="prefTrains" placeholder="Type train no./name and press Enter to add" />
+              <div id="trainChips" style="margin-top:8px;"></div>
+            </div>
+
+            <div class="full" id="availabilityBoard" style="margin-top:6px;"></div>
+          </div>
+        </div>
+        <!-- End Tatkal block -->
+
       </div>
 
       <div class="form-actions">
@@ -222,7 +274,7 @@ footer{
 </div>
 
 <script>
-// Open modal from any card + focus trapping
+// Open modal from any card + focus trapping (existing)
 const formPopup = document.getElementById('formPopup');
 const formTitle = document.getElementById('formTitle');
 const userService = document.getElementById('userService');
@@ -234,18 +286,16 @@ function openForm(service){
   userService.value = service;
   formPopup.style.display='flex';
   formPopup.scrollTop = 0;
-
-  // Set initial focus for accessibility
-  const firstInput = document.getElementById('userName');
-  firstInput.focus();
-
-  // Trap focus inside modal
+  document.getElementById('userName').focus();
   trapFocus(formPopup);
 }
 
 function closeForm(){
   formPopup.style.display='none';
   leadForm.reset();
+  document.getElementById('tatkalBlock').classList.add('hidden');
+  selectedTrains = [];
+  renderChips();
   if(lastTrigger){ lastTrigger.focus(); }
   releaseFocusTrap();
 }
@@ -266,7 +316,179 @@ document.querySelectorAll('.card').forEach(card=>{
   });
 });
 
-// WhatsApp send (two contacts, individually)
+// Show Tatkal block only for Tatkal
+const tatkalBlock = document.getElementById('tatkalBlock');
+userService.addEventListener('change', ()=>{
+  tatkalBlock.classList.toggle('hidden', userService.value !== 'Tatkal Ticket Booking');
+});
+
+// Phone validation: exactly 10 digits
+const phoneEl = document.getElementById('userPhone');
+function isTenDigits(v){ return /^\d{10}$/.test(v); } // 10 digits only
+phoneEl.addEventListener('input', ()=>{
+  // Trim non-digits and enforce maxlength
+  phoneEl.value = phoneEl.value.replace(/\D/g,'').slice(0,10);
+});
+function validatePhoneOrAlert(){
+  if(!isTenDigits(phoneEl.value)){
+    alert('Phone number must be exactly 10 digits.');
+    phoneEl.focus();
+    return false;
+  }
+  return true;
+}
+
+// Indian Rail API helpers (replace APIKEY)
+const APIKEY = 'YOUR_INDIANRAIL_API_KEY';
+const stationEndpoint = (q)=>`https://indianrailapi.com/api/v2/AutoCompleteStation/apikey/${APIKEY}/StationCodeOrName/${encodeURIComponent(q)}/`;
+const trainAutoEndpoint = (q)=>`https://indianrailapi.com/api/v2/AutoCompleteTrainInformation/apikey/${APIKEY}/TrainNoOrName/${encodeURIComponent(q)}/`;
+const seatAvailEndpoint = (t,from,to,ymd,cls)=>`https://indianrailapi.com/api/v2/SeatAvailability/apikey/${APIKEY}/TrainNumber/${t}/From/${from}/To/${to}/Date/${ymd}/Quota/TQ/Class/${cls}/`;
+
+async function fetchJSON(url){
+  const r = await fetch(url);
+  if(!r.ok) throw new Error('Network error');
+  return r.json();
+}
+
+// Station autocomplete
+function attachStationAutocomplete(inputId, listId){
+  const input = document.getElementById(inputId);
+  const list = document.getElementById(listId);
+  let t=null;
+  input.addEventListener('input', ()=>{
+    const q = input.value.trim();
+    if(t) clearTimeout(t);
+    if(q.length < 2){ list.classList.add('hidden'); list.innerHTML=''; return; }
+    t = setTimeout(async ()=>{
+      try{
+        const data = await fetchJSON(stationEndpoint(q));
+        const items = (data.Station||[]).slice(0,7).map(s=>({name:s.NameEn, code:s.StationCode}));
+        list.innerHTML = items.map(it=>`<div class="opt" data-code="${it.code}">${it.name} (${it.code})</div>`).join('');
+        list.classList.remove('hidden');
+        list.querySelectorAll('.opt').forEach(opt=>{
+          opt.addEventListener('click', ()=>{
+            input.value = `${opt.dataset.code}`;
+            list.classList.add('hidden');
+            maybeAutoAvailability();
+          });
+        });
+      }catch(e){ list.classList.add('hidden'); }
+    }, 250);
+  });
+  input.addEventListener('blur', ()=>setTimeout(()=>list.classList.add('hidden'), 200));
+}
+
+attachStationAutocomplete('fromStn','fromStnList');
+attachStationAutocomplete('toStn','toStnList');
+
+// Train chips
+const prefTrains = document.getElementById('prefTrains');
+const trainChips = document.getElementById('trainChips');
+let selectedTrains = [];
+
+prefTrains.addEventListener('keydown', async (e)=>{
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    const q = prefTrains.value.trim();
+    if(!q) return;
+    try{
+      let trainNo = q.replace(/\D/g,'');
+      if(!trainNo){
+        const data = await fetchJSON(trainAutoEndpoint(q));
+        const first = (data.Trains||[])[0];
+        if(first && first.TrainNo) trainNo = String(first.TrainNo);
+      }
+      if(trainNo && !selectedTrains.includes(trainNo)){
+        selectedTrains.push(trainNo);
+        renderChips();
+        maybeAutoAvailability();
+      }
+    }catch(e){}
+    prefTrains.value='';
+  }
+});
+
+function renderChips(){
+  trainChips.innerHTML = selectedTrains.map(no=>`
+    <span class="badge" data-train="${no}" style="margin:4px; cursor:default;">
+      ${no}
+      <button type="button" class="chip-x" aria-label="remove ${no}" style="margin-left:6px;background:transparent;border:none;color:#fff;cursor:pointer;">✕</button>
+    </span>
+  `).join('');
+  trainChips.querySelectorAll('.chip-x').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const no = btn.parentElement.getAttribute('data-train');
+      selectedTrains = selectedTrains.filter(t=>t!==no);
+      renderChips();
+      maybeAutoAvailability();
+    });
+  });
+}
+
+// Availability
+const availabilityBoard = document.getElementById('availabilityBoard');
+const travelClass = document.getElementById('travelClass');
+const journeyDate = document.getElementById('journeyDate');
+const fromStn = document.getElementById('fromStn');
+const toStn = document.getElementById('toStn');
+
+function formatDateYYYYMMDD(d){
+  try{
+    const dt = new Date(d);
+    const y = dt.getFullYear();
+    const m = String(dt.getMonth()+1).padStart(2,'0');
+    const day = String(dt.getDate()).padStart(2,'0');
+    return `${y}${m}${day}`;
+  }catch(e){ return ''; }
+}
+
+let inflight = 0;
+let cache = new Map();
+
+async function fetchAvailability(train, from, to, dateYmd, cls){
+  const key = `${train}|${from}|${to}|${dateYmd}|${cls}|TQ`;
+  const now = Date.now();
+  const hit = cache.get(key);
+  if(hit && now - hit.ts < 60000) return hit.html;
+
+  try{
+    const data = await fetchJSON(seatAvailEndpoint(train, from, to, dateYmd, cls));
+    let status = 'N/A';
+    if(data && data.Availability && data.Availability[0] && data.Availability[0].Status){
+      status = data.Availability[0].Status;
+    }
+    const html = `<div class="badge" style="gap:6px;"><i class="fas fa-train"></i> ${train} • ${cls} • ${status}</div>`;
+    cache.set(key, {ts: now, html});
+    return html;
+  }catch(e){
+    return `<div class="badge" style="gap:6px;background:#b91c1c;">${train} • Error</div>`;
+  }
+}
+
+async function maybeAutoAvailability(){
+  if(userService.value !== 'Tatkal Ticket Booking') return;
+  const from = fromStn.value.trim().toUpperCase();
+  const to = toStn.value.trim().toUpperCase();
+  const cls = travelClass.value.trim();
+  const dateYmd = formatDateYYYYMMDD(journeyDate.value);
+  if(!from || !to || !cls || !dateYmd || selectedTrains.length===0){
+    availabilityBoard.innerHTML = '';
+    return;
+  }
+  inflight++;
+  const me = inflight;
+  availabilityBoard.innerHTML = `<div style="opacity:0.8;">Checking availability…</div>`;
+  const rows = await Promise.all(selectedTrains.map(no=>fetchAvailability(no, from, to, dateYmd, cls)));
+  if(me !== inflight) return;
+  availabilityBoard.innerHTML = rows.join(' ');
+}
+
+[fromStn, toStn, travelClass, journeyDate].forEach(el=>{
+  el.addEventListener('change', maybeAutoAvailability);
+  el.addEventListener('input', ()=>{ if(el===fromStn || el===toStn) maybeAutoAvailability(); });
+});
+
+// WhatsApp send (two contacts)
 document.getElementById('sendBtn').addEventListener('click', ()=>{
   const name = document.getElementById('userName').value.trim();
   const age = document.getElementById('userAge').value.trim();
@@ -280,23 +502,47 @@ document.getElementById('sendBtn').addEventListener('click', ()=>{
     alert('Please fill all details!');
     return;
   }
+  if(!/^\d{10}$/.test(phone)){
+    alert('Phone number must be exactly 10 digits.');
+    return;
+  }
+
+  let extra = [];
+  if(service === 'Tatkal Ticket Booking'){
+    const from = fromStn.value.trim().toUpperCase();
+    const to = toStn.value.trim().toUpperCase();
+    const cls = travelClass.value.trim();
+    const dateYmd = formatDateYYYYMMDD(journeyDate.value);
+    if(!from || !to || !cls || !dateYmd || selectedTrains.length===0){
+      alert('Tatkal: Please add From, To, Date, Class and at least one Preferred Train.');
+      return;
+    }
+    extra = [
+      `From: ${from}`,
+      `To: ${to}`,
+      `Date: ${dateYmd}`,
+      `Class: ${cls}`,
+      `Quota: TQ`,
+      `Trains: ${selectedTrains.join(', ')}`
+    ];
+  }
 
   const lines = [
     'New Service Request:',
-    Name: ${name},
-    Age: ${age},
-    Gender: ${gender},
-    Phone: ${phone},
-    Email: ${email},
-    Service: ${service},
-    Requirement: ${req}
+    `Name: ${name}`,
+    `Age: ${age}`,
+    `Gender: ${gender}`,
+    `Phone: ${phone}`,
+    `Email: ${email}`,
+    `Service: ${service}`,
+    ...extra,
+    `Requirement: ${req}`
   ];
-  const msg = encodeURIComponent(lines.join('
-'));
+  const msg = encodeURIComponent(lines.join('\n'));
 
   const numbers = ['918092317965','918595674919'];
   numbers.forEach(num=>{
-    window.open(https://wa.me/${num}?text=${msg},'_blank');
+    window.open(`https://wa.me/${num}?text=${msg}`,'_blank');
   });
 
   alert("Request sent successfully to both WhatsApp numbers!");
@@ -312,9 +558,7 @@ document.addEventListener('keydown', (e)=>{
 // Focus trap (vanilla)
 let trapHandler = null;
 function trapFocus(container){
-  const selectors = [
-    'a[href]','button','textarea','input','select','[tabindex]:not([tabindex="-1"])'
-  ];
+  const selectors = ['a[href]','button','textarea','input','select','[tabindex]:not([tabindex="-1"])'];
   const getFocusable = ()=>Array.from(container.querySelectorAll(selectors.join(',')))
     .filter(el=>!el.hasAttribute('disabled') && el.offsetParent!==null);
   trapHandler = (e)=>{
