@@ -5,15 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ClickCart & Co. — Online Services</title>
 
-<!-- Fonts + Icons -->
+<!-- Performance: preconnect + fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <style>
 :root{
-  --primary:#6d28d9; --secondary:#00b4d8; --bg:#121212; --glass:rgba(255,255,255,0.1);
+  --primary:#6d28d9; --secondary:#00b4d8; --bg:#0b1020; --glass:rgba(255,255,255,0.06);
   --white:#fff; --accent:#ffdd57; --success:#25D366;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -22,37 +24,37 @@ body{
   background:linear-gradient(135deg,var(--secondary),var(--primary));
   color:var(--white); overflow-x:hidden;
 }
-
-/* Header */
-header{ text-align:center; padding:64px 20px 24px; }
-header h1{ font-size:2.6rem; text-shadow:0 0 15px var(--primary); }
-header p{ opacity:0.9; font-size:1.1rem; margin-top:6px; }
+header{ text-align:center; padding:70px 20px 20px 20px; }
+header h1{ font-size:3rem; text-shadow:0 0 15px rgba(0,0,0,0.15); }
+header p{ opacity:0.95; font-size:1.1rem; }
 
 /* Services grid */
 .services{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:22px; padding:36px 20px 48px; max-width:1100px; margin:auto;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px; padding:40px 20px; max-width:1100px; margin:auto;
 }
 .card{
-  background:var(--glass); padding:22px; border-radius:14px; text-align:center;
+  background:var(--glass); padding:25px; border-radius:15px; text-align:center;
   box-shadow:0 0 20px rgba(0,0,0,0.3);
-  transition:transform .25s, box-shadow .25s; cursor:pointer; outline:none;
+  transition:transform .3s, box-shadow .3s; cursor:pointer; outline:none;
 }
-.card:hover{ transform:translateY(-8px); box-shadow:0 0 25px var(--secondary); }
+.card:hover{ transform:translateY(-10px); box-shadow:0 0 25px rgba(0,0,0,0.2); }
 .card:focus-visible{ box-shadow:0 0 0 3px var(--accent); }
-.card i{ font-size:2rem; color:var(--secondary); margin-bottom:10px; }
-.card h3{ margin-bottom:6px; }
+.card i{ font-size:2rem; color:var(--secondary); margin-bottom:12px; }
+.card h3{ margin-bottom:8px; }
 .card p{ opacity:0.85; }
 
 /* Contact */
 .contact{
-  text-align:center; background:rgba(0,0,0,0.4);
-  padding:44px 20px; border-top:1px solid rgba(255,255,255,0.1);
+  text-align:center; background:rgba(0,0,0,0.12);
+  padding:28px 20px; border-top:1px solid rgba(255,255,255,0.06);
 }
 .contact a{ color:var(--success); text-decoration:none; font-weight:600; }
 
 /* Footer */
-footer{ text-align:center; padding:22px; background:rgba(0,0,0,0.5); font-size:0.95rem; }
+footer{
+  text-align:center; padding:22px; background:rgba(0,0,0,0.12); font-size:0.95rem;
+}
 .footer-people{
   display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap; margin-bottom:6px;
 }
@@ -60,83 +62,93 @@ footer{ text-align:center; padding:22px; background:rgba(0,0,0,0.5); font-size:0
   display:inline-flex; align-items:center; gap:8px;
   background:linear-gradient(45deg,var(--primary),var(--secondary));
   padding:8px 12px; border-radius:999px; font-weight:600;
-  box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  box-shadow:0 6px 18px rgba(0,0,0,0.15);
 }
 .madein{ opacity:0.95; }
 
-/* Modal */
-#formOverlay{
+/* Modal (accessible) */
+#formPopup{
   display:none; position:fixed; inset:0; z-index:999;
   background:rgba(0,0,0,0.65); backdrop-filter:blur(6px);
   justify-content:center; align-items:center; padding:20px;
 }
-.dialog{
-  background:var(--glass); padding:22px; border-radius:16px; width:min(520px,92%);
-  box-shadow:0 0 25px var(--primary);
+.form-box{
+  background:var(--glass); padding:20px; border-radius:12px; width:min(720px,96%);
+  box-shadow:0 0 30px rgba(0,0,0,0.4);
 }
-.dialog header{ padding:0 0 10px 0; }
-.dialog .title{ font-size:1.3rem; margin-bottom:6px; }
-.dialog .desc{ font-size:0.95rem; opacity:0.9; margin-bottom:14px; }
+.form-box header{ padding:0 0 10px 0; }
+.form-title{ font-size:1.25rem; margin-bottom:6px; }
+.form-desc{ font-size:0.95rem; opacity:0.9; margin-bottom:12px; }
 
 .form-grid{
-  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
 }
 .form-grid .full{ grid-column:1 / -1; }
 
-.dialog input, .dialog select, .dialog textarea{
-  width:100%; padding:10px; border-radius:8px; border:none; outline:none;
-  background:rgba(255,255,255,0.12); color:#fff;
+.form-box input, .form-box select, .form-box textarea{
+  width:100%; margin:0; padding:10px; border-radius:8px; border:none; outline:none;
+  background:rgba(255,255,255,0.08); color:#fff;
 }
-.dialog textarea{ resize:vertical; min-height:84px; }
+.form-box textarea{ resize:vertical; min-height:80px; }
 
-.form-actions{ display:flex; gap:12px; margin-top:12px; }
+.form-actions{ display:flex; gap:10px; margin-top:12px; }
 .btn{
   background:linear-gradient(45deg,var(--primary),var(--secondary));
   color:white; border:none; padding:10px 14px; border-radius:8px; cursor:pointer;
-  transition:.25s; flex:1;
+  transition:.18s; flex:1;
 }
-.btn:hover{ opacity:0.9; transform:translateY(-1px); }
+.btn:hover{ opacity:0.95; transform:translateY(-2px); }
 .btn.secondary{ background:#ff4d4d; }
+
+/* small helpers */
+.small{ font-size:0.85rem; opacity:0.9; margin-top:6px; }
 .hidden{ display:none !important; }
+.label{ font-size:0.9rem; margin-bottom:6px; display:block; opacity:0.95; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>⚡ClickCart & Co.</h1>
+  <h1>⚡ ClickCart & Co.</h1>
   <p>Hamare bina online duniya adhoori hai 😎</p>
-  <!-- Language selector and poster image removed -->
 </header>
 
 <section class="services" id="services">
-  <div class="card" data-service="Tatkal Ticket Booking" role="button" tabindex="0" aria-label="Open Tatkal Ticket Booking form">
+  <div class="card" data-service="Tatkal Ticket Booking" role="button" tabindex="0" aria-label="Tatkal Ticket Booking form open">
     <i class="fas fa-train"></i>
     <h3>Tatkal Ticket Booking</h3>
     <p>Fast IRCTC ticket booking</p>
   </div>
 
-  <div class="card" data-service="Form Filling" role="button" tabindex="0" aria-label="Open Form Filling form">
+  <div class="card" data-service="Form Filling" role="button" tabindex="0" aria-label="Form Filling form open">
     <i class="fas fa-pen"></i>
     <h3>Form Filling</h3>
     <p>Govt. & Private applications</p>
   </div>
 
-  <div class="card" data-service="Resume & Documents" role="button" tabindex="0" aria-label="Open Resume & Documents form">
+  <div class="card" data-service="Resume & Documents" role="button" tabindex="0" aria-label="Resume & Documents form open">
     <i class="fas fa-file-alt"></i>
     <h3>Resume & Documents</h3>
     <p>CVs, Cover letters, Docs</p>
   </div>
 
-  <div class="card" data-service="Poster Designing" role="button" tabindex="0" aria-label="Open Poster Designing form">
+  <div class="card" data-service="Poster Designing" role="button" tabindex="0" aria-label="Poster Designing form open">
     <i class="fas fa-paint-brush"></i>
     <h3>Poster Designing</h3>
     <p>Custom banners & social posts</p>
   </div>
 
-  <div class="card" data-service="Photo Editing" role="button" tabindex="0" aria-label="Open Photo Editing form">
+  <div class="card" data-service="Photo Editing" role="button" tabindex="0" aria-label="Photo Editing form open">
     <i class="fas fa-camera"></i>
     <h3>Photo Editing</h3>
     <p>Retouching, enhancements</p>
+  </div>
+
+  <!-- New Freelancing card -->
+  <div class="card" data-service="Freelancing / Work With Us" role="button" tabindex="0" aria-label="Freelancing form open">
+    <i class="fas fa-briefcase"></i>
+    <h3>Freelancing / Work With Us</h3>
+    <p>Hire us for projects — web, design, editing</p>
   </div>
 </section>
 
@@ -152,31 +164,33 @@ footer{ text-align:center; padding:22px; background:rgba(0,0,0,0.5); font-size:0
     <span class="badge"><i class="fa-solid fa-user-tie"></i> Adarsh Gupta</span>
     <span class="badge"><i class="fa-solid fa-user-tie"></i> Ayush Pandey</span>
   </div>
-  <div class="madein">Made with ♥️ in India • © 2025 ClickCart & Co. · All Rights Reserved ⚡</div>
+  <div class="madein">Made with ♥ in India • © 2025 ClickCart & Co. · All Rights Reserved ⚡</div>
 </footer>
 
-<!-- Modal Dialog -->
-<div id="formOverlay" role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialogDesc">
-  <div class="dialog">
+<!-- Accessible Modal (single modal used for all services; content toggled) -->
+<div id="formPopup" role="dialog" aria-modal="true" aria-labelledby="formTitle" aria-describedby="formDesc">
+  <div class="form-box" id="modalContent">
     <header>
-      <div id="dialogTitle" class="title">Service Form</div>
-      <div id="dialogDesc" class="desc">Please fill the details to proceed.</div>
+      <div id="formTitle" class="form-title">Service Form</div>
+      <div id="formDesc" class="form-desc">Provide details to proceed with the selected service.</div>
     </header>
 
+    <!-- Shared main form used as a container; service-specific sections shown/hidden -->
     <form id="leadForm" novalidate>
-      <div class="form-grid">
+      <div class="form-grid" id="commonGrid">
+        <!-- Common fields (shared across services) -->
         <div>
-          <label class="hidden" for="userName">Full Name</label>
-          <input type="text" id="userName" placeholder="Full Name" required />
+          <label class="label" for="userName_common">Full Name</label>
+          <input type="text" id="userName_common" placeholder="Full Name" required />
         </div>
         <div>
-          <label class="hidden" for="userAge">Age</label>
-          <input type="number" id="userAge" placeholder="Age" min="1" max="120" required />
+          <label class="label" for="userAge_common">Age</label>
+          <input type="number" id="userAge_common" placeholder="Age" min="1" max="120" required />
         </div>
 
         <div>
-          <label class="hidden" for="userGender">Gender</label>
-          <select id="userGender" required>
+          <label class="label" for="userGender_common">Gender</label>
+          <select id="userGender_common" required>
             <option value="">Gender</option>
             <option>Male</option>
             <option>Female</option>
@@ -184,29 +198,115 @@ footer{ text-align:center; padding:22px; background:rgba(0,0,0,0.5); font-size:0
             <option>Prefer not to say</option>
           </select>
         </div>
+
         <div>
-          <label class="hidden" for="userService">Service Required</label>
-          <select id="userService" required>
-            <option value="Tatkal Ticket Booking">Tatkal Ticket Booking</option>
-            <option value="Form Filling">Form Filling</option>
-            <option value="Resume & Documents">Resume & Documents</option>
-            <option value="Poster Designing">Poster Designing</option>
-            <option value="Photo Editing">Photo Editing</option>
-          </select>
+          <label class="label" for="userPhone_common">Phone Number</label>
+          <input type="tel" id="userPhone_common" placeholder="Phone Number" required />
         </div>
 
         <div>
-          <label class="hidden" for="userEmail">Email</label>
-          <input type="email" id="userEmail" placeholder="Email" required />
-        </div>
-        <div>
-          <label class="hidden" for="userPhone">Phone Number</label>
-          <input type="tel" id="userPhone" placeholder="Phone Number" required />
+          <label class="label" for="userEmail_common">Email</label>
+          <input type="email" id="userEmail_common" placeholder="Email" required />
         </div>
 
         <div class="full">
-          <label class="hidden" for="userReq">Requirement</label>
-          <textarea id="userReq" placeholder="Write your requirement here..." required></textarea>
+          <label class="label" for="userReq_common">Requirement (brief)</label>
+          <textarea id="userReq_common" placeholder="Write your requirement here..."></textarea>
+        </div>
+      </div>
+
+      <!-- Tatkal Ticket section -->
+      <div id="tatkalSection" class="hidden">
+        <hr style="border:none;height:10px;opacity:0.03;margin:12px 0;">
+        <div class="form-grid">
+          <div>
+            <label class="label" for="t_source">Source Station (code or name)</label>
+            <input id="t_source" placeholder="e.g. NDLS or New Delhi" />
+          </div>
+          <div>
+            <label class="label" for="t_destination">Destination Station (code or name)</label>
+            <input id="t_destination" placeholder="e.g. BCT or Mumbai Central" />
+          </div>
+
+          <div>
+            <label class="label" for="t_date">Date of Journey</label>
+            <input id="t_date" type="date" />
+          </div>
+          <div>
+            <label class="label" for="t_class">Preferred Class</label>
+            <select id="t_class">
+              <option>3A</option>
+              <option>2A</option>
+              <option>1A</option>
+              <option>SL</option>
+              <option>CC</option>
+            </select>
+          </div>
+
+          <div class="full">
+            <label class="label">Preferred Trains (auto-filled / select)</label>
+            <select id="t_preferredTrains" multiple style="min-height:80px;"></select>
+            <div id="t_avail_msg" class="small"></div>
+          </div>
+
+          <div class="full" style="display:flex; gap:10px;">
+            <button type="button" class="btn" id="t_checkAvailability">Check Availability</button>
+            <button type="button" class="btn" id="t_fillMock">Auto-fill Mock Trains</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Filling section -->
+      <div id="formFillSection" class="hidden">
+        <hr style="border:none;height:10px;opacity:0.03;margin:12px 0;">
+        <div class="form-grid">
+          <div>
+            <label class="label" for="ff_type">Type of Form</label>
+            <select id="ff_type">
+              <option value="">Select</option>
+              <option value="Sarkari">Sarkari (Government)</option>
+              <option value="Private">Private</option>
+            </select>
+          </div>
+          <div>
+            <label class="label" for="ff_formname">Form Name / Short Title</label>
+            <input id="ff_formname" placeholder="e.g. Aadhar Update, Job Application" />
+          </div>
+
+          <div class="full">
+            <label class="label" for="ff_details">Additional Details</label>
+            <textarea id="ff_details" placeholder="Any extra info the user should provide"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Freelancing section -->
+      <div id="freelanceSection" class="hidden">
+        <hr style="border:none;height:10px;opacity:0.03;margin:12px 0;">
+        <div class="form-grid">
+          <div>
+            <label class="label" for="fr_title">Project Title</label>
+            <input id="fr_title" placeholder="e.g. Website Design" />
+          </div>
+          <div>
+            <label class="label" for="fr_budget">Approx. Budget (optional)</label>
+            <input id="fr_budget" placeholder="e.g. ₹5000" />
+          </div>
+
+          <div class="full">
+            <label class="label" for="fr_desc">Project Description</label>
+            <textarea id="fr_desc" placeholder="Describe your requirements"></textarea>
+          </div>
+
+          <div>
+            <label class="label" for="fr_timeline">Timeline (days)</label>
+            <input id="fr_timeline" type="number" min="0" placeholder="e.g. 7" />
+          </div>
+
+          <div>
+            <label class="label" for="fr_links">Reference links (optional)</label>
+            <input id="fr_links" placeholder="e.g. portfolio links, references" />
+          </div>
         </div>
       </div>
 
@@ -214,119 +314,78 @@ footer{ text-align:center; padding:22px; background:rgba(0,0,0,0.5); font-size:0
         <button type="button" class="btn" id="sendBtn">Submit & Send</button>
         <button type="button" class="btn secondary" id="closeBtn">Close</button>
       </div>
+      <div class="small" id="saveMsg" style="display:none;margin-top:8px;">Common info saved locally for autofill.</div>
     </form>
   </div>
 </div>
 
 <script>
-// Elements
-const overlay = document.getElementById('formOverlay');
-const dialogTitle = document.getElementById('dialogTitle');
-const userService = document.getElementById('userService');
-const leadForm = document.getElementById('leadForm');
-const sendBtn = document.getElementById('sendBtn');
-const closeBtn = document.getElementById('closeBtn');
+// Owner numbers (use country code + number, no +)
+const OWNER_NUMBERS = ['918092317965','918595674919'];
 
+/* Modal and focus trap utilities (kept from original) */
+const formPopup = document.getElementById('formPopup');
+const formTitle = document.getElementById('formTitle');
+const formDesc = document.getElementById('formDesc');
+const leadForm = document.getElementById('leadForm');
 let lastTrigger = null;
 
-// Open dialog
-function openForm(service){
-  dialogTitle.textContent = service + ' Form';
-  userService.value = service;
-  overlay.style.display = 'flex';
-  document.getElementById('userName').focus();
-  trapFocus(overlay);
-}
+// sections
+const tatkalSection = document.getElementById('tatkalSection');
+const formFillSection = document.getElementById('formFillSection');
+const freelanceSection = document.getElementById('freelanceSection');
 
-// Close dialog
-function closeForm(){
-  overlay.style.display = 'none';
-  leadForm.reset();
-  releaseFocusTrap();
-  if(lastTrigger) lastTrigger.focus();
-}
+// common fields
+const common = {
+  name: document.getElementById('userName_common'),
+  age: document.getElementById('userAge_common'),
+  gender: document.getElementById('userGender_common'),
+  phone: document.getElementById('userPhone_common'),
+  email: document.getElementById('userEmail_common'),
+  req: document.getElementById('userReq_common')
+};
 
-// Bind service cards
-document.querySelectorAll('.card').forEach(card=>{
-  card.setAttribute('role','button');
-  card.setAttribute('tabindex','0');
+const saveMsg = document.getElementById('saveMsg');
 
-  const open = ()=>{
-    lastTrigger = card;
-    openForm(card.dataset.service || 'Service');
-  };
+/* tatkal fields */
+const t_source = document.getElementById('t_source');
+const t_destination = document.getElementById('t_destination');
+const t_date = document.getElementById('t_date');
+const t_class = document.getElementById('t_class');
+const t_preferredTrains = document.getElementById('t_preferredTrains');
+const t_avail_msg = document.getElementById('t_avail_msg');
+const t_checkAvailability = document.getElementById('t_checkAvailability');
+const t_fillMock = document.getElementById('t_fillMock');
 
-  card.addEventListener('click', open);
-  card.addEventListener('keydown', e=>{
-    if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      open();
-    }
-  });
-});
+/* formfill fields */
+const ff_type = document.getElementById('ff_type');
+const ff_formname = document.getElementById('ff_formname');
+const ff_details = document.getElementById('ff_details');
 
-// WhatsApp send to two numbers
-sendBtn.addEventListener('click', ()=>{
-  const name = document.getElementById('userName').value.trim();
-  const age = document.getElementById('userAge').value.trim();
-  const gender = document.getElementById('userGender').value;
-  const email = document.getElementById('userEmail').value.trim();
-  const phone = document.getElementById('userPhone').value.trim();
-  const req = document.getElementById('userReq').value.trim();
-  const service = document.getElementById('userService').value;
+/* freelance fields */
+const fr_title = document.getElementById('fr_title');
+const fr_budget = document.getElementById('fr_budget');
+const fr_desc = document.getElementById('fr_desc');
+const fr_timeline = document.getElementById('fr_timeline');
+const fr_links = document.getElementById('fr_links');
 
-  if(!name || !age || !gender || !email || !phone || !req){
-    alert('Please fill all details!');
-    return;
-  }
-
-  const lines = [
-    'New Service Request:',
-    `Name: ${name}`,
-    `Age: ${age}`,
-    `Gender: ${gender}`,
-    `Phone: ${phone}`,
-    `Email: ${email}`,
-    `Service: ${service}`,
-    `Requirement: ${req}`
-  ];
-  const msg = encodeURIComponent(lines.join('\n'));
-
-  const numbers = ['918092317965','918595674919']; // Adarsh, Ayush
-  numbers.forEach(num=>{
-    window.open(`https://wa.me/${num}?text=${msg}`, '_blank', 'noopener');
-  });
-
-  alert('Request sent successfully to both WhatsApp numbers!');
-  closeForm();
-});
-
-// Close handlers
-closeBtn.addEventListener('click', closeForm);
-document.addEventListener('keydown', e=>{
-  if(e.key === 'Escape' && overlay.style.display === 'flex'){
-    closeForm();
-  }
-});
-
-// Simple focus trap
+/* Focus trap implementation */
 let trapHandler = null;
 function trapFocus(container){
   const selectors = [
     'a[href]','button','textarea','input','select','[tabindex]:not([tabindex="-1"])'
   ];
   const getFocusable = ()=>Array.from(container.querySelectorAll(selectors.join(',')))
-    .filter(el=>!el.disabled && el.offsetParent !== null);
-
+    .filter(el=>!el.hasAttribute('disabled') && el.offsetParent!==null);
   trapHandler = (e)=>{
     if(e.key !== 'Tab') return;
     const focusables = getFocusable();
-    if(!focusables.length) return;
+    if(focusables.length===0) return;
     const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-    if(e.shiftKey && document.activeElement === first){
+    const last = focusables[focusables.length-1];
+    if(e.shiftKey && document.activeElement===first){
       e.preventDefault(); last.focus();
-    } else if(!e.shiftKey && document.activeElement === last){
+    } else if(!e.shiftKey && document.activeElement===last){
       e.preventDefault(); first.focus();
     }
   };
@@ -334,11 +393,140 @@ function trapFocus(container){
 }
 function releaseFocusTrap(){
   if(trapHandler){
-    overlay.removeEventListener('keydown', trapHandler);
+    formPopup.removeEventListener('keydown', trapHandler);
     trapHandler = null;
   }
 }
-</script>
 
-</body>
-</html>
+/* Open/close modal and toggle sections */
+function openForm(service){
+  formTitle.textContent = service + " Form";
+  formDesc.textContent = "Provide details to proceed with the selected service.";
+  // show/hide sections
+  tatkalSection.classList.add('hidden');
+  formFillSection.classList.add('hidden');
+  freelanceSection.classList.add('hidden');
+
+  if(service === 'Tatkal Ticket Booking'){
+    tatkalSection.classList.remove('hidden');
+  } else if(service === 'Form Filling'){
+    formFillSection.classList.remove('hidden');
+  } else if(service.startsWith('Freelancing')){
+    freelanceSection.classList.remove('hidden');
+  } // else other services don't have extra sections
+
+  // ensure service name appears in small req if empty
+  if(!common.req.value) common.req.value = `${service} - `;
+
+  formPopup.style.display='flex';
+  const firstInput = common.name;
+  firstInput.focus();
+  trapFocus(formPopup);
+}
+
+function closeForm(){
+  formPopup.style.display='none';
+  // keep saved common info, but clear service-specific temp fields
+  t_preferredTrains.innerHTML = '';
+  t_avail_msg.textContent = '';
+  // reset other service-specific fields except common
+  // (we intentionally keep common values for convenience)
+  releaseFocusTrap();
+  if(lastTrigger) lastTrigger.focus();
+}
+
+/* Attach event listeners to cards */
+document.querySelectorAll('.card').forEach(card=>{
+  const open = ()=>{
+    lastTrigger = card;
+    const service = card.dataset.service;
+    openForm(service);
+  };
+  card.addEventListener('click', open);
+  card.addEventListener('keydown', e=>{
+    if(e.key==='Enter' || e.key===' '){
+      e.preventDefault();
+      open();
+    }
+  });
+});
+
+/* localStorage helpers for common info */
+const STORAGE_KEY = 'common_user_info';
+function loadCommonData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const obj = JSON.parse(raw);
+    common.name.value = obj.name || '';
+    common.age.value = obj.age || '';
+    common.gender.value = obj.gender || '';
+    common.phone.value = obj.phone || '';
+    common.email.value = obj.email || '';
+    common.req.value = obj.req || '';
+  }catch(e){ console.warn('loadCommonData err', e); }
+}
+function saveCommonData(){
+  const obj = {
+    name: common.name.value || '',
+    age: common.age.value || '',
+    gender: common.gender.value || '',
+    phone: common.phone.value || '',
+    email: common.email.value || '',
+    req: common.req.value || ''
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+  saveMsg.style.display = 'block';
+  setTimeout(()=> saveMsg.style.display='none', 2200);
+}
+
+/* Auto-save common when changed */
+[common.name, common.age, common.gender, common.phone, common.email, common.req].forEach(el=>{
+  el.addEventListener('change', saveCommonData);
+});
+
+/* Initialize common data on load */
+loadCommonData();
+
+/* Tatkal: Check Availability logic
+   - Tries to call /api/checkAvailability (if available)
+   - If not available or error -> opens Google search for trains between source and destination on selected date (fallback)
+*/
+async function checkAvailability(){
+  const source = t_source.value.trim();
+  const destination = t_destination.value.trim();
+  const date = t_date.value;
+  const pclass = t_class.value;
+
+  if(!source || !destination || !date){
+    t_avail_msg.textContent = 'Please enter source, destination and date first.';
+    return;
+  }
+
+  t_avail_msg.textContent = 'Checking availability...';
+  t_preferredTrains.innerHTML = '';
+
+  // Try backend API if present
+  try{
+    const resp = await fetch(/api/checkAvailability?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}&date=${encodeURIComponent(date)}&pclass=${encodeURIComponent(pclass)});
+    if(resp.ok){
+      const data = await resp.json();
+      // Expect data.trains = [{trainNo, name, available, quotaInfo}]
+      if(Array.isArray(data.trains) && data.trains.length>0){
+        let any = false;
+        data.trains.forEach(t=>{
+          const opt = document.createElement('option');
+          opt.value = ${t.trainNo} | ${t.name};
+          opt.textContent = ${t.trainNo} — ${t.name} — ${t.available? 'Seats Available':'No Seats'} ${t.quotaInfo? (' | ' + t.quotaInfo): ''};
+          t_preferredTrains.appendChild(opt);
+          if(t.available) any = true;
+        });
+        t_avail_msg.textContent = any ? 'Some trains show availability — choose preferred ones.' : 'Currently no seats available (based on API).';
+        return;
+      }
+    }
+    // If API not ok or returned nothing, fallback to search
+    throw new Error('No trains from API');
+  }catch(err){
+    console.warn('Availability API not usable:', err);
+    // Fallback: open Google search in
