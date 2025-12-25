@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Qaunta - Services</title>
+  <title>ClickCart & Co. - Services</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
     :root {
-      --primary: #8b5cf6;
-      --secondary: #06b6d4;
-      --glass: rgba(255,255,255,0.15);
+      --primary: #6d28d9;
+      --secondary: #00b4d8;
+      --glass: rgba(255,255,255,0.1);
       --white: #fff;
-      --accent: #facc15;
+      --accent: #ffdd57;
     }
     *, *::before, *::after {
       box-sizing: border-box;
@@ -25,7 +25,7 @@
     }
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
       color: var(--white);
       margin: 0;
       display: flex;
@@ -68,8 +68,6 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       outline-offset: 4px;
       user-select: none;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
     }
     .card:hover, .card:focus-visible {
       box-shadow: 0 0 36px var(--secondary), 0 0 40px var(--primary);
@@ -125,8 +123,6 @@
       font-size: 1rem;
       display: flex;
       flex-direction: column;
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.2);
     }
     .modalContent h2 {
       font-weight: 700;
@@ -152,7 +148,6 @@
       color: #222;
       outline: none;
       transition: outline-color 0.3s ease;
-      backdrop-filter: blur(10px);
     }
     input::placeholder,
     textarea::placeholder {
@@ -162,7 +157,6 @@
     select:focus,
     textarea:focus {
       outline-color: var(--secondary);
-      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.3);
     }
     textarea {
       resize: vertical;
@@ -182,8 +176,7 @@
       font-size: 1.15rem;
       padding: 14px 0;
       color: white;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
     button.submit {
       background: linear-gradient(45deg, var(--primary), var(--secondary));
@@ -213,9 +206,6 @@
         padding: 1.4rem 1.6rem;
         font-size: 0.9rem;
       }
-      header h1 {
-        font-size: 2.2rem;
-      }
     }
 
     /* Contact Section */
@@ -226,8 +216,6 @@
       margin: 0 auto 24px;
       border-radius: 14px;
       text-align: center;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
     }
     .contact h3 {
       font-weight: 700;
@@ -245,12 +233,10 @@
       color: var(--accent);
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.3s ease;
     }
     .contact a:focus,
     .contact a:hover {
       text-decoration: underline;
-      text-shadow: 0 0 10px var(--accent);
     }
 
     /* Footer */
@@ -262,8 +248,6 @@
       padding: 12px 10px calc(12px + env(safe-area-inset-bottom));
       user-select: none;
       margin-top: auto;
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255,255,255,0.1);
     }
     .footer-line {
       opacity: 0.78;
@@ -275,7 +259,7 @@
 <body>
 
 <header>
-  <h1>Qaunta</h1>
+  <h1>ClickCart & Co.</h1>
   <p>Hamare bina online duniya adhoori hai 😎</p>
 </header>
 
@@ -370,7 +354,7 @@
       <label for="emailInput">Email</label>
       <input type="email" id="emailInput" placeholder="Your email" required />
       <label for="phoneInput">Phone (10 digits)</label>
-      <input type="tel" id="phoneInput" placeholder="1234567890" pattern="d{10}" minlength="10" maxlength="10" required />
+      <input type="tel" id="phoneInput" placeholder="1234567890" pattern="\d{10}" minlength="10" maxlength="10" required />
       <label for="serviceInput">Service</label>
       <input type="text" id="serviceInput" readonly />
       <label for="requirementsInput">Requirements</label>
@@ -385,15 +369,17 @@
 
 <!-- Contact Us Section -->
 <section class="contact" aria-label="Contact information">
-  <h3>Contact Us</h3>
-  <p>Adarsh Gupta: <a href="tel:+918092317965" aria-label="Call Adarsh on plus nine one eight zero nine two three one seven nine six five">+91 8092317965</a></p>
-  <p>Ayush Pandey: <a href="tel:+918595674919" aria-label="Call Ayush on plus nine one eight five nine five six seven four nine one nine">+91 8595674919</a></p>
-  <p>Email: <a href="mailto:baba.googl001@gmail.com" aria-label="Email baba dot googl zero zero one at gmail dot com">baba.googl001@gmail.com</a></p>
+  <div style="max-width:1100px; margin: 0 auto 24px; padding: 0 12px;">
+    <h3>Contact Us</h3>
+    <p>Adarsh Gupta: <a href="tel:+918092317965" aria-label="Call Adarsh on plus nine one eight zero nine two three one seven nine six five">+91 8092317965</a></p>
+    <p>Ayush Pandey: <a href="tel:+918595674919" aria-label="Call Ayush on plus nine one eight five nine five six seven four nine one nine">+91 8595674919</a></p>
+    <p>Email: <a href="mailto:baba.googl001@gmail.com" aria-label="Email baba dot googl zero zero one at gmail dot com">baba.googl001@gmail.com</a></p>
+  </div>
 </section>
 
-<footer role="contentinfo">
-  <div class="footer-line">Made with ♥️ In Bharat by Adarsh & Ayush</div>
-  <div class="footer-line">© 2025 Qaunta. All rights reserved</div>
+<footer role="contentinfo" style="text-align:center; color:white; opacity:0.9; padding:16px 12px 20px; background: rgba(0,0,0,0.15); font-size: 0.9rem; user-select:none;">
+  <div>Made with ♥️ In Bharat by Adarsh & Ayush</div>
+  <div>© 2025 ClickCart & Co. All rights reserved</div>
 </footer>
 
 <script>
@@ -440,22 +426,13 @@
   function openModal(modal){
     modal.classList.add('active');
     modal.setAttribute('aria-hidden','false');
-    modal.querySelector('input, select')?.focus();
   }
   function closeModal(modal){
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden','true');
   }
-  
   closeBtn.addEventListener('click', () => closeModal(tatkalModal));
   closeGeneralBtn.addEventListener('click', () => closeModal(generalModal));
-
-  // Close modals on overlay click or Escape key
-  [tatkalModal, generalModal].forEach(modal => {
-    modal.addEventListener('click', e => {
-      if(e.target === modal) closeModal(modal);
-    });
-  });
 
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape'){
@@ -483,18 +460,15 @@
       `Quota: ${quotaSelect.value}`,
       `Preferred Trains: ${trains}`,
       '',
-      'Made with ♥️ In Bharat by Adarsh & Ayush',
-      '© 2025 Qaunta. All rights reserved'
+      'Made with ♥ in Bharat by Adarsh & Ayush',
+      '© 2025 ClickCart & Co. All rights reserved'
     ];
-    const msg = encodeURIComponent(msgLines.join('
-'));
+    const msg = encodeURIComponent(msgLines.join('\n'));
     ['918092317965','918595674919'].forEach(num => {
       window.open(`https://wa.me/${num}?text=${msg}`, '_blank','noopener,noreferrer');
     });
     alert('Details sent to WhatsApp!');
     closeModal(tatkalModal);
-    // Reset form
-    tatkalForm.reset();
   });
 
   submitGeneralBtn.addEventListener('click', () => {
@@ -502,7 +476,7 @@
     if(!(+ageInput.value > 0 && +ageInput.value <= 120)) { alert('Please enter valid Age'); return; }
     if(!genderSelect.value) { alert('Please select Gender'); return; }
     if(!emailInput.value.trim()) { alert('Please enter Email'); return; }
-    if(!phoneInput.value.match(/^d{10}$/)) { alert('Please enter valid 10-digit Phone'); return; }
+    if(!phoneInput.value.match(/^\d{10}$/)) { alert('Please enter valid 10-digit Phone'); return; }
     if(!requirementsInput.value.trim()) { alert('Please enter Requirements'); return; }
 
     const msgLines = [
@@ -516,20 +490,30 @@
       `Service: ${serviceInput.value}`,
       `Requirements: ${requirementsInput.value.trim()}`,
       '',
-      'Made with ♥️ In Bharat by Adarsh & Ayush',
-      '© 2025 Qaunta. All rights reserved'
+      'Made with ♥ in Bharat by Adarsh & Ayush',
+      '© 2025 ClickCart & Co. All rights reserved'
     ];
-    const msg = encodeURIComponent(msgLines.join('
-'));
+    const msg = encodeURIComponent(msgLines.join('\n'));
     ['918092317965','918595674919'].forEach(num => {
       window.open(`https://wa.me/${num}?text=${msg}`, '_blank','noopener,noreferrer');
     });
     alert('Details sent to WhatsApp!');
     closeModal(generalModal);
-    // Reset form
-    generalForm.reset();
   });
 </script>
+
+<!-- Contact Us Section -->
+<section class="contact" aria-label="Contact information" style="max-width:1100px; margin: 0 auto 24px; padding: 0 12px;">
+  <h3>Contact Us</h3>
+  <p>Adarsh Gupta: <a href="tel:+918092317965" aria-label="Call Adarsh on plus nine one eight zero nine two three one seven nine six five">+91 8092317965</a></p>
+  <p>Ayush Pandey: <a href="tel:+918595674919" aria-label="Call Ayush on plus nine one eight five nine five six seven four nine one nine">+91 8595674919</a></p>
+  <p>Email: <a href="mailto:baba.googl001@gmail.com" aria-label="Email baba dot googl zero zero one at gmail dot com">baba.googl001@gmail.com</a></p>
+</section>
+
+<footer role="contentinfo" style="text-align:center; color:white; opacity:0.9; padding:16px 12px 20px; background: rgba(0,0,0,0.15); font-size: 0.9rem; user-select:none;">
+  <div>Made with ♥️ In Bharat by Adarsh & Ayush</div>
+  <div>© 2025 ClickCart & Co. All rights reserved</div>
+</footer>
 
 </body>
 </html>
