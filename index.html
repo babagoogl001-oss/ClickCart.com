@@ -3,20 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <title>QuanTa Solutions</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== GLOBAL ===== */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
+/* ===== BASE ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
 
 body{
 background:#050b1f;
@@ -24,40 +18,28 @@ color:white;
 overflow-x:hidden;
 }
 
-/* GRID BACKGROUND */
-body::before{
+/* GRID + GLOW BG */
+body:before{
 content:"";
-position:fixed;
-width:100%;
-height:100%;
+position:fixed;inset:0;
 background:
-linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
-background-size:40px 40px;
+linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+background-size:42px 42px;
 z-index:-2;
 }
-
-body::after{
+body:after{
 content:"";
-position:fixed;
-inset:0;
-background:radial-gradient(circle at top,#0b2cff33,transparent 60%);
+position:fixed;inset:0;
+background:radial-gradient(circle at top,#0b38ff55,transparent 60%);
 z-index:-3;
 }
 
-/* ===== HEADER ===== */
-
-.header{
-text-align:center;
-padding:60px 20px 30px;
-}
+/* HEADER */
+.header{text-align:center;padding:60px 20px}
 
 .logo{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:12px;
-font-size:36px;
+font-size:38px;
 font-weight:700;
 letter-spacing:3px;
 background:linear-gradient(90deg,#00eaff,#7a5cff);
@@ -65,153 +47,124 @@ background:linear-gradient(90deg,#00eaff,#7a5cff);
 color:transparent;
 }
 
-.logo-icon{
-width:55px;
-height:55px;
-border-radius:14px;
-background:linear-gradient(135deg,#00eaff,#7a5cff);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:24px;
-box-shadow:0 0 20px #00eaff88;
-}
-
 .tagline{
 margin-top:12px;
-opacity:.8;
+opacity:.85;
 }
 
-.divider{
-width:120px;
-height:3px;
-margin:18px auto;
-background:linear-gradient(90deg,transparent,#00eaff,transparent);
-}
-
-/* ===== SERVICES ===== */
-
+/* SERVICES */
 .services{
-max-width:900px;
+max-width:950px;
 margin:auto;
 padding:20px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:25px;
+gap:24px;
 }
 
 .card{
-background:rgba(255,255,255,.05);
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(18px);
 border-radius:22px;
-padding:35px 20px;
+padding:32px;
 text-align:center;
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,.1);
 cursor:pointer;
 transition:.35s;
+border:1px solid rgba(255,255,255,.12);
 }
 
 .card:hover{
 transform:translateY(-8px);
-box-shadow:0 0 25px #00eaff55;
+box-shadow:0 0 30px #00eaff55;
 }
 
 .icon{
-font-size:40px;
-margin-bottom:15px;
+font-size:42px;
+margin-bottom:12px;
+opacity:.9;
 }
 
-.card h3{
-margin-bottom:6px;
-}
+/* aesthetic borders */
+.card:nth-child(1){border-top:3px solid #00eaff}
+.card:nth-child(2){border-top:3px solid #ff7a7a}
+.card:nth-child(3){border-top:3px solid #7affc1}
+.card:nth-child(4){border-top:3px solid #ffd36b}
+.card:nth-child(5){border-top:3px solid #b67aff}
+.card:nth-child(6){border-top:3px solid #7ab6ff}
+.card:nth-child(7){border-top:3px solid #ff7ad9}
 
-.card p{
-opacity:.7;
-font-size:14px;
-}
-
-/* ===== MODAL ===== */
-
+/* MODAL */
 .modal{
 position:fixed;
 inset:0;
 background:#000000cc;
 display:none;
-align-items:center;
 justify-content:center;
+align-items:center;
 padding:15px;
 z-index:999;
 }
+.modal.show{display:flex}
 
-.modal.show{
-display:flex;
-}
-
-.modal-box{
+.box{
 background:#07142f;
-padding:25px;
-border-radius:18px;
+padding:22px;
+border-radius:16px;
 width:100%;
-max-width:420px;
+max-width:430px;
+max-height:90vh;
+overflow:auto;
 }
 
 input,select,textarea{
 width:100%;
-margin:8px 0;
+margin:7px 0;
 padding:12px;
 border-radius:10px;
 border:none;
-outline:none;
 background:#0b1e45;
-color:white;
+color:#fff;
 }
 
 button{
 width:100%;
 padding:13px;
+margin-top:10px;
 border:none;
 border-radius:10px;
 background:linear-gradient(90deg,#00eaff,#7a5cff);
 color:white;
 font-weight:600;
 cursor:pointer;
-margin-top:10px;
 }
 
-/* FLOAT WHATSAPP */
+.addPassenger{background:#1a2f6d}
 
+/* FLOAT WHATSAPP */
 .whatsapp{
 position:fixed;
 right:18px;
 bottom:18px;
 background:#25D366;
-width:55px;
-height:55px;
+width:58px;height:58px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:26px;
+font-size:28px;
 color:white;
 text-decoration:none;
-box-shadow:0 0 15px #25D366aa;
+box-shadow:0 0 20px #25D366aa;
 }
 
 /* FOOTER */
-
 footer{
-margin-top:50px;
+margin-top:45px;
 padding:30px;
 text-align:center;
 background:#040916;
 }
-
-footer a{
-color:#00eaff;
-text-decoration:none;
-display:block;
-margin:6px 0;
-}
+footer a{color:#00eaff;text-decoration:none;display:block;margin:6px}
 
 </style>
 </head>
@@ -219,132 +172,207 @@ margin:6px 0;
 <body>
 
 <div class="header">
-<div class="logo">
-<div class="logo-icon">⚡</div>
-QUANTA
-</div>
-<div class="tagline">Hamare bina online duniya adhoori hai 😎</div>
-<div class="divider"></div>
+<div class="logo">⚡ QUANTA</div>
+<div class="tagline">Hamare bina online duniya adhuri h 😎</div>
 </div>
 
 <div class="services">
 
-<div class="card" data-service="Tatkal Booking">
-<div class="icon">🚆</div>
-<h3>Tatkal Booking</h3>
-<p>Get your ticket instantly</p>
-</div>
-
-<div class="card" data-service="Form Filling">
-<div class="icon">📄</div>
-<h3>Form Filling</h3>
-<p>Govt. & Private forms</p>
-</div>
-
-<div class="card" data-service="Resume & Docs">
-<div class="icon">📑</div>
-<h3>Resume & Docs</h3>
-<p>CVs & documents</p>
-</div>
-
-<div class="card" data-service="Poster Design">
-<div class="icon">🎨</div>
-<h3>Poster Design</h3>
-<p>Banners & social posts</p>
-</div>
-
-<div class="card" data-service="Photo Editing">
-<div class="icon">📷</div>
-<h3>Photo Editing</h3>
-<p>Retouching & enhancements</p>
-</div>
-
-<div class="card" data-service="Freelancing">
-<div class="icon">💼</div>
-<h3>Freelancing</h3>
-<p>Hire for projects</p>
-</div>
-
-<div class="card" data-service="Other Services">
-<div class="icon">•••</div>
-<h3>Other Services</h3>
-<p>Any digital needs</p>
-</div>
+<div class="card" data-service="tatkal"><div class="icon">🚄</div><h3>Tatkal Booking</h3></div>
+<div class="card" data-service="form"><div class="icon">📝</div><h3>Form Filling</h3></div>
+<div class="card" data-service="resume"><div class="icon">📄</div><h3>Resume & CV</h3></div>
+<div class="card" data-service="poster"><div class="icon">🖌️</div><h3>Poster Design</h3></div>
+<div class="card" data-service="photo"><div class="icon">🧿</div><h3>Photo Editing</h3></div>
+<div class="card" data-service="freelance"><div class="icon">💻</div><h3>Freelancing</h3></div>
+<div class="card" data-service="other"><div class="icon">✨</div><h3>Other Services</h3></div>
 
 </div>
 
-<!-- MODAL -->
 <div class="modal" id="modal">
-<div class="modal-box">
-<h3 id="serviceTitle"></h3>
-
-<form id="form">
-
-<input id="name" placeholder="Your Name" required>
-<input id="phone" placeholder="Phone Number" required>
-<textarea id="details" placeholder="Requirement"></textarea>
-
-<button type="submit">Submit</button>
-</form>
-
+<div class="box">
+<h3 id="title"></h3>
+<form id="dynamicForm"></form>
 </div>
 </div>
 
-<!-- FLOAT BUTTON -->
 <a class="whatsapp" href="https://wa.me/918092317965" target="_blank">🟢</a>
 
 <footer>
 <h3>Contact Us</h3>
 <a href="https://wa.me/918092317965">Adarsh Gupta — +91 8092317965</a>
 <a href="https://wa.me/918595674919">Ayush — +91 8595674919</a>
-<p style="margin-top:12px;opacity:.7;">
-Made with ❤️ in Bharat by QuanTa Solutions
-</p>
+<p>Made with ❤️ in Bharat by QuanTa Solutions</p>
 </footer>
 
 <script>
 
 const owners=["918092317965","918595674919"];
 const modal=document.getElementById("modal");
-const title=document.getElementById("serviceTitle");
+const form=document.getElementById("dynamicForm");
+const title=document.getElementById("title");
 
+/* ===== FORMS ===== */
+
+const forms={
+
+tatkal:()=>`
+<input placeholder="From Station" required>
+<input placeholder="To Station" required>
+<input type="date" required>
+<textarea placeholder="Suggested Train Name & Number"></textarea>
+
+<div id="passengers"></div>
+<button type="button" class="addPassenger" onclick="addPassenger()">+ Add Passenger</button>
+
+<input placeholder="Mobile Number" required>
+
+<select>
+<option>Sleeper (SL)</option>
+<option>3AC</option>
+<option>2AC</option>
+<option>1AC</option>
+<option>Chair Car (CC)</option>
+<option>Executive (EC)</option>
+</select>
+
+<input placeholder="Preferred Seat">
+<textarea placeholder="Additional Notes"></textarea>
+
+<button type="submit">Submit</button>
+`,
+
+form:()=>`
+<input placeholder="Name">
+<select>
+<option>Government Form</option>
+<option>Private Form</option>
+</select>
+<select>
+<option>Scholarship</option>
+<option>Job</option>
+<option>Exam</option>
+<option>Other</option>
+</select>
+<input type="date">
+<select>
+<option>Working</option>
+<option>Not Working</option>
+</select>
+<input placeholder="Phone Number">
+<textarea placeholder="Additional Information"></textarea>
+<button type="submit">Submit</button>
+`,
+
+resume:()=>`
+<select>
+<option>Basic Resume</option>
+<option>Professional Resume</option>
+<option>ATS Resume</option>
+<option>Job Specific Resume</option>
+<option>CV Formatting</option>
+<option>Resume Update</option>
+</select>
+<input placeholder="Name">
+<input placeholder="Phone">
+<textarea placeholder="Details"></textarea>
+<button type="submit">Submit</button>
+`,
+
+poster:()=>`
+<select>
+<option>Business Poster</option>
+<option>Event Poster</option>
+<option>Instagram Post</option>
+<option>YouTube Thumbnail</option>
+<option>Banner Design</option>
+<option>Political Poster</option>
+</select>
+<textarea placeholder="Design Details"></textarea>
+<button type="submit">Submit</button>
+`,
+
+photo:()=>`
+<select>
+<option>Background Remove</option>
+<option>HD Enhancement</option>
+<option>Color Correction</option>
+<option>Passport Photo</option>
+<option>Wedding Edit</option>
+<option>Social Media Edit</option>
+</select>
+<textarea placeholder="Editing Requirement"></textarea>
+<button type="submit">Submit</button>
+`,
+
+freelance:()=>`
+<select>
+<option>Website Work</option>
+<option>Graphic Design</option>
+<option>Data Entry</option>
+<option>Content Writing</option>
+<option>Social Media Management</option>
+<option>Video Editing</option>
+</select>
+<textarea placeholder="Project Details"></textarea>
+<button type="submit">Submit</button>
+`,
+
+other:()=>`
+<input placeholder="Name">
+<input placeholder="Phone">
+<select>
+<option>Online Work</option>
+<option>Design Work</option>
+<option>Technical Help</option>
+<option>Consultation</option>
+</select>
+<textarea placeholder="Explain Requirement"></textarea>
+<button type="submit">Submit</button>
+`
+};
+
+/* OPEN MODAL */
 document.querySelectorAll(".card").forEach(card=>{
 card.onclick=()=>{
-title.innerText=card.dataset.service;
+title.innerText=card.innerText;
+form.innerHTML=forms[card.dataset.service]();
 modal.classList.add("show");
 };
 });
 
+/* PASSENGER ADD */
+function addPassenger(){
+document.getElementById("passengers")
+.insertAdjacentHTML("beforeend",
+`<input placeholder="Passenger Name">
+<input placeholder="Passenger Age">`);
+}
+window.addPassenger=addPassenger;
+
+/* CLOSE */
 modal.onclick=e=>{
 if(e.target===modal)modal.classList.remove("show");
 };
 
-document.getElementById("form").onsubmit=function(e){
+/* SUBMIT */
+document.addEventListener("submit",e=>{
+if(e.target.id==="dynamicForm"){
 e.preventDefault();
 
-let service=title.innerText;
-let name=nameInput=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let details=document.getElementById("details").value;
+let data=[...e.target.querySelectorAll("input,select,textarea")]
+.map(el=>(el.placeholder||el.options?.[el.selectedIndex]?.text)+": "+el.value)
+.join("\n");
 
-let msg=`NEW CUSTOMER REQUEST
-
-Service: ${service}
-Name: ${name}
-Phone: ${phone}
-
-Requirement:
-${details}`;
-
-msg=encodeURIComponent(msg);
+let msg=encodeURIComponent("NEW SERVICE REQUEST\n\n"+data);
 
 owners.forEach(n=>{
-window.open(`https://wa.me/${n}?text=${msg}`,'_blank');
+window.open(`https://wa.me/${n}?text=${msg}`,"_blank");
 });
 
 modal.classList.remove("show");
-this.reset();
-};
+e.target.reset();
+}
+});
 
 </script>
 
