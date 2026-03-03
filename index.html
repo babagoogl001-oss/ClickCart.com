@@ -2,125 +2,189 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuanTa Services</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<title>QuanTa Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== ORIGINAL UI (UNCHANGED COLORS) ===== */
+/* ===== GLOBAL ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
 
-*{margin:0;padding:0;box-sizing:border-box;}
 body{
-font-family:'Poppins',sans-serif;
-background:#060c1a;
-color:#f0f8ff;
+background:#050b1f;
+color:white;
 overflow-x:hidden;
 }
 
-/* HEADER */
-header{text-align:center;padding:40px 10px;}
-h1{
-font-family:'Rajdhani';
-letter-spacing:4px;
-color:#00d4ff;
-font-size:2.5rem;
+/* GRID BACKGROUND */
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:
+linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+background-size:40px 40px;
+z-index:-2;
 }
-.tagline{opacity:.7;font-size:.9rem}
 
-/* SERVICES GRID */
-.services{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-padding:12px;
-max-width:1000px;
-margin:auto;
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background:radial-gradient(circle at top,#0b2cff33,transparent 60%);
+z-index:-3;
 }
-.card{
-width:calc(50% - 6px);
-background:rgba(255,255,255,.06);
-border:1px solid rgba(0,212,255,.2);
-border-radius:18px;
-padding:22px 10px;
+
+/* ===== HEADER ===== */
+
+.header{
 text-align:center;
-cursor:pointer;
-transition:.2s;
+padding:60px 20px 30px;
 }
-.card:active{transform:scale(.96)}
+
+.logo{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
+font-size:36px;
+font-weight:700;
+letter-spacing:3px;
+background:linear-gradient(90deg,#00eaff,#7a5cff);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.logo-icon{
+width:55px;
+height:55px;
+border-radius:14px;
+background:linear-gradient(135deg,#00eaff,#7a5cff);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+box-shadow:0 0 20px #00eaff88;
+}
+
+.tagline{
+margin-top:12px;
+opacity:.8;
+}
+
+.divider{
+width:120px;
+height:3px;
+margin:18px auto;
+background:linear-gradient(90deg,transparent,#00eaff,transparent);
+}
+
+/* ===== SERVICES ===== */
+
+.services{
+max-width:900px;
+margin:auto;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+border-radius:22px;
+padding:35px 20px;
+text-align:center;
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.1);
+cursor:pointer;
+transition:.35s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px #00eaff55;
+}
+
+.icon{
+font-size:40px;
+margin-bottom:15px;
+}
+
 .card h3{
-font-family:'Rajdhani';
-color:#e0f2fe;
+margin-bottom:6px;
+}
+
+.card p{
+opacity:.7;
+font-size:14px;
 }
 
 /* ===== MODAL ===== */
 
-.modal-overlay{
-display:none;
+.modal{
 position:fixed;
-top:0;left:0;right:0;bottom:0;
-background:rgba(2,8,23,.93);
-z-index:999;
-justify-content:center;
+inset:0;
+background:#000000cc;
+display:none;
 align-items:center;
+justify-content:center;
 padding:15px;
+z-index:999;
 }
 
-.modal-overlay.show{display:flex;}
+.modal.show{
+display:flex;
+}
 
 .modal-box{
-background:#0d1428;
-border:1px solid rgba(0,212,255,.25);
-border-radius:22px;
-padding:20px;
+background:#07142f;
+padding:25px;
+border-radius:18px;
 width:100%;
 max-width:420px;
 }
 
-input,textarea,select{
+input,select,textarea{
 width:100%;
-margin-top:8px;
-margin-bottom:10px;
+margin:8px 0;
 padding:12px;
 border-radius:10px;
-border:1px solid rgba(0,212,255,.3);
-background:rgba(255,255,255,.06);
+border:none;
+outline:none;
+background:#0b1e45;
 color:white;
-font-size:15px;
 }
 
 button{
-border:none;
-border-radius:12px;
-padding:14px;
-font-family:'Rajdhani';
-font-size:1rem;
-cursor:pointer;
-}
-
-.btn-submit{
-background:linear-gradient(135deg,#7c3aed,#00d4ff);
-color:white;
 width:100%;
+padding:13px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#00eaff,#7a5cff);
+color:white;
+font-weight:600;
+cursor:pointer;
 margin-top:10px;
 }
 
-.btn-close{
-margin-top:8px;
-background:rgba(239,68,68,.15);
-color:#fca5a5;
-width:100%;
-}
+/* FLOAT WHATSAPP */
 
-/* ===== FLOAT BUTTON ===== */
-
-.whatsapp-float{
+.whatsapp{
 position:fixed;
+right:18px;
 bottom:18px;
-right:16px;
 background:#25D366;
-color:white;
 width:55px;
 height:55px;
 border-radius:50%;
@@ -128,44 +192,25 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:26px;
+color:white;
 text-decoration:none;
-box-shadow:0 0 20px rgba(0,0,0,.4);
-z-index:999;
+box-shadow:0 0 15px #25D366aa;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 
 footer{
-margin-top:30px;
+margin-top:50px;
+padding:30px;
 text-align:center;
-padding:20px 12px;
-border-top:1px solid rgba(0,212,255,.2);
-background:rgba(0,0,0,.35);
+background:#040916;
 }
 
-.contact-card{
-margin:8px auto;
-max-width:320px;
-padding:12px;
-border-radius:12px;
-border:1px solid rgba(0,212,255,.2);
-background:rgba(255,255,255,.05);
+footer a{
+color:#00eaff;
 text-decoration:none;
 display:block;
-color:white;
-}
-
-.footer-brand{
-font-family:'Rajdhani';
-letter-spacing:3px;
-color:#00d4ff;
-margin-top:12px;
-}
-
-.footer-text{opacity:.6;font-size:.85rem;margin-top:6px;}
-
-@media(min-width:700px){
-.card{width:calc(33.33% - 8px);}
+margin:6px 0;
 }
 
 </style>
@@ -173,122 +218,132 @@ margin-top:12px;
 
 <body>
 
-<header>
-<h1>QUANTA</h1>
-<p class="tagline">Hamare bina online duniya adhoori hai 😎</p>
-</header>
+<div class="header">
+<div class="logo">
+<div class="logo-icon">⚡</div>
+QUANTA
+</div>
+<div class="tagline">Hamare bina online duniya adhoori hai 😎</div>
+<div class="divider"></div>
+</div>
 
-<!-- SERVICES -->
-<section class="services">
+<div class="services">
 
-<div class="card" data-service="Tatkal Ticket Booking"><h3>Tatkal Booking</h3></div>
-<div class="card" data-service="Form Filling"><h3>Form Filling</h3></div>
-<div class="card" data-service="Resume & Documents"><h3>Resume & CV</h3></div>
-<div class="card" data-service="Poster Designing"><h3>Poster Design</h3></div>
-<div class="card" data-service="Photo Editing"><h3>Photo Editing</h3></div>
-<div class="card" data-service="Freelancing"><h3>Freelancing</h3></div>
-<div class="card" data-service="Other Services"><h3>Other Services</h3></div>
+<div class="card" data-service="Tatkal Booking">
+<div class="icon">🚆</div>
+<h3>Tatkal Booking</h3>
+<p>Get your ticket instantly</p>
+</div>
 
-</section>
+<div class="card" data-service="Form Filling">
+<div class="icon">📄</div>
+<h3>Form Filling</h3>
+<p>Govt. & Private forms</p>
+</div>
+
+<div class="card" data-service="Resume & Docs">
+<div class="icon">📑</div>
+<h3>Resume & Docs</h3>
+<p>CVs & documents</p>
+</div>
+
+<div class="card" data-service="Poster Design">
+<div class="icon">🎨</div>
+<h3>Poster Design</h3>
+<p>Banners & social posts</p>
+</div>
+
+<div class="card" data-service="Photo Editing">
+<div class="icon">📷</div>
+<h3>Photo Editing</h3>
+<p>Retouching & enhancements</p>
+</div>
+
+<div class="card" data-service="Freelancing">
+<div class="icon">💼</div>
+<h3>Freelancing</h3>
+<p>Hire for projects</p>
+</div>
+
+<div class="card" data-service="Other Services">
+<div class="icon">•••</div>
+<h3>Other Services</h3>
+<p>Any digital needs</p>
+</div>
+
+</div>
 
 <!-- MODAL -->
-<div id="modal" class="modal-overlay">
+<div class="modal" id="modal">
 <div class="modal-box">
+<h3 id="serviceTitle"></h3>
 
-<h2 id="serviceTitle">Service</h2>
+<form id="form">
 
-<form id="serviceForm">
+<input id="name" placeholder="Your Name" required>
+<input id="phone" placeholder="Phone Number" required>
+<textarea id="details" placeholder="Requirement"></textarea>
 
-<input type="text" id="name" placeholder="Your Name" required>
-<input type="tel" id="phone" placeholder="Mobile Number" required>
-
-<input type="text" id="source" placeholder="Source (Tatkal only)">
-<input type="text" id="dest" placeholder="Destination (Tatkal only)">
-<input type="date" id="date">
-
-<textarea id="details" placeholder="Describe your requirement"></textarea>
-
-<button class="btn-submit">Submit Request</button>
-<button type="button" class="btn-close" onclick="closeModal()">Cancel</button>
-
+<button type="submit">Submit</button>
 </form>
 
 </div>
 </div>
 
 <!-- FLOAT BUTTON -->
-<a class="whatsapp-float" href="https://wa.me/918092317965" target="_blank">💬</a>
+<a class="whatsapp" href="https://wa.me/918092317965" target="_blank">🟢</a>
 
-<!-- FOOTER -->
 <footer>
-
-<a class="contact-card" href="https://wa.me/918092317965" target="_blank">
-Adarsh Gupta — +91 8092317965
-</a>
-
-<a class="contact-card" href="https://wa.me/918595674919" target="_blank">
-Ayush — +91 8595674919
-</a>
-
-<div class="footer-brand">QUANTA SOLUTIONS</div>
-<div class="footer-text">
+<h3>Contact Us</h3>
+<a href="https://wa.me/918092317965">Adarsh Gupta — +91 8092317965</a>
+<a href="https://wa.me/918595674919">Ayush — +91 8595674919</a>
+<p style="margin-top:12px;opacity:.7;">
 Made with ❤️ in Bharat by QuanTa Solutions
-</div>
-
+</p>
 </footer>
 
 <script>
 
-/* OWNERS */
 const owners=["918092317965","918595674919"];
-
 const modal=document.getElementById("modal");
 const title=document.getElementById("serviceTitle");
-let selectedService="";
 
-/* OPEN MODAL */
 document.querySelectorAll(".card").forEach(card=>{
 card.onclick=()=>{
-selectedService=card.dataset.service;
-title.innerText=selectedService;
+title.innerText=card.dataset.service;
 modal.classList.add("show");
 };
 });
 
-function closeModal(){
-modal.classList.remove("show");
-}
+modal.onclick=e=>{
+if(e.target===modal)modal.classList.remove("show");
+};
 
-/* SUBMIT → WHATSAPP */
-document.getElementById("serviceForm").onsubmit=function(e){
-
+document.getElementById("form").onsubmit=function(e){
 e.preventDefault();
 
-let message=`📌 NEW CUSTOMER REQUEST
+let service=title.innerText;
+let name=nameInput=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let details=document.getElementById("details").value;
 
-Service: ${selectedService}
+let msg=`NEW CUSTOMER REQUEST
 
-Name: ${name.value}
-Phone: ${phone.value}
-
-From: ${source.value||"N/A"}
-To: ${dest.value||"N/A"}
-Date: ${date.value||"N/A"}
+Service: ${service}
+Name: ${name}
+Phone: ${phone}
 
 Requirement:
-${details.value||"Not provided"}
+${details}`;
 
-— QuanTa Website`;
+msg=encodeURIComponent(msg);
 
-message=encodeURIComponent(message);
-
-owners.forEach(num=>{
-window.open(`https://wa.me/${num}?text=${message}`,'_blank');
+owners.forEach(n=>{
+window.open(`https://wa.me/${n}?text=${msg}`,'_blank');
 });
 
+modal.classList.remove("show");
 this.reset();
-closeModal();
-
 };
 
 </script>
